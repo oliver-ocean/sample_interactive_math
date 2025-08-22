@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Grade 8 Mathematics - Unit Conversion with Soccer">
+    <title>Sofia's Soccer Math - Unit Conversion Adventure</title>
+    <style>
+    /* Mobile-First Responsive Design */
+    * { 
+        box-sizing: border-box; 
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+        color: #2c3e50;
+        min-height: 100vh;
+        padding: 0.5rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .lesson-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Flying soccer balls animation */
+    .soccer-ball {
+        position: absolute;
+        font-size: 1.5em;
+        opacity: 0.6;
+        animation: float 6s ease-in-out infinite;
+        z-index: 1;
+    }
+    
+    .soccer-ball:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .soccer-ball:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+    .soccer-ball:nth-child(3) { top: 60%; left: 3%; animation-delay: 4s; }
+    .soccer-ball:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 1s; }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-15px) rotate(120deg); }
+        66% { transform: translateY(-8px) rotate(240deg); }
+    }
+    
+    /* Header styling */
+    .lesson-header {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .lesson-header h1 {
+        font-size: 1.8em;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .lesson-subtitle {
+        font-size: 1em;
+        opacity: 0.9;
+        margin-bottom: 1rem;
+    }
+    
+    /* Tab navigation */
+    .lesson-tabs {
+        display: flex;
+        gap: 0.25rem;
+        margin: 1rem 0.5rem 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        background: rgba(255,255,255,0.1);
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+    
+    .tab-button {
+        padding: 0.75rem 1rem;
+        border: none;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        min-height: 44px;
+        font-size: 0.9em;
+        font-weight: 500;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .tab-button.active {
+        background: white;
+        color: #27ae60;
+        transform: scale(1.05);
+    }
+    
+    .tab-button:hover:not(.active) {
+        background: rgba(255,255,255,0.3);
+    }
+    
+    /* Content sections */
+    .lesson-content {
+        padding: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .lesson-panel {
+        display: none;
+        animation: fadeIn 0.3s ease-in;
+    }
+    
+    .lesson-panel.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Section styling framework */
+    .content-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-left: 5px solid #27ae60;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .content-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .theory-section {
+        border-left-color: #3498db;
+        background: linear-gradient(135deg, #e3f2fd 0%, #f1f8ff 100%);
+    }
+    
+    .theory-section::before {
+        content: "📚 THEORY";
+        display: block;
+        font-weight: bold;
+        color: #1565c0;
+        font-size: 0.9em;
+        margin-bottom: 0.75rem;
+    }
+    
+    .practice-section {
+        border-left-color: #f39c12;
+        background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%);
+    }
+    
+    .practice-section::before {
+        content: "⚽ PRACTICE";
+        display: block;
+        font-weight: bold;
+        color: #e67e22;
+        font-size: 0.9em;
+        margin-bottom: 0.75rem;
+    }
+    
+    .problem-section {
+        border-left-color: #e74c3c;
+        background: linear-gradient(135deg, #fdf2f2 0%, #fef9f9 100%);
+    }
+    
+    .problem-section::before {
+        content: "🎯 CHALLENGE";
+        display: block;
+        font-weight: bold;
+        color: #c0392b;
+        font-size: 0.9em;
+        margin-bottom: 0.75rem;
+    }
+    
+    .review-section {
+        border-left-color: #9b59b6;
+        background: linear-gradient(135deg, #f8f4fd 0%, #fdfbff 100%);
+    }
+    
+    .review-section::before {
+        content: "🏆 MASTERY CHECK";
+        display: block;
+        font-weight: bold;
+        color: #7d3c98;
+        font-size: 0.9em;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Mathematical notation */
+    .math {
+        font-family: 'Times New Roman', 'STIX Two Math', serif;
+        font-style: italic;
+        color: #2c3e50;
+        background: rgba(248, 249, 250, 0.8);
+        padding: 0.3em 0.5em;
+        border-radius: 4px;
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+        font-size: 1.1em;
+    }
+    
+    .math:hover {
+        background: rgba(248, 249, 250, 1);
+        border-color: rgba(0,0,0,0.2);
+        transform: scale(1.02);
+    }
+    
+    .math-block {
+        display: block;
+        text-align: center;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #fafbfc 0%, #f8f9fa 100%);
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 1.3em;
+        color: #2c3e50;
+        font-family: 'Times New Roman', serif;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    /* Exercise styling */
+    .exercise-item {
+        background: white;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .exercise-item:hover {
+        border-color: #27ae60;
+        box-shadow: 0 2px 8px rgba(39,174,96,0.2);
+    }
+    
+    .problem-number {
+        font-weight: 600;
+        color: #27ae60;
+        margin-right: 0.5rem;
+        font-size: 1.1em;
+    }
+    
+    .answer-space {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .math-input {
+        padding: 0.75rem;
+        border: 2px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 16px;
+        min-width: 120px;
+        font-family: 'Times New Roman', serif;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .math-input:focus {
+        border-color: #27ae60;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(39,174,96,0.1);
+    }
+    
+    /* Button styling */
+    .btn {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        padding: 0.75rem 1.5rem;
+        font-family: inherit;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .check-btn {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        color: white;
+    }
+    
+    .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(39,174,96,0.3);
+    }
+    
+    .check-btn:active {
+        transform: translateY(0);
+    }
+    
+    .hint-btn {
+        background: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
+        color: white;
+    }
+    
+    .solution-btn {
+        background: linear-gradient(135deg, #9b59b6 0%, #bb6bd9 100%);
+        color: white;
+    }
+    
+    .feedback {
+        margin-top: 0.5rem;
+        font-weight: 500;
+        min-height: 1.5em;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .feedback.correct {
+        background: linear-gradient(135deg, #d5f4e6 0%, #e8f8f5 100%);
+        color: #1e8449;
+        border: 1px solid #27ae60;
+    }
+    
+    .feedback.incorrect {
+        background: linear-gradient(135deg, #fadbd8 0%, #fdecea 100%);
+        color: #a93226;
+        border: 1px solid #e74c3c;
+    }
+    
+    /* Solution reveal styling */
+    .solution {
+        display: none;
+        background: linear-gradient(135deg, #f8f4fd 0%, #fdfbff 100%);
+        border: 2px solid #9b59b6;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .solution h4 {
+        color: #7d3c98;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    /* Key facts box */
+    .key-facts {
+        background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 100%);
+        border: 2px solid #f39c12;
+        border-left: 6px solid #e67e22;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        position: relative;
+    }
+    
+    .key-facts::before {
+        content: "🔑 KEY FACTS";
+        display: block;
+        font-weight: bold;
+        color: #d35400;
+        font-size: 0.9em;
+        margin-bottom: 1rem;
+    }
+    
+    /* Character introduction box */
+    .character-intro {
+        background: linear-gradient(135deg, #fef9e7 0%, #fffbf0 100%);
+        border: 2px solid #f1c40f;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        position: relative;
+    }
+    
+    .character-intro::before {
+        content: "👩‍🎓";
+        font-size: 3em;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Progress indicator */
+    .progress-bar {
+        background: #ecf0f1;
+        height: 6px;
+        border-radius: 3px;
+        margin: 1rem 0;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        background: linear-gradient(90deg, #27ae60, #2ecc71);
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+    
+    /* Responsive design for larger screens */
+    @media screen and (min-width: 768px) {
+        body {
+            padding: 1rem;
+        }
+        
+        .lesson-container {
+            max-width: 900px;
+        }
+        
+        .lesson-header {
+            padding: 3rem 2rem;
+        }
+        
+        .lesson-header h1 {
+            font-size: 2.5em;
+        }
+        
+        .lesson-content {
+            padding: 2rem;
+        }
+        
+        .content-section {
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .math {
+            font-size: 1.2em;
+        }
+        
+        .answer-space {
+            flex-direction: row;
+        }
+        
+        .math-input {
+            width: auto;
+            min-width: 150px;
+        }
+        
+        .btn {
+            width: auto;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+    
+    @media screen and (min-width: 1200px) {
+        .lesson-container {
+            max-width: 1200px;
+        }
+        
+        .content-section {
+            padding: 2.5rem;
+        }
+    }
+    
+    /* Print styles */
+    @media print {
+        .lesson-tabs, .btn { display: none; }
+        .lesson-panel { display: block !important; page-break-before: always; }
+        .lesson-panel:first-child { page-break-before: avoid; }
+        .content-section { background: white !important; border: 2px solid black !important; box-shadow: none !important; page-break-inside: avoid; }
+        .math, .math-block { background: white !important; color: black !important; border: 1px solid black !important; }
+        .math-input { border: 1px solid black !important; background: white !important; }
+        .soccer-ball { display: none; }
+    }
+    
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    
+    .sr-only {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    
+    /* Success/Error animations */
+    @keyframes successPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes errorShake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+    
+    .success-animation {
+        animation: successPulse 0.6s ease-in-out;
+    }
+    
+    .error-animation {
+        animation: errorShake 0.5s ease-in-out;
+    }
+    </style>
+</head>
+<body>
+    <!-- Flying soccer balls -->
+    <div class="soccer-ball">⚽</div>
+    <div class="soccer-ball">⚽</div>
+    <div class="soccer-ball">⚽</div>
+    <div class="soccer-ball">⚽</div>
+    
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <h1>⚽ Sofia's Soccer Math Adventure ⚽</h1>
+            <div class="lesson-subtitle">📏 Converting Units of Measurement - Grade 8 Mathematics 📐</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <nav class="lesson-tabs" aria-label="Lesson navigation">
+                <button class="tab-button active" onclick="showLesson(1)" aria-controls="lesson1" role="tab">🎯 Objectives</button>
+                <button class="tab-button" onclick="showLesson(2)" aria-controls="lesson2" role="tab">📚 Learn</button>
+                <button class="tab-button" onclick="showLesson(3)" aria-controls="lesson3" role="tab">⚽ Practice</button>
+                <button class="tab-button" onclick="showLesson(4)" aria-controls="lesson4" role="tab">🏆 Challenge</button>
+            </nav>
+        </header>
+        
+        <main class="lesson-content">
+            <!-- Lesson 1: Objectives & Introduction -->
+            <div id="lesson1" class="lesson-panel active" role="tabpanel" aria-labelledby="lesson1-tab">
+                <div class="theory-section">
+                    <h3>🎯 Learning Objectives</h3>
+                    <p>By the end of this lesson, you will be able to:</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>Apply dimensional analysis to convert units of length and time 📏⏰</li>
+                        <li>Convert between units using both multiplication and division 🔢</li>
+                        <li>Convert between imperial and metric systems 🌎</li>
+                        <li>Calculate and convert rates, such as speed, in real-world soccer problems ⚡</li>
+                    </ul>
+                </div>
+                
+                <div class="character-intro">
+                    <h3>👩‍🎓 Meet Sofia: Our Soccer Math Student</h3>
+                    <p>Sofia loves soccer and wants to analyze the game using math. Let's help her master unit conversions to better understand the sport's global nature! 🌍⚽</p>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>🔑 Key Vocabulary</h3>
+                    <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+                        <div><strong>Unit Conversion</strong>: The process of changing a measurement from one unit to another without changing its value 🔄</div>
+                        <div><strong>Conversion Factor</strong>: A ratio equal to one, used to convert units (e.g., <span class="math">3 feet / 1 yard</span>) ⚖️</div>
+                        <div><strong>Dimensional Analysis</strong>: A method of problem-solving that uses conversion factors to change units 🧮</div>
+                        <div><strong>Rate</strong>: A ratio that compares two quantities with different units (e.g., feet per second) 📊</div>
+                    </div>
+                </div>
+                
+                <div class="key-facts">
+                    <h3>📏 Essential Conversion Facts</h3>
+                    <div style="display: grid; gap: 0.5rem; font-size: 1.1em;">
+                        <div>🦶 1 yard = 3 feet</div>
+                        <div>⏱️ 1 minute = 60 seconds</div>
+                        <div>🕐 1 hour = 60 minutes</div>
+                        <div>🌍 1 meter ≈ 1.094 yards (The '≈' symbol means 'approximately equal to')</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 2: Theory & Examples -->
+            <div id="lesson2" class="lesson-panel" role="tabpanel" aria-labelledby="lesson2-tab">
+                <div class="theory-section">
+                    <h3>🌟 Understanding Dimensional Analysis</h3>
+                    <p>Dimensional analysis is a powerful tool. The key is to multiply by a conversion factor (a fraction that equals 1) so that the unwanted units cancel out.</p>
+                    
+                    <div class="math-block">
+                        120 yards × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">3 feet<br>1 yard</span> = 360 feet
+                    </div>
+                    
+                    <p>Notice how the 'yards' unit in the numerator and denominator cancels out, leaving only 'feet'! ✨</p>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🌟 Guided Examples with Step-by-Step Solutions</h3>
+                    
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: white; border-radius: 10px; border: 2px solid #3498db;">
+                        <h4>⚽ Example 1: Converting Large Units to Small (Multiplication)</h4>
+                        <p><strong>The Story</strong>: A historic soccer field was 120 yards long. How many feet is that? 🏟️</p>
+                        
+                        <div class="solution" style="display: block; background: none; border: none; padding: 0; margin-top: 1rem;">
+                            <h4>📝 Step-by-Step Solution:</h4>
+                            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>Identify the goal</strong>: Convert 120 yards to feet</li>
+                                <li><strong>Choose the conversion factor</strong>: We want to cancel 'yards', so it must be in the denominator: <span class="math">3 feet / 1 yard</span></li>
+                                <li><strong>Set up the equation</strong>:
+                                    <div class="math-block">120 yards × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">3 feet<br>1 yard</span></div>
+                                </li>
+                                <li><strong>Calculate</strong>: 120 × 3 = 360. The 'yards' cancel, leaving feet</li>
+                                <li><strong>Answer</strong>: 360 feet ✅</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: white; border-radius: 10px; border: 2px solid #f39c12;">
+                        <h4>⚽ Example 2: Converting Small Units to Large (Division)</h4>
+                        <p><strong>The Story</strong>: Sofia measured the distance from the goal to the penalty spot as 36 feet. The official rules list this distance in yards. What is it in yards? 🥅</p>
+                        
+                        <div class="solution" style="display: block; background: none; border: none; padding: 0; margin-top: 1rem;">
+                            <h4>📝 Step-by-Step Solution:</h4>
+                            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>Identify the goal</strong>: Convert 36 feet to yards</li>
+                                <li><strong>Choose the conversion factor</strong>: We want to cancel 'feet', so it must be in the denominator: <span class="math">1 yard / 3 feet</span></li>
+                                <li><strong>Set up the equation</strong>:
+                                    <div class="math-block">36 feet × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">1 yard<br>3 feet</span></div>
+                                </li>
+                                <li><strong>Calculate</strong>: 36 ÷ 3 = 12. The 'feet' cancel, leaving yards</li>
+                                <li><strong>Answer</strong>: 12 yards ✅</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: white; border-radius: 10px; border: 2px solid #27ae60;">
+                        <h4>🌍 Example 3: Converting Between Systems (Imperial to Metric)</h4>
+                        <p><strong>The Story</strong>: Sofia learns that Andrés Iniesta played on fields in Spain measured in meters. A standard FIFA field is 115 yards long. What is this length in meters? 🇪🇸</p>
+                        
+                        <div class="solution" style="display: block; background: none; border: none; padding: 0; margin-top: 1rem;">
+                            <h4>📝 Step-by-Step Solution:</h4>
+                            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>Identify the goal</strong>: Convert 115 yards to meters</li>
+                                <li><strong>Choose the conversion factor</strong>: We use 1 meter ≈ 1.094 yards. To cancel 'yards', we use <span class="math">1 meter / 1.094 yards</span></li>
+                                <li><strong>Set up the equation</strong>:
+                                    <div class="math-block">115 yards × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">1 meter<br>1.094 yards</span></div>
+                                </li>
+                                <li><strong>Calculate</strong>: 115 ÷ 1.094 ≈ 105.12. The 'yards' cancel, leaving meters</li>
+                                <li><strong>Answer</strong>: Approximately 105.12 meters ✅</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 3: Practice Problems -->
+            <div id="lesson3" class="lesson-panel" role="tabpanel" aria-labelledby="lesson3-tab">
+                <div class="practice-section">
+                    <h3>🏃‍♀️ Guided Practice Problems</h3>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">Problem 1:</div>
+                        <div>🏟️ A soccer field is 180 feet wide. How many yards wide is it? Show your work using dimensional analysis.</div>
+                        <div class="answer-space">
+                            <label for="answer1" class="sr-only">Enter your answer</label>
+                            <input type="text" id="answer1" class="math-input" placeholder="Enter answer..." data-correct="60">
+                            <span>yards</span>
+                            <button onclick="checkAnswer(1)" class="btn check-btn">Check ✓</button>
+                            <button onclick="showSolution(1)" class="btn hint-btn">Show Solution 💡</button>
+                        </div>
+                        <div id="feedback1" class="feedback"></div>
+                        <div id="solution1" class="solution">
+                            <h4>💡 Solution</h4>
+                            <p><strong>Given:</strong> 180 feet</p>
+                            <p><strong>Conversion Factor:</strong> <span class="math">1 yard / 3 feet</span></p>
+                            <div class="math-block">180 feet × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">1 yard<br>3 feet</span> = 60 yards</div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">Problem 2:</div>
+                        <div>⏰ A youth soccer game half lasts 1800 seconds. How many minutes is that?</div>
+                        <div class="answer-space">
+                            <label for="answer2" class="sr-only">Enter your answer</label>
+                            <input type="text" id="answer2" class="math-input" placeholder="Enter answer..." data-correct="30">
+                            <span>minutes</span>
+                            <button onclick="checkAnswer(2)" class="btn check-btn">Check ✓</button>
+                            <button onclick="showSolution(2)" class="btn hint-btn">Show Solution 💡</button>
+                        </div>
+                        <div id="feedback2" class="feedback"></div>
+                        <div id="solution2" class="solution">
+                            <h4>💡 Solution</h4>
+                            <p><strong>Given:</strong> 1800 seconds</p>
+                            <p><strong>Conversion Factor:</strong> <span class="math">1 minute / 60 seconds</span></p>
+                            <div class="math-block">1800 seconds × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">1 minute<br>60 seconds</span> = 30 minutes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>💪 Independent Practice Problems</h3>
+                    <p><strong>Instructions:</strong> Use dimensional analysis to solve each problem. Show your setup and final answer. Round decimals to two places where necessary. 📝</p>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">3.</div>
+                        <div>🥅 The goal area in soccer is 6 yards wide. How many feet wide is it?</div>
+                        <div class="answer-space">
+                            <input type="text" id="answer3" class="math-input" placeholder="Answer..." data-correct="18">
+                            <span>feet</span>
+                            <button onclick="checkAnswer(3)" class="btn check-btn">Check ✓</button>
+                        </div>
+                        <div id="feedback3" class="feedback"></div>
+                    </div>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">4.</div>
+                        <div>⚽ A corner kick travels 75 feet before a player heads it. How far did it travel in yards?</div>
+                        <div class="answer-space">
+                            <input type="text" id="answer4" class="math-input" placeholder="Answer..." data-correct="25">
+                            <span>yards</span>
+                            <button onclick="checkAnswer(4)" class="btn check-btn">Check ✓</button>
+                        </div>
+                        <div id="feedback4" class="feedback"></div>
+                    </div>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">5.</div>
+                        <div>🏃‍♀️ Sofia's team does warm-up exercises for 8 minutes. How many seconds is that?</div>
+                        <div class="answer-space">
+                            <input type="text" id="answer5" class="math-input" placeholder="Answer..." data-correct="480">
+                            <span>seconds</span>
+                            <button onclick="checkAnswer(5)" class="btn check-btn">Check ✓</button>
+                        </div>
+                        <div id="feedback5" class="feedback"></div>
+                    </div>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">6.</div>
+                        <div>🌍 A field in Europe is 68 meters wide. How wide is it in yards? (Round to 2 decimal places)</div>
+                        <div class="answer-space">
+                            <input type="text" id="answer6" class="math-input" placeholder="Answer..." data-correct="74.39">
+                            <span>yards</span>
+                            <button onclick="checkAnswer(6)" class="btn check-btn">Check ✓</button>
+                        </div>
+                        <div id="feedback6" class="feedback"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 4: Challenge Problems -->
+            <div id="lesson4" class="lesson-panel" role="tabpanel" aria-labelledby="lesson4-tab">
+                <div class="problem-section">
+                    <h3>🎯 Real-World Application: Calculating Speed</h3>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">Problem A:</div>
+                        <div>🏃‍♀️ <strong>Sofia's Sprint</strong><br>Sofia sprints the full 110-yard length of the field in 15 seconds. What is her speed in <strong>feet per second</strong>?<br>(Hint: First convert the distance to feet, then calculate the rate.)</div>
+                        <div class="answer-space">
+                            <input type="text" id="answerA" class="math-input" placeholder="Answer..." data-correct="22">
+                            <span>feet per second</span>
+                            <button onclick="checkAnswer('A')" class="btn check-btn">Check ✓</button>
+                            <button onclick="showSolution('A')" class="btn solution-btn">Show Solution 🔍</button>
+                        </div>
+                        <div id="feedbackA" class="feedback"></div>
+                        <div id="solutionA" class="solution">
+                            <h4>🔍 Complete Solution</h4>
+                            <p><strong>Step 1:</strong> Convert distance to feet</p>
+                            <div class="math-block">110 yards × 3 = 330 feet</div>
+                            <p><strong>Step 2:</strong> Calculate speed</p>
+                            <div class="math-block">Speed = Distance ÷ Time = 330 feet ÷ 15 seconds = 22 feet/second</div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">Problem B:</div>
+                        <div>⚡ <strong>International Player Speed</strong><br>A player like Kylian Mbappé can reach a top speed of 10.5 meters per second. What is this speed in <strong>yards per second</strong>?</div>
+                        <div class="answer-space">
+                            <input type="text" id="answerB" class="math-input" placeholder="Answer..." data-correct="11.49">
+                            <span>yards per second</span>
+                            <button onclick="checkAnswer('B')" class="btn check-btn">Check ✓</button>
+                            <button onclick="showSolution('B')" class="btn solution-btn">Show Solution 🔍</button>
+                        </div>
+                        <div id="feedbackB" class="feedback"></div>
+                        <div id="solutionB" class="solution">
+                            <h4>🔍 Complete Solution</h4>
+                            <div class="math-block">10.5 m/s × <span style="border-top: 2px solid #2c3e50; display: inline-block; text-align: center; padding: 0.2em;">1.094 yards<br>1 meter</span> ≈ 11.49 yards/second</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-section">
+                    <h3>🔍 Challenge Problems (Bonus!) 🏆</h3>
+                    
+                    <div class="exercise-item">
+                        <div class="problem-number">Challenge 1:</div>
+                        <div>🏃‍♀️ <strong>Perimeter Run</strong><br>Sofia runs the perimeter of a field that is 110 yards long and 70 yards wide. If she completes the run in 90 seconds, what is her average speed in feet per second?</div>
+                        <div class="answer-space">
+                            <input type="text" id="answerC1" class="math-input" placeholder="Answer..." data-correct="12">
+                            <span>feet per second</span>
+                            <button onclick="checkAnswer('C1')" class="btn check-btn">Check ✓</button>
+                            <button onclick="showSolution('C1')" class="btn solution-btn">Show Solution 🔍</button>
+                        </div>
+                        <div id="feedbackC1" class="feedback"></div>
+                        <div id="solutionC1" class="solution">
+                            <h4>🔍 Complete Solution</h4>
+                            <p><strong>Step 1:</strong> Calculate perimeter in yards</p>
+                            <div class="math-block">Perimeter = 2(110) + 2(70) = 220 + 140 = 360 yards</div>
+                            <p><strong>Step 2:</strong> Convert to feet</p>
+                            <div class="math-block">360 yards × 3 = 1080 feet</div>
+                            <p><strong>Step 3:</strong> Calculate speed</p>
+                            <div class="math-block">Speed = 1080 feet ÷ 90 seconds = 12 feet/second</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border-radius: 15px;">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p style="font-size: 1.2em; margin: 1rem 0;">You've mastered unit conversion with Sofia! 🏆⚽</p>
+                        <p>You're now ready to tackle any conversion challenge that comes your way! 🌟</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    // Progress tracking
+    let completedProblems = new Set();
+    let totalProblems = 12; // Total number of practice problems
+    
+    // Enhanced lesson navigation with mathematical context
+    function showLesson(lessonNumber) {
+        // Hide all lesson panels
+        const panels = document.querySelectorAll('.lesson-panel');
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Remove active class from all tab buttons
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+            button.setAttribute('aria-selected', 'false');
+        });
+        
+        // Show selected lesson panel
+        const targetPanel = document.getElementById(`lesson${lessonNumber}`);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+            targetPanel.setAttribute('aria-hidden', 'false');
+        }
+        
+        // Add active class to clicked button
+        if (event && event.target) {
+            event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
+        }
+        
+        // Update progress bar
+        updateProgress();
+        
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Focus management for accessibility
+        if (targetPanel) {
+            targetPanel.focus();
+        }
+    }
+    
+    // Answer checking system with flexible comparison
+    function checkAnswer(questionId) {
+        const input = document.querySelector(`#answer${questionId}`);
+        const userAnswer = parseFloat(input.value.trim());
+        const correctAnswer = parseFloat(input.dataset.correct);
+        const feedback = document.querySelector(`#feedback${questionId}`);
+        
+        // Handle tolerance for decimal answers
+        const tolerance = 0.1;
+        const isCorrect = Math.abs(userAnswer - correctAnswer) <= tolerance;
+        
+        if (isCorrect) {
+            feedback.innerHTML = '<span style="color: #27ae60; font-weight: 600;">✅ Correct! Excellent work! 🎉</span>';
+            feedback.className = 'feedback correct';
+            input.style.borderColor = '#27ae60';
+            input.style.backgroundColor = '#d5f4e6';
+            
+            // Add success animation
+            input.classList.add('success-animation');
+            setTimeout(() => input.classList.remove('success-animation'), 1000);
+            
+            // Track completion
+            completedProblems.add(questionId);
+            updateProgress();
+            
+            // Celebrate with emoji burst
+            createEmojiBurst(input);
+            
+        } else {
+            feedback.innerHTML = '<span style="color: #e74c3c; font-weight: 600;">❌ Not quite right. Check your calculation and try again! 🤔</span>';
+            feedback.className = 'feedback incorrect';
+            input.style.borderColor = '#e74c3c';
+            input.style.backgroundColor = '#fadbd8';
+            
+            // Add shake animation
+            input.classList.add('error-animation');
+            setTimeout(() => input.classList.remove('error-animation'), 500);
+        }
+        
+        // Save attempt data
+        saveAttempt(questionId, userAnswer, correctAnswer, isCorrect);
+    }
+    
+    // Create emoji burst effect for correct answers
+    function createEmojiBurst(element) {
+        const emojis = ['⚽', '🎉', '✨', '🏆', '🌟', '👏'];
+        const rect = element.getBoundingClientRect();
+        
+        for (let i = 0; i < 6; i++) {
+            const emoji = document.createElement('div');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.position = 'fixed';
+            emoji.style.left = rect.left + Math.random() * rect.width + 'px';
+            emoji.style.top = rect.top + 'px';
+            emoji.style.fontSize = '1.5em';
+            emoji.style.pointerEvents = 'none';
+            emoji.style.zIndex = '1000';
+            emoji.style.animation = `burstUp 1s ease-out forwards`;
+            
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 1000);
+        }
+    }
+    
+    // Add burst animation
+    const style = document.createElement('style');
+    style.textContent += `
+        @keyframes burstUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Solution reveal
+    function showSolution(questionId) {
+        const solutionDiv = document.querySelector(`#solution${questionId}`);
+        const button = event.target;
+        
+        if (solutionDiv) {
+            const isHidden = solutionDiv.style.display === 'none' || !solutionDiv.style.display;
+            solutionDiv.style.display = isHidden ? 'block' : 'none';
+            button.textContent = isHidden ? 'Hide Solution 🙈' : (button.classList.contains('hint-btn') ? 'Show Solution 💡' : 'Show Solution 🔍');
+            
+            // Animate the reveal
+            if (isHidden) {
+                solutionDiv.style.opacity = '0';
+                solutionDiv.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    solutionDiv.style.transition = 'all 0.3s ease';
+                    solutionDiv.style.opacity = '1';
+                    solutionDiv.style.transform = 'translateY(0)';
+                }, 10);
+            }
+        }
+    }
+    
+    // Update progress bar
+    function updateProgress() {
+        const progressFill = document.getElementById('progressFill');
+        const completionRate = (completedProblems.size / totalProblems) * 100;
+        progressFill.style.width = completionRate + '%';
+        
+        // Achievement messages
+        if (completionRate === 100) {
+            setTimeout(() => {
+                alert('🎉 Amazing! You\'ve completed all the problems! Sofia is proud of your math skills! ⚽🏆');
+            }, 500);
+        } else if (completionRate >= 75) {
+            // Subtle encouragement without alert
+            console.log('Great progress! You\'re almost there! 🌟');
+        }
+    }
+    
+    // Save student attempt data
+    function saveAttempt(questionId, userAnswer, correctAnswer, isCorrect) {
+        const attemptData = {
+            questionId,
+            userAnswer,
+            correctAnswer,
+            isCorrect,
+            timestamp: new Date().toISOString(),
+            lesson: document.querySelector('.lesson-panel.active')?.id || 'unknown'
+        };
+        
+        try {
+            const attempts = JSON.parse(localStorage.getItem('sofiaAttempts') || '[]');
+            attempts.push(attemptData);
+            
+            // Keep only last 100 attempts
+            if (attempts.length > 100) {
+                attempts.splice(0, attempts.length - 100);
+            }
+            
+            localStorage.setItem('sofiaAttempts', JSON.stringify(attempts));
+        } catch (e) {
+            console.log('Could not save attempt data');
+        }
+    }
+    
+    // Initialize interactive elements
+    function initializeInteractiveElements() {
+        // Add keyboard support for custom buttons
+        document.querySelectorAll('.btn, .tab-button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        // Add input validation and enter key support
+        document.querySelectorAll('.math-input').forEach(input => {
+            input.addEventListener('input', function() {
+                // Reset styling on new input
+                this.style.borderColor = '#dee2e6';
+                this.style.backgroundColor = 'white';
+                
+                const questionId = this.id.replace('answer', '');
+                const feedback = document.querySelector(`#feedback${questionId}`);
+                if (feedback) {
+                    feedback.innerHTML = '';
+                    feedback.className = 'feedback';
+                }
+            });
+            
+            // Add enter key support
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const questionId = this.id.replace('answer', '');
+                    checkAnswer(questionId);
+                }
+            });
+        });
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeInteractiveElements();
+        updateProgress();
+        
+        // Add welcome message
+        setTimeout(() => {
+            console.log('⚽ Welcome to Sofia\'s Soccer Math Adventure! Let\'s learn unit conversion together! 🎉');
+        }, 1000);
+    });
+    
+    // Handle window resize for responsive design
+    window.addEventListener('resize', debounce(function() {
+        // Responsive adjustments if needed
+    }, 250));
+    
+    // Debounce utility function
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Export functions for external use
+    window.SofiasMath = {
+        showLesson,
+        checkAnswer,
+        showSolution,
+        updateProgress
+    };
+    </script>
+</body>
+</html>

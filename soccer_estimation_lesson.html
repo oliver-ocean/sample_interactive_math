@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Grade 8 Mathematics - Estimation and Approximation with Soccer">
+    <title>Grade 8 Soccer Math: Estimation & Approximation ⚽</title>
+    <style>
+    /* Mobile-First Responsive Design */
+    * { box-sizing: border-box; }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+        color: #1b5e20;
+        min-height: 100vh;
+        margin: 0;
+        padding: 1rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+    
+    .lesson-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    
+    .lesson-header {
+        text-align: center;
+        background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+        color: white;
+        padding: 1.5rem 1rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .lesson-header::before {
+        content: "⚽";
+        position: absolute;
+        font-size: 4rem;
+        opacity: 0.1;
+        top: -1rem;
+        right: 1rem;
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .lesson-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .lesson-header .subtitle {
+        margin: 0.5rem 0 0 0;
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    
+    /* Tab Navigation */
+    .lesson-tabs {
+        display: flex;
+        gap: 0.25rem;
+        margin-bottom: 1.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem;
+    }
+    
+    .tab-button {
+        padding: 0.75rem 1rem;
+        border: 2px solid #4caf50;
+        background: white;
+        color: #2e7d32;
+        border-radius: 12px 12px 0 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        min-height: 44px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        flex-shrink: 0;
+        position: relative;
+    }
+    
+    .tab-button.active {
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        color: white;
+        border-color: #4caf50;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    }
+    
+    .tab-button:hover:not(.active) {
+        background: #f1f8e9;
+        border-color: #66bb6a;
+        transform: translateY(-1px);
+    }
+    
+    /* Lesson Panels */
+    .lesson-panel {
+        display: none;
+        animation: fadeIn 0.4s ease-in;
+    }
+    
+    .lesson-panel.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    /* Content Sections */
+    .content-section {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border-left: 6px solid #4caf50;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .content-section:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .theory-section {
+        border-left-color: #1976d2;
+        background: linear-gradient(135deg, #e3f2fd 0%, #f1f8ff 100%);
+    }
+    
+    .theory-section::before {
+        content: "📚 THEORY";
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #1976d2;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    
+    .practice-section {
+        border-left-color: #ff6f00;
+        background: linear-gradient(135deg, #fff3e0 0%, #fef7f0 100%);
+    }
+    
+    .practice-section::before {
+        content: "⚽ PRACTICE";
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #ff6f00;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    
+    .problem-section {
+        border-left-color: #7b1fa2;
+        background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+    }
+    
+    .problem-section::before {
+        content: "🧮 PROBLEMS";
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #7b1fa2;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    
+    .solution-section {
+        border-left-color: #d32f2f;
+        background: linear-gradient(135deg, #ffebee 0%, #fff5f5 100%);
+    }
+    
+    .solution-section::before {
+        content: "✅ SOLUTIONS";
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #d32f2f;
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+    
+    /* Mathematical Notation */
+    .math {
+        font-family: 'Times New Roman', 'STIX Two Math', serif;
+        font-style: italic;
+        color: #1b5e20;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 0.3em 0.5em;
+        border-radius: 6px;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+        display: inline-block;
+        margin: 0.1em;
+        transition: all 0.2s ease;
+    }
+    
+    .math:hover {
+        background: rgba(255, 255, 255, 1);
+        border-color: #4caf50;
+        transform: scale(1.05);
+    }
+    
+    .math-block {
+        display: block;
+        text-align: center;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border: 3px solid #4caf50;
+        border-radius: 12px;
+        font-size: 1.3em;
+        color: #1b5e20;
+        font-family: 'Times New Roman', serif;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+        position: relative;
+    }
+    
+    .math-block::before {
+        content: "⚽";
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        background: #4caf50;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        animation: bounce 2s infinite;
+    }
+    
+    /* Problem Styling */
+    .problem {
+        background: white;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        border-radius: 12px;
+        border: 2px solid #e8f5e8;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        position: relative;
+    }
+    
+    .problem-number {
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .problem-content {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #2e7d32;
+    }
+    
+    .answer-section {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px dashed #4caf50;
+    }
+    
+    .math-input {
+        padding: 0.75rem;
+        border: 2px solid #c8e6c9;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 100%;
+        margin: 0.5rem 0;
+        font-family: 'Times New Roman', serif;
+        transition: all 0.3s ease;
+    }
+    
+    .math-input:focus {
+        border-color: #4caf50;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        background: #f8fff8;
+    }
+    
+    /* Buttons */
+    .btn {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-family: inherit;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin: 0.5rem 0.5rem 0.5rem 0;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    }
+    
+    .btn:hover {
+        background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    }
+    
+    .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    }
+    
+    .btn-secondary {
+        background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
+        box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+    }
+    
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+        box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+    }
+    
+    /* Hidden Solutions */
+    .solution-content {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+        border-radius: 8px;
+        border-left: 4px solid #4caf50;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    .solution-content.show {
+        display: block;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .feedback {
+        margin-top: 0.5rem;
+        font-weight: 600;
+        min-height: 1.5em;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    
+    /* Soccer Field Decoration */
+    .soccer-field {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+        border-radius: 10px;
+        margin: 1rem 0;
+        position: relative;
+        overflow: hidden;
+        border: 3px solid white;
+    }
+    
+    .soccer-field::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        border: 2px solid white;
+        border-radius: 50%;
+    }
+    
+    .soccer-field::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+    }
+    
+    .player-icon {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: playerMove 4s ease-in-out infinite;
+    }
+    
+    .player-maldini {
+        top: 30%;
+        left: 20%;
+        animation-delay: 0s;
+    }
+    
+    .player-sofia {
+        top: 60%;
+        right: 25%;
+        animation-delay: 2s;
+    }
+    
+    @keyframes playerMove {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(20px); }
+    }
+    
+    /* Responsive Design for Larger Screens */
+    @media screen and (min-width: 768px) {
+        body {
+            padding: 2rem;
+        }
+        
+        .lesson-container {
+            max-width: 1000px;
+        }
+        
+        .lesson-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .lesson-header .subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .content-section {
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .tab-button {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .math {
+            font-size: 1.2em;
+        }
+        
+        .problem {
+            padding: 2rem;
+        }
+        
+        .soccer-field {
+            height: 200px;
+        }
+    }
+    
+    @media screen and (min-width: 1200px) {
+        .lesson-container {
+            max-width: 1200px;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+    }
+    
+    /* Print Styles */
+    @media print {
+        .lesson-tabs, .btn { display: none; }
+        
+        .lesson-panel {
+            display: block !important;
+            page-break-before: always;
+        }
+        
+        .lesson-panel:first-child {
+            page-break-before: avoid;
+        }
+        
+        .content-section {
+            background: white !important;
+            border: 2px solid black !important;
+            box-shadow: none !important;
+            page-break-inside: avoid;
+        }
+        
+        .math, .math-block {
+            background: white !important;
+            color: black !important;
+            border: 1px solid black !important;
+        }
+        
+        .solution-content {
+            display: block !important;
+        }
+    }
+    
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    .sr-only {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    
+    /* Flying Soccer Ball Animation */
+    .flying-ball {
+        position: fixed;
+        font-size: 2rem;
+        z-index: 1000;
+        pointer-events: none;
+        animation: flyAcross 8s linear infinite;
+    }
+    
+    @keyframes flyAcross {
+        0% {
+            left: -50px;
+            top: 20%;
+            transform: rotate(0deg);
+        }
+        100% {
+            left: 100vw;
+            top: 80%;
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="flying-ball">⚽</div>
+    
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <h1>🏆 Grade 8 Soccer Math: Estimation & Approximation 🏆</h1>
+            <p class="subtitle">Learning with Paolo Maldini's Mathematical Brilliance ⚽</p>
+        </header>
+        
+        <nav class="lesson-tabs" aria-label="Lesson navigation">
+            <button class="tab-button active" onclick="showLesson(1)" aria-controls="lesson1" role="tab">📚 Introduction</button>
+            <button class="tab-button" onclick="showLesson(2)" aria-controls="lesson2" role="tab">🎯 Examples</button>
+            <button class="tab-button" onclick="showLesson(3)" aria-controls="lesson3" role="tab">⚽ Basic Practice</button>
+            <button class="tab-button" onclick="showLesson(4)" aria-controls="lesson4" role="tab">🏃‍♂️ Advanced</button>
+            <button class="tab-button" onclick="showLesson(5)" aria-controls="lesson5" role="tab">🏆 Challenge</button>
+        </nav>
+        
+        <main class="lesson-content">
+            <!-- Lesson 1: Introduction -->
+            <div id="lesson1" class="lesson-panel active" role="tabpanel">
+                <div class="theory-section">
+                    <h3>🎯 Learning Objectives</h3>
+                    <div class="soccer-field">
+                        <div class="player-icon player-maldini">🏃‍♂️</div>
+                        <div class="player-icon player-sofia">🏃‍♀️</div>
+                    </div>
+                    <p>By the end of this lesson, you will be able to:</p>
+                    <ul>
+                        <li>⚽ <strong>Estimate</strong> measurements and calculations using various strategies</li>
+                        <li>🎯 Apply <strong>rounding rules</strong> to approximate numbers to different place values</li>
+                        <li>🧮 Use <strong>benchmark numbers</strong> and mental math to make reasonable estimates</li>
+                        <li>⚽ Solve <strong>real-world problems</strong> involving estimation and approximation</li>
+                        <li>✅ <strong>Evaluate reasonableness</strong> of answers using estimation techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>📚 Key Vocabulary</h3>
+                    <div style="display: grid; gap: 1rem; margin: 1rem 0;">
+                        <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+                            <strong>🎯 Estimation:</strong> Finding an approximate value that is close to the actual answer
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #ff9800;">
+                            <strong>📊 Approximation:</strong> A value that is not exact but close enough for practical purposes
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+                            <strong>🔄 Rounding:</strong> Adjusting a number to the nearest specified place value
+                        </div>
+                        <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #9c27b0;">
+                            <strong>⭐ Benchmark Numbers:</strong> Easy-to-use reference numbers (like 10, 100, 1000)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>🏆 Paolo Maldini's Mathematical Brilliance</h3>
+                    <p>Paolo Maldini, AC Milan's legendary defender, didn't just rely on speed or strength—he used <strong>mathematical thinking!</strong> 🧠⚡</p>
+                    
+                    <p>During matches, Maldini had mere seconds to estimate:</p>
+                    <ul>
+                        <li>📐 The <strong>angle</strong> of an attacking player's run</li>
+                        <li>📏 The <strong>distance</strong> between himself and the goal</li>
+                        <li>🎯 The <strong>optimal position</strong> to intercept passes</li>
+                    </ul>
+                    
+                    <div style="background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; text-align: center;">
+                        <h4 style="margin: 0; font-size: 1.2rem;">⚡ Key Insight ⚡</h4>
+                        <p style="margin: 0.5rem 0 0 0;">Just like Maldini's split-second calculations on the field, estimation skills help us make quick, reasonable decisions in mathematics and daily life! 🚀</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 2: Guided Examples -->
+            <div id="lesson2" class="lesson-panel" role="tabpanel">
+                <div class="theory-section">
+                    <h3>🎯 Guided Examples with Solutions</h3>
+                </div>
+                
+                <div class="practice-section">
+                    <h4>Example 1: 🏟️ The San Siro Stadium</h4>
+                    <p><strong>Problem:</strong> The San Siro stadium, where Maldini played for 25 years, has a capacity of 80,018 fans. If tickets cost €47 each, estimate the total revenue from a sold-out match. 💰</p>
+                    
+                    <div class="math-block">
+                        <strong>Solution Steps:</strong><br>
+                        Step 1: Round capacity → <span class="math">80,018 ≈ 80,000</span><br>
+                        Step 2: Round ticket price → <span class="math">€47 ≈ €50</span><br>
+                        Step 3: Calculate → <span class="math">80,000 × 50 = €4,000,000</span>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="toggleSolution('example1')">🔍 Show Actual Answer</button>
+                    <div id="example1" class="solution-content">
+                        <p><strong>✅ Actual calculation:</strong> <span class="math">80,018 × 47 = €3,760,846</span></p>
+                        <p>Our estimate of €4,000,000 is very reasonable! 🎯</p>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h4>Example 2: ⚽ Soccer Strategy - Defensive Positioning</h4>
+                    <p><strong>Problem:</strong> During a corner kick, Maldini positions himself 9.7 meters from the goal line and 6.2 meters from the corner flag. Estimate his distance from the corner of the goal using the Pythagorean theorem. 📐</p>
+                    
+                    <div class="math-block">
+                        <strong>Solution Steps:</strong><br>
+                        Step 1: Round distances → <span class="math">9.7 ≈ 10m</span>, <span class="math">6.2 ≈ 6m</span><br>
+                        Step 2: Apply Pythagorean theorem → <span class="math">d² = 10² + 6²</span><br>
+                        Step 3: Calculate → <span class="math">d² = 100 + 36 = 136</span><br>
+                        Step 4: Estimate → <span class="math">d ≈ √144 = 12</span> meters
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="toggleSolution('example2')">🔍 Show Actual Answer</button>
+                    <div id="example2" class="solution-content">
+                        <p><strong>✅ Actual calculation:</strong> <span class="math">√(9.7² + 6.2²) = √132.53 ≈ 11.5</span> meters</p>
+                        <p>Our estimate of 12 meters is excellent! 🎯</p>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h4>Example 3: 🏃‍♀️ Young Sofia's Practice</h4>
+                    <p><strong>Problem:</strong> Sofia, inspired by Maldini's precision, practices estimating angles during her youth soccer training. If she runs from one corner of a rectangular field (108m × 68m) to the opposite corner, estimate the angle her path makes with the longer sideline. 📏</p>
+                    
+                    <div class="math-block">
+                        <strong>Solution Steps:</strong><br>
+                        Step 1: Round dimensions → <span class="math">108m ≈ 110m</span>, <span class="math">68m ≈ 70m</span><br>
+                        Step 2: Use tangent ratio → <span class="math">tan(θ) = 70/110 = 7/11 ≈ 0.64</span><br>
+                        Step 3: Estimate angle → Since <span class="math">tan(30°) ≈ 0.58</span>, our angle is slightly larger<br>
+                        <strong>Estimate:</strong> About <span class="math">32°</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 3: Basic Practice -->
+            <div id="lesson3" class="lesson-panel" role="tabpanel">
+                <div class="problem-section">
+                    <h3>⚽ Problem Set A: Basic Estimation</h3>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 1 🚀</div>
+                        <div class="problem-content">
+                            A powerful soccer kick travels at 118 km/h. Estimate how many meters it travels in 0.5 seconds.
+                        </div>
+                        <div class="answer-section">
+                            <label for="answer1a" class="sr-only">Enter your answer for problem 1</label>
+                            <input type="text" id="answer1a" class="math-input" placeholder="Enter your estimate..." data-correct="16.5">
+                            <button onclick="checkAnswer('1a')" class="btn">⚽ Check Answer</button>
+                            <button onclick="toggleSolution('solution1a')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback1a" class="feedback"></div>
+                        <div id="solution1a" class="solution-content">
+                            <p><strong>Solution:</strong> Round speed: <span class="math">118 km/h ≈ 120 km/h</span></p>
+                            <p>Convert to m/s: <span class="math">120 km/h = 120,000m ÷ 3600s = 33.3 m/s ≈ 33 m/s</span></p>
+                            <p>Distance = <span class="math">33 m/s × 0.5s = 16.5 meters</span> ⚽</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 2 🏆</div>
+                        <div class="problem-content">
+                            The UEFA Champions League trophy weighs 7.5 kg. If 15 trophies were made for display, estimate the total weight.
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer2a" class="math-input" placeholder="Enter your estimate..." data-correct="120">
+                            <button onclick="checkAnswer('2a')" class="btn">🏆 Check Answer</button>
+                            <button onclick="toggleSolution('solution2a')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback2a" class="feedback"></div>
+                        <div id="solution2a" class="solution-content">
+                            <p><strong>Solution:</strong> <span class="math">7.5 × 15 ≈ 8 × 15 = 120 kg</span> 🏆</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 3 📊</div>
+                        <div class="problem-content">
+                            Sofia's team scored these goals in their last 6 games: 2, 4, 1, 3, 5, 2. Estimate their average goals per game.
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer3a" class="math-input" placeholder="Enter your estimate..." data-correct="3">
+                            <button onclick="checkAnswer('3a')" class="btn">📊 Check Answer</button>
+                            <button onclick="toggleSolution('solution3a')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback3a" class="feedback"></div>
+                        <div id="solution3a" class="solution-content">
+                            <p><strong>Solution:</strong> Total goals: <span class="math">2 + 4 + 1 + 3 + 5 + 2 = 17</span></p>
+                            <p>Average: <span class="math">17 ÷ 6 ≈ 18 ÷ 6 = 3</span> goals per game ⚽</p>
+                            <p><strong>Quick tip:</strong> Notice the numbers cluster around 3! 🎯</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 4: Intermediate Applications -->
+            <div id="lesson4" class="lesson-panel" role="tabpanel">
+                <div class="problem-section">
+                    <h3>🏃‍♂️ Problem Set B: Intermediate Applications</h3>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 4 🏟️</div>
+                        <div class="problem-content">
+                            During the 1994 World Cup, Maldini's team played in stadiums with these capacities: 94,348; 77,622; 83,091; 68,237. Estimate the total capacity of all four stadiums by rounding each to the nearest thousand.
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer4b" class="math-input" placeholder="Enter your estimate..." data-correct="323000">
+                            <button onclick="checkAnswer('4b')" class="btn">🏟️ Check Answer</button>
+                            <button onclick="toggleSolution('solution4b')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback4b" class="feedback"></div>
+                        <div id="solution4b" class="solution-content">
+                            <p><strong>Solution:</strong> Round each capacity:</p>
+                            <p><span class="math">94,348 ≈ 94,000</span> | <span class="math">77,622 ≈ 78,000</span></p>
+                            <p><span class="math">83,091 ≈ 83,000</span> | <span class="math">68,237 ≈ 68,000</span></p>
+                            <p>Total: <span class="math">94,000 + 78,000 + 83,000 + 68,000 = 323,000</span> 🏟️</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 5 📏</div>
+                        <div class="problem-content">
+                            A soccer field is 105.2 meters long and 67.8 meters wide. Estimate:<br>
+                            a) The perimeter of the field<br>
+                            b) The area of the field
+                        </div>
+                        <div class="answer-section">
+                            <label>a) Perimeter:</label>
+                            <input type="text" id="answer5a" class="math-input" placeholder="Perimeter estimate..." data-correct="346">
+                            <label>b) Area:</label>
+                            <input type="text" id="answer5b" class="math-input" placeholder="Area estimate..." data-correct="7350">
+                            <button onclick="checkAnswer('5ab')" class="btn">📏 Check Answers</button>
+                            <button onclick="toggleSolution('solution5ab')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback5ab" class="feedback"></div>
+                        <div id="solution5ab" class="solution-content">
+                            <p><strong>Solutions:</strong></p>
+                            <p>a) Perimeter: <span class="math">2(105.2 + 67.8) ≈ 2(105 + 68) = 2(173) = 346</span> meters</p>
+                            <p>b) Area: <span class="math">105.2 × 67.8 ≈ 105 × 70 = 7,350</span> square meters ⚽</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lesson 5: Advanced Challenge -->
+            <div id="lesson5" class="lesson-panel" role="tabpanel">
+                <div class="problem-section">
+                    <h3>🏆 Problem Set C: Advanced Challenge</h3>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 7 🎯</div>
+                        <div class="problem-content">
+                            Maldini played in 647 Serie A games. His team won approximately 55% of them. Estimate the total number of games his team won.
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer7c" class="math-input" placeholder="Enter your estimate..." data-correct="350">
+                            <button onclick="checkAnswer('7c')" class="btn">🎯 Check Answer</button>
+                            <button onclick="toggleSolution('solution7c')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback7c" class="feedback"></div>
+                        <div id="solution7c" class="solution-content">
+                            <p><strong>Solution:</strong> Round games to 650 and 55% to 50%</p>
+                            <p>Wins ≈ <span class="math">50% of 650 = 325</span></p>
+                            <p>Since 55% > 50%, estimate slightly higher: <strong>350-360 games</strong> 🏆</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 8 💰</div>
+                        <div class="problem-content">
+                            Sofia's team is buying new equipment. Estimate the total cost for:<br>
+                            • 17 jerseys at €28.99 each<br>
+                            • 17 pairs of shorts at €14.50 each<br>
+                            • 8 soccer balls at €21.25 each
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer8c" class="math-input" placeholder="Enter total estimate..." data-correct="925">
+                            <button onclick="checkAnswer('8c')" class="btn">💰 Check Answer</button>
+                            <button onclick="toggleSolution('solution8c')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback8c" class="feedback"></div>
+                        <div id="solution8c" class="solution-content">
+                            <p><strong>Solution:</strong></p>
+                            <p>Jerseys: <span class="math">17 × €28.99 ≈ 17 × €30 = €510</span></p>
+                            <p>Shorts: <span class="math">17 × €14.50 ≈ 17 × €15 = €255</span></p>
+                            <p>Balls: <span class="math">8 × €21.25 ≈ 8 × €20 = €160</span></p>
+                            <p>Total: <span class="math">€510 + €255 + €160 = €925</span> 💰</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem">
+                        <div class="problem-number">Problem 9 📹</div>
+                        <div class="problem-content">
+                            A camera is mounted on top of a 15.8m tall pole at the corner of a 105m by 68m soccer field. Estimate the straight-line distance from the camera to the center of the field.
+                        </div>
+                        <div class="answer-section">
+                            <input type="text" id="answer9c" class="math-input" placeholder="Enter your estimate..." data-correct="62">
+                            <button onclick="checkAnswer('9c')" class="btn">📹 Check Answer</button>
+                            <button onclick="toggleSolution('solution9c')" class="btn btn-secondary">💡 Show Solution</button>
+                        </div>
+                        <div id="feedback9c" class="feedback"></div>
+                        <div id="solution9c" class="solution-content">
+                            <p><strong>Solution:</strong></p>
+                            <p>Step 1: Ground distance to center ≈ <span class="math">√(50² + 35²) = √(2500 + 1225) ≈ √3600 = 60m</span></p>
+                            <p>Step 2: Total distance ≈ <span class="math">√(60² + 16²) = √(3600 + 256) ≈ √3856 ≈ 62m</span> 📹</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>🏆 Summary and Review</h3>
+                    <p>Today we learned that estimation is a powerful mathematical tool, just like it was for Paolo Maldini on the soccer field! 🌟</p>
+                    
+                    <div style="background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%); color: white; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+                        <h4 style="margin: 0 0 1rem 0;">⚡ Key Strategies:</h4>
+                        <ul style="margin: 0;">
+                            <li>🎯 <strong>Rounding to benchmark numbers</strong> (10, 100, 1000)</li>
+                            <li>🧮 <strong>Using mental math</strong> with simpler numbers</li>
+                            <li>✅ <strong>Checking reasonableness</strong> of our answers</li>
+                            <li>⚽ <strong>Applying estimation</strong> to real-world situations</li>
+                        </ul>
+                    </div>
+                    
+                    <p><strong>Remember:</strong> A good estimate should be close to the actual answer and obtained quickly. Like Maldini's defensive positioning, the goal isn't perfection—it's making smart, quick decisions that get you very close to the right answer! 🎯⚽</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer style="text-align: center; margin-top: 2rem; padding: 1rem; color: #666;">
+            <p>🏆 Created with Soccer Math Magic ⚽ | Grade 8 Mathematics</p>
+        </footer>
+    </div>
+
+    <script>
+    // Enhanced lesson navigation with soccer context
+    function showLesson(lessonNumber) {
+        // Hide all lesson panels
+        const panels = document.querySelectorAll('.lesson-panel');
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Remove active class from all tab buttons
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+            button.setAttribute('aria-selected', 'false');
+        });
+        
+        // Show selected lesson panel
+        const targetPanel = document.getElementById(`lesson${lessonNumber}`);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+            targetPanel.setAttribute('aria-hidden', 'false');
+        }
+        
+        // Add active class to clicked button
+        if (event && event.target) {
+            event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
+        }
+        
+        // Save progress
+        try {
+            const progressData = {
+                lesson: lessonNumber,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('soccerMathProgress', JSON.stringify(progressData));
+        } catch (e) {
+            console.log('Could not save progress');
+        }
+        
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Answer checking system with soccer feedback
+    function checkAnswer(questionId) {
+        let isCorrect = false;
+        
+        if (questionId === '5ab') {
+            // Special case for double answer
+            const input1 = document.querySelector('#answer5a');
+            const input2 = document.querySelector('#answer5b');
+            const userAnswer1 = parseFloat(input1.value.trim());
+            const userAnswer2 = parseFloat(input2.value.trim());
+            const correct1 = parseFloat(input1.dataset.correct);
+            const correct2 = parseFloat(input2.dataset.correct);
+            
+            const tolerance = 20; // Allow some range for estimates
+            const isCorrect1 = Math.abs(userAnswer1 - correct1) <= tolerance;
+            const isCorrect2 = Math.abs(userAnswer2 - correct2) <= tolerance;
+            
+            isCorrect = isCorrect1 && isCorrect2;
+            
+            const feedback = document.querySelector('#feedback5ab');
+            if (isCorrect1 && isCorrect2) {
+                feedback.innerHTML = '<span class="correct">⚽ GOAL! Both estimates are excellent! 🏆</span>';
+                feedback.className = 'feedback correct';
+                input1.style.borderColor = '#4caf50';
+                input2.style.borderColor = '#4caf50';
+            } else {
+                let message = '🥅 Keep trying! ';
+                if (!isCorrect1) message += 'Check your perimeter calculation. ';
+                if (!isCorrect2) message += 'Check your area calculation. ';
+                feedback.innerHTML = `<span class="incorrect">${message}</span>`;
+                feedback.className = 'feedback incorrect';
+                if (!isCorrect1) input1.style.borderColor = '#f44336';
+                if (!isCorrect2) input2.style.borderColor = '#f44336';
+            }
+        } else {
+            // Regular single answer checking
+            const input = document.querySelector(`#answer${questionId}`);
+            const userAnswer = parseFloat(input.value.trim());
+            const correctAnswer = parseFloat(input.dataset.correct);
+            const feedback = document.querySelector(`#feedback${questionId}`);
+            
+            // Allow tolerance for estimates
+            const tolerance = correctAnswer * 0.15; // 15% tolerance
+            isCorrect = Math.abs(userAnswer - correctAnswer) <= tolerance;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">⚽ GOAL! Your estimate is spot on! 🏆</span>';
+                feedback.className = 'feedback correct';
+                input.style.borderColor = '#4caf50';
+                input.style.backgroundColor = '#e8f5e8';
+                
+                // Add celebration animation
+                input.style.animation = 'bounce 0.6s ease-in-out';
+                setTimeout(() => input.style.animation = '', 600);
+                
+            } else {
+                feedback.innerHTML = '<span class="incorrect">🥅 Close, but not quite! Try a different approach. ⚽</span>';
+                feedback.className = 'feedback incorrect';
+                input.style.borderColor = '#f44336';
+                input.style.backgroundColor = '#ffebee';
+                
+                // Add shake animation
+                input.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => input.style.animation = '', 500);
+            }
+        }
+        
+        // Save attempt data
+        saveAttempt(questionId, isCorrect);
+    }
+    
+    // Toggle solution visibility
+    function toggleSolution(solutionId) {
+        const solution = document.getElementById(solutionId);
+        const button = event.target;
+        
+        if (solution.classList.contains('show')) {
+            solution.classList.remove('show');
+            button.textContent = button.textContent.replace('Hide', 'Show');
+        } else {
+            solution.classList.add('show');
+            button.textContent = button.textContent.replace('Show', 'Hide');
+        }
+    }
+    
+    // Save student attempt data
+    function saveAttempt(questionId, isCorrect) {
+        try {
+            const attemptData = {
+                questionId,
+                isCorrect,
+                timestamp: new Date().toISOString()
+            };
+            
+            const attempts = JSON.parse(localStorage.getItem('soccerMathAttempts') || '[]');
+            attempts.push(attemptData);
+            
+            // Keep only last 50 attempts
+            if (attempts.length > 50) {
+                attempts.splice(0, attempts.length - 50);
+            }
+            
+            localStorage.setItem('soccerMathAttempts', JSON.stringify(attempts));
+        } catch (e) {
+            console.log('Could not save attempt data');
+        }
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load saved progress
+        try {
+            const saved = localStorage.getItem('soccerMathProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.lesson && progress.lesson >= 1 && progress.lesson <= 5) {
+                    showLesson(progress.lesson);
+                }
+            }
+        } catch (e) {
+            console.log('No saved progress found');
+        }
+        
+        // Add keyboard support for inputs
+        document.querySelectorAll('.math-input').forEach(input => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const questionId = this.id.replace('answer', '');
+                    checkAnswer(questionId);
+                }
+            });
+            
+            // Reset styling on new input
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#c8e6c9';
+                this.style.backgroundColor = 'white';
+                this.style.animation = '';
+                
+                const questionId = this.id.replace('answer', '');
+                const feedback = document.querySelector(`#feedback${questionId}`);
+                if (feedback) {
+                    feedback.innerHTML = '';
+                    feedback.className = 'feedback';
+                }
+            });
+        });
+        
+        // Add shake animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Add flying ball periodically
+        setInterval(createFlyingBall, 15000);
+    });
+    
+    // Create additional flying soccer balls
+    function createFlyingBall() {
+        const ball = document.createElement('div');
+        ball.textContent = '⚽';
+        ball.className = 'flying-ball';
+        ball.style.top = Math.random() * 80 + '%';
+        ball.style.animationDuration = (Math.random() * 3 + 5) + 's';
+        document.body.appendChild(ball);
+        
+        setTimeout(() => {
+            if (ball.parentNode) {
+                ball.parentNode.removeChild(ball);
+            }
+        }, 8000);
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        // Ensure proper mobile layout on orientation change
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 100);
+    });
+    
+    // Export functions for debugging
+    window.SoccerMath = {
+        showLesson,
+        checkAnswer,
+        toggleSolution
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Advanced Soccer Statistics - Grade 8 Mathematics">
+    <title>Percentage Perfection: Advanced Soccer Statistics - Grade 8</title>
+    <style>
+    /* Mobile-First CSS Approach */
+    * { box-sizing: border-box; }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+        color: #2c3e50;
+        min-height: 100vh;
+        margin: 0;
+        padding: 1rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.6;
+    }
+    
+    /* Responsive images and media */
+    img, video, iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Header styling */
+    .lesson-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 1.5rem 1rem;
+        background: linear-gradient(135deg, #2c5f2d 0%, #4a7c4f 100%);
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(44, 95, 45, 0.3);
+    }
+    
+    .lesson-header h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    
+    .lesson-header .grade-info {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+    
+    /* Container styling */
+    .lesson-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    
+    /* Tab navigation - mobile first */
+    .lesson-tabs {
+        display: flex;
+        gap: 0.25rem;
+        margin-bottom: 2rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0.5rem 0;
+    }
+    
+    .tab-button {
+        padding: 0.75rem 1rem;
+        border: 2px solid #388e3c;
+        background: white;
+        color: #2e7d32;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        min-height: 44px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        flex-shrink: 0;
+    }
+    
+    .tab-button.active {
+        background: #388e3c;
+        color: white;
+        border-color: #388e3c;
+        box-shadow: 0 2px 8px rgba(56, 142, 60, 0.3);
+    }
+    
+    .tab-button:hover:not(.active) {
+        background: #e8f5e8;
+        border-color: #2e7d32;
+    }
+    
+    /* Lesson panels */
+    .lesson-panel {
+        display: none;
+        animation: fadeIn 0.3s ease-in;
+    }
+    
+    .lesson-panel.active {
+        display: block;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Content sections - mobile first */
+    .content-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-left: 5px solid #388e3c;
+        transition: all 0.2s ease;
+    }
+    
+    .content-section:hover {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    
+    .content-section h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: #2e7d32;
+        font-weight: 600;
+    }
+    
+    /* Section type variations */
+    .theory-section {
+        border-left-color: #1976d2;
+        background: linear-gradient(135deg, #e3f2fd 0%, #f1f8ff 100%);
+    }
+    
+    .theory-section h3 {
+        color: #1565c0;
+    }
+    
+    .theory-section::before {
+        content: "📚 THEORY";
+        font-weight: bold;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 0.75rem;
+        color: #1976d2;
+    }
+    
+    .example-section {
+        border-left-color: #f57c00;
+        background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%);
+    }
+    
+    .example-section h3 {
+        color: #ef6c00;
+    }
+    
+    .example-section::before {
+        content: "🌟 EXAMPLES";
+        font-weight: bold;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 0.75rem;
+        color: #f57c00;
+    }
+    
+    .practice-section {
+        border-left-color: #388e3c;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+    }
+    
+    .practice-section h3 {
+        color: #2e7d32;
+    }
+    
+    .practice-section::before {
+        content: "💪 PRACTICE";
+        font-weight: bold;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 0.75rem;
+        color: #388e3c;
+    }
+    
+    .challenge-section {
+        border-left-color: #7b1fa2;
+        background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+    }
+    
+    .challenge-section h3 {
+        color: #6a1b9a;
+    }
+    
+    .challenge-section::before {
+        content: "🏆 CHALLENGE";
+        font-weight: bold;
+        font-size: 0.9em;
+        display: block;
+        margin-bottom: 0.75rem;
+        color: #7b1fa2;
+    }
+    
+    /* Mathematical notation - mobile optimized */
+    .math {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+        font-style: normal;
+        font-size: 1.1em;
+        font-weight: 500;
+        color: #2c3e50;
+        background: rgba(248, 249, 250, 0.9);
+        padding: 0.5em 0.7em;
+        border-radius: 6px;
+        border: 1px solid rgba(0,0,0,0.1);
+        display: inline-block;
+        margin: 0.2em;
+        word-break: break-word;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .math-block {
+        display: block;
+        text-align: center;
+        margin: 1.5rem 0;
+        padding: 1.5rem 1rem;
+        background: linear-gradient(135deg, #fafbfc 0%, #f8f9fa 100%);
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 1.2em;
+        color: #2c3e50;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        word-break: break-word;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Problem styling */
+    .problem-item {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 1.5rem 1rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .problem-number {
+        font-weight: 700;
+        color: #2e7d32;
+        font-size: 1.1em;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .problem-content {
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+    
+    /* Button styling - mobile optimized */
+    .btn {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        background: #388e3c;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-family: inherit;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        width: 100%;
+        max-width: 200px;
+        margin: 0.5rem 0;
+    }
+    
+    .btn:hover {
+        background: #2e7d32;
+        transform: translateY(-1px);
+    }
+    
+    .btn:active {
+        transform: translateY(0);
+        background: #1b5e20;
+    }
+    
+    .btn-secondary {
+        background: #ff9800;
+        color: white;
+    }
+    
+    .btn-secondary:hover {
+        background: #f57c00;
+    }
+    
+    /* Solution styling - hidden by default */
+    .solution {
+        display: none;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+        border: 2px solid #4caf50;
+        border-radius: 8px;
+        padding: 1.5rem 1rem;
+        margin-top: 1rem;
+        color: #1b5e20;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    .solution.show {
+        display: block;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .solution h4 {
+        color: #2e7d32;
+        margin-top: 0;
+        font-size: 1.1em;
+    }
+    
+    /* Key vocabulary styling */
+    .vocab-grid {
+        display: block;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .vocab-item {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #1976d2;
+        margin-bottom: 1rem;
+    }
+    
+    .vocab-term {
+        font-weight: 700;
+        color: #1565c0;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Objectives list */
+    .objectives-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .objectives-list li {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 0.75rem 1rem;
+        margin: 0.5rem 0;
+        border-radius: 6px;
+        border-left: 4px solid #4caf50;
+        position: relative;
+        padding-left: 2.5rem;
+    }
+    
+    .objectives-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 1rem;
+        color: #4caf50;
+        font-weight: bold;
+    }
+    
+    /* Example problem styling */
+    .example-problem {
+        background: rgba(255, 152, 0, 0.1);
+        border: 2px solid #ff9800;
+        border-radius: 10px;
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .example-title {
+        font-weight: 700;
+        color: #ef6c00;
+        margin-bottom: 1rem;
+        font-size: 1.1em;
+    }
+    
+    .solution-steps {
+        background: rgba(76, 175, 80, 0.1);
+        border-left: 4px solid #4caf50;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .solution-steps ol {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+    
+    .solution-steps li {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+    }
+    
+    /* Summary section */
+    .summary-section {
+        background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%);
+        border: 2px solid #ff9800;
+        border-radius: 12px;
+        padding: 2rem 1rem;
+        margin: 2rem 0;
+    }
+    
+    .summary-section h3 {
+        color: #ef6c00;
+        margin-top: 0;
+    }
+    
+    /* Tablet and Desktop styles - Progressive Enhancement */
+    @media screen and (min-width: 768px) {
+        body {
+            padding: 2rem;
+        }
+        
+        .lesson-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .lesson-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .lesson-header .grade-info {
+            font-size: 1.2rem;
+        }
+        
+        .lesson-tabs {
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        .tab-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .content-section {
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .math {
+            font-family: 'Times New Roman', 'STIX Two Math', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            padding: 0.4em 0.6em;
+        }
+        
+        .math-block {
+            font-size: 1.4em;
+            padding: 2rem;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .problem-item {
+            padding: 2rem;
+        }
+        
+        .btn {
+            width: auto;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .objectives-list li {
+            padding: 1rem 1rem 1rem 3rem;
+        }
+        
+        .objectives-list li::before {
+            left: 1.5rem;
+        }
+    }
+    
+    /* Large screen optimizations */
+    @media screen and (min-width: 1200px) {
+        .lesson-container {
+            max-width: 1200px;
+        }
+        
+        .content-section {
+            padding: 2.5rem;
+        }
+    }
+    
+    /* Print styles */
+    @media print {
+        body {
+            background: white;
+            color: black;
+        }
+        
+        .lesson-tabs { display: none; }
+        
+        .lesson-panel {
+            display: block !important;
+            page-break-before: always;
+        }
+        
+        .lesson-panel:first-child {
+            page-break-before: avoid;
+        }
+        
+        .content-section {
+            background: white !important;
+            border: 2px solid black !important;
+            box-shadow: none !important;
+            page-break-inside: avoid;
+        }
+        
+        .math, .math-block {
+            background: white !important;
+            color: black !important;
+            border: 1px solid black !important;
+        }
+        
+        .btn { display: none; }
+        
+        .solution {
+            display: block !important;
+            background: white !important;
+            border: 1px solid black !important;
+        }
+    }
+    
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d3e2d 100%);
+            color: #e0e0e0;
+        }
+        
+        .content-section {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+        
+        .lesson-header {
+            background: linear-gradient(135deg, #1a3d1a 0%, #2e5a30 100%);
+        }
+        
+        .math, .math-block {
+            background: #3a3a3a;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+    }
+    
+    /* Loading animation for solutions */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(56, 142, 60, 0.3);
+        border-radius: 50%;
+        border-top-color: #388e3c;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    </style>
+</head>
+<body>
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <h1>⚽ Percentage Perfection: Advanced Soccer Statistics</h1>
+            <p class="grade-info">Grade 8 | Advanced Level | Competition Preparation</p>
+        </header>
+        
+        <nav class="lesson-tabs" aria-label="Lesson navigation">
+            <button class="tab-button active" onclick="showLesson(1)" aria-controls="lesson1" role="tab">📚 Theory</button>
+            <button class="tab-button" onclick="showLesson(2)" aria-controls="lesson2" role="tab">🌟 Examples</button>
+            <button class="tab-button" onclick="showLesson(3)" aria-controls="lesson3" role="tab">💪 Practice</button>
+            <button class="tab-button" onclick="showLesson(4)" aria-controls="lesson4" role="tab">🏆 Challenge</button>
+        </nav>
+        
+        <main class="lesson-content">
+            <!-- Theory Panel -->
+            <div id="lesson1" class="lesson-panel active" role="tabpanel" aria-labelledby="lesson1-tab">
+                <div class="theory-section">
+                    <h3>Learning Objectives</h3>
+                    <p>By the end of this lesson, you will master:</p>
+                    <ul class="objectives-list">
+                        <li>Complex percentage calculations involving multiple steps</li>
+                        <li>Percentage change, compound percentages, and weighted averages</li>
+                        <li>Real-world applications of percentages in sports analytics</li>
+                        <li>Competition-level problem-solving strategies</li>
+                    </ul>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>Key Vocabulary & Advanced Concepts</h3>
+                    <div class="vocab-grid">
+                        <div class="vocab-item">
+                            <div class="vocab-term">Percentage Change</div>
+                            <div class="math-block">(New Value - Old Value) / Old Value × 100%</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-term">Compound Percentage</div>
+                            <div>Multiple percentage changes applied sequentially</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-term">Weighted Average</div>
+                            <div class="math-block">Σ(value × weight) / Σ(weights)</div>
+                        </div>
+                        <div class="vocab-item">
+                            <div class="vocab-term">Relative Percentage</div>
+                            <div>Comparing one percentage to another</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>Advanced Formulas</h3>
+                    <div class="vocab-item">
+                        <div class="vocab-term">Final Amount after Multiple Changes</div>
+                        <div class="math-block">A_f = A_i × (1 ± p₁%) × (1 ± p₂%) × ...</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-term">Break-even Percentage</div>
+                        <div>The percentage needed to return to original value after a decrease</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Examples Panel -->
+            <div id="lesson2" class="lesson-panel" role="tabpanel" aria-labelledby="lesson2-tab">
+                <div class="example-section">
+                    <h3>Guided Examples with Step-by-Step Solutions</h3>
+                    
+                    <div class="example-problem">
+                        <div class="example-title">Example 1: Historical Analysis - The 1950 World Cup Upset</div>
+                        <p><em>In the 1950 World Cup, the United States shocked the soccer world by defeating England 1-0. Before the match, England had won 85% of their international games over the past 5 years, while the US had won only 32%. After this tournament, England's win rate dropped by 15 percentage points, while the US win rate increased by 25% relatively.</em></p>
+                        
+                        <p><strong>Problem:</strong> If England played 120 games in the following 5-year period with their new win rate, and the US played 80 games with their new win rate, how many more games did England win than the US?</p>
+                        
+                        <button class="btn btn-secondary" onclick="toggleSolution('solution1')">Show Solution</button>
+                        
+                        <div id="solution1" class="solution">
+                            <h4>Step-by-Step Solution:</h4>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li>Calculate England's new win rate: <span class="math">85% - 15% = 70%</span></li>
+                                    <li>Calculate US's new win rate: <span class="math">32% + (25% of 32%) = 32% + 8% = 40%</span></li>
+                                    <li>England's wins: <span class="math">120 × 0.70 = 84 games</span></li>
+                                    <li>US's wins: <span class="math">80 × 0.40 = 32 games</span></li>
+                                    <li>Difference: <span class="math">84 - 32 = 52 more games</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="example-problem">
+                        <div class="example-title">Example 2: Strategic Analysis - Formation Effectiveness</div>
+                        <p><em>Coach Martinez analyzes three formations: 4-4-2 wins 68% of games, 3-5-2 wins 72% of games, and 4-3-3 wins 65% of games. This season, the team used 4-4-2 for 40% of games, 3-5-2 for 35% of games, and 4-3-3 for 25% of games.</em></p>
+                        
+                        <p><strong>Problem:</strong> What was the team's overall win percentage, and by what percentage would it improve if they used the 3-5-2 formation for all games?</p>
+                        
+                        <button class="btn btn-secondary" onclick="toggleSolution('solution2')">Show Solution</button>
+                        
+                        <div id="solution2" class="solution">
+                            <h4>Step-by-Step Solution:</h4>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><strong>Weighted average calculation:</strong>
+                                        <div class="math-block">Overall win % = (0.68 × 0.40) + (0.72 × 0.35) + (0.65 × 0.25)</div>
+                                        <div class="math-block">= 0.272 + 0.252 + 0.1625 = 0.6865 = 68.65%</div>
+                                    </li>
+                                    <li><strong>Percentage improvement:</strong>
+                                        <div class="math-block">Improvement = (72% - 68.65%) / 68.65% × 100% ≈ 4.88%</div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="example-problem">
+                        <div class="example-title">Example 3: Sofia's Training Progress</div>
+                        <p><em>Sofia, inspired by the World Cup trophy, tracks her penalty kick accuracy. In January, she made 60% of her shots. Each month from February to May, her accuracy improved by 8% relatively. However, in June, she faced more challenging practice conditions and her rate decreased by 12 percentage points.</em></p>
+                        
+                        <p><strong>Problem:</strong> What was Sofia's accuracy rate at the end of June, and what percentage improvement does she need in July to reach 90% accuracy?</p>
+                        
+                        <button class="btn btn-secondary" onclick="toggleSolution('solution3')">Show Solution</button>
+                        
+                        <div id="solution3" class="solution">
+                            <h4>Step-by-Step Solution:</h4>
+                            <div class="solution-steps">
+                                <ol>
+                                    <li><strong>Track monthly progress (4 relative increases):</strong>
+                                        <div>Accuracy at end of May: <span class="math">60% × (1.08)⁴ ≈ 60% × 1.3605 ≈ 81.63%</span></div>
+                                    </li>
+                                    <li><strong>June adjustment (absolute decrease):</strong>
+                                        <div><span class="math">81.63% - 12% = 69.63%</span></div>
+                                    </li>
+                                    <li><strong>Required improvement for 90%:</strong>
+                                        <div class="math-block">Needed improvement = (90% - 69.63%) / 69.63% × 100% ≈ 29.25%</div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practice Panel -->
+            <div id="lesson3" class="lesson-panel" role="tabpanel" aria-labelledby="lesson3-tab">
+                <div class="practice-section">
+                    <h3>Problem Set A: Multi-Step Calculations</h3>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 1</div>
+                        <div class="problem-content">
+                            The FIFA World Cup viewership increased by 15% from 2014 to 2018, then increased by another 22% from 2018 to 2022. If 2022 viewership was 1.12 billion people, what was the 2014 viewership? Express your answer in millions, rounded to the nearest million.
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceA1')">Show Solution</button>
+                        <div id="practiceA1" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Let x = 2014 viewership.</p>
+                                <p><span class="math">x × 1.15 × 1.22 = 1.12</span> billion</p>
+                                <p><span class="math">x × 1.403 = 1.12</span></p>
+                                <p><span class="math">x = 1.12 / 1.403 ≈ 0.79829</span> billion = <strong>798 million</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 2</div>
+                        <div class="problem-content">
+                            A soccer league has three divisions. Division A has 45% of all players with an 82% pass completion rate. Division B has 35% of players with a 76% completion rate. Division C has the remaining players with a 71% completion rate. If the overall league pass completion rate is 77.7%, verify this calculation and determine what Division B's rate would need to be to achieve an overall 80% completion rate.
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceA2')">Show Solution</button>
+                        <div id="practiceA2" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p><strong>Verification:</strong> 0.45(0.82) + 0.35(0.76) + 0.20(0.71) = 0.369 + 0.266 + 0.142 = 0.777 = 77.7% ✓</p>
+                                <p><strong>For 80%:</strong> 0.45(0.82) + 0.35(x) + 0.20(0.71) = 0.80</p>
+                                <p>0.369 + 0.35x + 0.142 = 0.80</p>
+                                <p>0.511 + 0.35x = 0.80</p>
+                                <p>0.35x = 0.289</p>
+                                <p>x = 0.289 / 0.35 ≈ 0.8257 = <strong>82.6%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 3</div>
+                        <div class="problem-content">
+                            Sofia's team wins 64% of home games and 48% of away games. This season, they play 60% of their games at home. If they play 50 total games, what must their away game win percentage be to achieve a 70% overall win rate for the season?
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceA3')">Show Solution</button>
+                        <div id="practiceA3" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Total games = 50. Target wins = 50 × 0.70 = 35.</p>
+                                <p>Home games = 50 × 0.60 = 30. Expected home wins = 30 × 0.64 = 19.2.</p>
+                                <p>Away games = 50 × 0.40 = 20.</p>
+                                <p>Wins needed from away games = 35 - 19.2 = 15.8.</p>
+                                <p>Required away win percentage = 15.8 / 20 = 0.79 = <strong>79%</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>Problem Set B: Advanced Applications</h3>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 4</div>
+                        <div class="problem-content">
+                            In a penalty shootout, Team Alpha has players with individual success rates of 85%, 90%, 78%, 88%, and 92%. Team Beta's players have rates of 87%, 86%, 91%, 79%, and 84%. If the probability of winning a 5-round shootout is approximated by the team's average success rate, by what percentage is Team Alpha more likely to win than Team Beta?
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceB1')">Show Solution</button>
+                        <div id="practiceB1" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Team Alpha average: (85+90+78+88+92)/5 = 86.6%</p>
+                                <p>Team Beta average: (87+86+91+79+84)/5 = 85.4%</p>
+                                <p>Percentage difference: (86.6 - 85.4)/85.4 × 100% ≈ <strong>1.40%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 5</div>
+                        <div class="problem-content">
+                            A soccer stadium's attendance follows this pattern:<br>
+                            • Regular season games: 78% capacity (65% of all games)<br>
+                            • Playoff games: 94% capacity (25% of all games)<br>
+                            • Championship games: 98% capacity (10% of all games)<br><br>
+                            If the stadium capacity is 45,000 and the total attendance for a season was 1,890,000, how many games were played in total?
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceB2')">Show Solution</button>
+                        <div id="practiceB2" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Weighted average capacity: (0.65 × 0.78) + (0.25 × 0.94) + (0.10 × 0.98) = 0.507 + 0.235 + 0.098 = 0.84</p>
+                                <p>Average attendance per game = 0.84 × 45,000 = 37,800</p>
+                                <p>Total games = Total Attendance / Average Attendance = 1,890,000 / 37,800 = <strong>50 games</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Problem 6</div>
+                        <div class="problem-content">
+                            Sofia tracks her improvement over 6 months. Her shooting accuracy starts at 55% and increases by X% relatively each month. If her final accuracy is 89.67%, find X to the nearest tenth of a percent.
+                        </div>
+                        <button class="btn" onclick="toggleSolution('practiceB3')">Show Solution</button>
+                        <div id="practiceB3" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Let r = 1 + X/100. Initial = 55%. Final = 89.67%. Time = 6 months.</p>
+                                <p>Equation: 55 × r⁶ = 89.67</p>
+                                <p>r⁶ = 89.67/55 ≈ 1.63036</p>
+                                <p>r = ⁶√1.63036 ≈ 1.085</p>
+                                <p>1 + X/100 = 1.085 → X/100 = 0.085 → X = <strong>8.5%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Challenge Panel -->
+            <div id="lesson4" class="lesson-panel" role="tabpanel" aria-labelledby="lesson4-tab">
+                <div class="challenge-section">
+                    <h3>Challenge Problems (Competition Level)</h3>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Challenge 1</div>
+                        <div class="problem-content">
+                            In the 2018 World Cup, teams scored an average of 2.64 goals per game. If this represented a 12.8% increase from the 2014 average, and the 2014 average was itself a 15.2% decrease from 2010, what was the 2010 average? Round to the nearest hundredth.
+                        </div>
+                        <button class="btn" onclick="toggleSolution('challenge1')">Show Solution</button>
+                        <div id="challenge1" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Let 2010 average = x.</p>
+                                <p>2014 average = x × (1 - 0.152) = x × 0.848</p>
+                                <p>2018 average = (x × 0.848) × (1 + 0.128) = x × 0.848 × 1.128 = 2.64</p>
+                                <p>x × 0.956544 = 2.64</p>
+                                <p>x = 2.64 / 0.956544 ≈ 2.7599... ≈ <strong>2.76</strong> goals per game</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Challenge 2</div>
+                        <div class="problem-content">
+                            A soccer tournament uses the following point system:<br>
+                            • Win: 3 points<br>
+                            • Draw: 1 point<br>
+                            • Loss: 0 points<br><br>
+                            Team Phoenix won 40% of games, drew 25% of games, and lost the rest. Team United's win rate was 25% lower than Phoenix's, but their draw rate was 60% higher. Both teams played the same number of games. If Phoenix scored 58 total points, how many points did United score?
+                        </div>
+                        <button class="btn" onclick="toggleSolution('challenge2')">Show Solution</button>
+                        <div id="challenge2" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Phoenix: 40% wins, 25% draws, 35% losses.</p>
+                                <p>Points per game = (0.40 × 3) + (0.25 × 1) = 1.2 + 0.25 = 1.45</p>
+                                <p>Total games played = 58 points / 1.45 points/game = 40 games</p>
+                                <p>United: Win rate = 40% × (1 - 0.25) = 30%. Draw rate = 25% × (1 + 0.60) = 40%. Loss rate = 30%</p>
+                                <p>United's points = 40 games × ((0.30 × 3) + (0.40 × 1)) = 40 × (0.9 + 0.4) = 40 × 1.3 = <strong>52 points</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-number">Challenge 3</div>
+                        <div class="problem-content">
+                            Sofia's penalty practice involves 5 sessions per week. Her accuracy rates for each session follow a pattern where Session 1 starts at 70%, and each subsequent session improves by 4% relatively. However, each week, her starting rate (Session 1) improves by 2% relatively from the previous week's Session 1. After 4 complete weeks, what is her accuracy rate in the final session (Session 5)? Express as a percentage rounded to the nearest tenth.
+                        </div>
+                        <button class="btn" onclick="toggleSolution('challenge3')">Show Solution</button>
+                        <div id="challenge3" class="solution">
+                            <h4>Solution:</h4>
+                            <div class="solution-steps">
+                                <p>Calculate Week 4 starting accuracy (3 weekly increases from Week 1):</p>
+                                <p>Week 4, Session 1 = 70% × (1.02)³ = 70% × 1.061208 ≈ 74.285%</p>
+                                <p>Calculate Week 4, Session 5 accuracy (4 session improvements from Session 1):</p>
+                                <p>Week 4, Session 5 = 74.285% × (1.04)⁴ ≈ 74.285% × 1.16986 ≈ 86.903% ≈ <strong>86.9%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-section">
+                    <h3>🎯 Master Strategies for Advanced Percentage Problems</h3>
+                    <ol>
+                        <li><strong>Identify the type:</strong> Absolute vs. relative changes</li>
+                        <li><strong>Track compound effects:</strong> Use (1 + r)ⁿ for repeated relative changes</li>
+                        <li><strong>Apply weighted averages:</strong> When combining different groups or scenarios</li>
+                        <li><strong>Work backwards:</strong> Use inverse operations when finding original values</li>
+                    </ol>
+                    
+                    <h3>🏅 Competition Tips</h3>
+                    <ul>
+                        <li>Always check if percentage changes are relative to previous values or absolute.</li>
+                        <li>Round only at the final step unless specified otherwise.</li>
+                        <li>Verify answers by checking if they make sense in the context of the problem.</li>
+                    </ul>
+                    
+                    <p><strong>Next Steps:</strong> Practice AMC 8 percentage problems and explore advanced statistics in sports analytics!</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="lesson-footer">
+            <p>⚽ Created with IterLight Math Education Platform</p>
+        </footer>
+    </div>
+
+    <script>
+    // Enhanced lesson navigation
+    function showLesson(lessonNumber) {
+        // Hide all lesson panels
+        const panels = document.querySelectorAll('.lesson-panel');
+        panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Remove active class from all tab buttons
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+            button.setAttribute('aria-selected', 'false');
+        });
+        
+        // Show selected lesson panel
+        const targetPanel = document.getElementById(`lesson${lessonNumber}`);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+            targetPanel.setAttribute('aria-hidden', 'false');
+        }
+        
+        // Add active class to clicked button
+        if (event && event.target) {
+            event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
+        }
+        
+        // Save progress
+        try {
+            const progressData = {
+                lesson: lessonNumber,
+                timestamp: new Date().toISOString(),
+                subject: 'Advanced Soccer Statistics'
+            };
+            localStorage.setItem('soccerMathProgress', JSON.stringify(progressData));
+        } catch (e) {
+            console.log('Could not save progress');
+        }
+        
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Focus management for accessibility
+        if (targetPanel) {
+            targetPanel.focus();
+        }
+    }
+    
+    // Toggle solution visibility
+    function toggleSolution(solutionId) {
+        const solution = document.getElementById(solutionId);
+        const button = event.target;
+        
+        if (solution) {
+            if (solution.classList.contains('show')) {
+                solution.classList.remove('show');
+                button.textContent = 'Show Solution';
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                // Add loading effect
+                button.innerHTML = '<span class="loading"></span> Loading...';
+                button.disabled = true;
+                
+                // Simulate brief loading for better UX
+                setTimeout(() => {
+                    solution.classList.add('show');
+                    button.textContent = 'Hide Solution';
+                    button.setAttribute('aria-expanded', 'true');
+                    button.disabled = false;
+                    
+                    // Scroll solution into view
+                    solution.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                }, 300);
+            }
+        }
+    }
+    
+    // Load saved progress
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            const saved = localStorage.getItem('soccerMathProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                if (progress.lesson && progress.lesson >= 1 && progress.lesson <= 4) {
+                    showLesson(progress.lesson);
+                }
+            }
+        } catch (e) {
+            console.log('No saved progress found');
+        }
+        
+        // Add keyboard support for buttons
+        document.querySelectorAll('.btn, .tab-button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+        
+        // Add proper ARIA attributes
+        document.querySelectorAll('.solution').forEach(solution => {
+            solution.setAttribute('aria-live', 'polite');
+            solution.setAttribute('aria-expanded', 'false');
+        });
+        
+        // Initialize all buttons with proper ARIA
+        document.querySelectorAll('[onclick*="toggleSolution"]').forEach(button => {
+            button.setAttribute('aria-expanded', 'false');
+        });
+    });
+    
+    // Handle window resize for responsive design
+    window.addEventListener('resize', function() {
+        // Ensure proper tab scrolling on mobile
+        const tabs = document.querySelector('.lesson-tabs');
+        if (tabs) {
+            const activeTab = tabs.querySelector('.tab-button.active');
+            if (activeTab && window.innerWidth < 768) {
+                activeTab.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    inline: 'center' 
+                });
+            }
+        }
+    });
+    
+    // Add scroll behavior for long solutions
+    function scrollToElement(element) {
+        if (element) {
+            const offset = window.innerHeight * 0.1; // 10% of viewport
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Export functions for external use
+    window.SoccerMath = {
+        showLesson,
+        toggleSolution
+    };
+    </script>
+</body>
+</html>
