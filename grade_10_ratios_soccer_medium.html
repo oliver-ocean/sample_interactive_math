@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<!--
+Math Worksheet HTML
+Generated: 2025-08-22 11:37:45
+Grade 10: Ratios + Soccer + Medium + Soccer Ratios Adventure
+Math Topic: Ratios
+Sports Context: Soccer
+Difficulty Level: Medium
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Rate Analysis Worksheet - Grade 10 Mathematics</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.1/distrib/jsxgraphcore.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+            position: relative;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.8em;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555; /* Darkened for better contrast */
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin: 25px 0 10px 0;
+            font-size: 1.4em;
+        }
+        
+        h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        section {
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        section.solutions-section {
+            border-left: 5px solid #28a745;
+        }
+        
+        .problem-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        
+        .answer-section {
+            display: none; /* Hidden by default */
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        
+        .answer-input {
+            width: 200px;
+            padding: 8px;
+            margin: 5px;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .check-btn, .show-solution-btn, #toggleAllSolutionsBtn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            min-height: 44px; /* Ensure touch-friendly size */
+            display: inline-block;
+            text-align: center;
+            line-height: 1.5; /* Adjust line height for vertical centering */
+        }
+        
+        .check-btn:hover, .show-solution-btn:hover, #toggleAllSolutionsBtn:hover {
+            background-color: #2980b9;
+        }
+
+        .show-solution-btn {
+            background-color: #6c757d;
+            display: none; /* Hidden by default */
+        }
+
+        .show-solution-btn:hover {
+            background-color: #5a6268;
+        }
+
+        #toggleAllSolutionsBtn {
+            background-color: #28a745;
+            margin-top: 20px;
+            width: auto;
+        }
+
+        #toggleAllSolutionsBtn:hover {
+            background-color: #218838;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .jxgbox {
+            width: 100%;
+            height: 200px;
+            background-color: white;
+            border: 2px solid #2c3e50;
+            margin: 10px 0;
+            overflow: visible;
+            position: relative;
+        }
+        
+        .step {
+            background-color: #e8f4fd;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+        }
+        
+        strong {
+            color: #2c3e50;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .formula-box {
+            background-color: #f0f8ff;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        .summary {
+            background-color: #e6f3ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        
+        .checklist {
+            list-style-type: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            margin-bottom: 5px;
+            color: #28a745;
+        }
+        
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1200px;
+            }
+            .problem-container {
+                display: flex;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .jxgbox {
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .problem-container {
+                flex-direction: column;
+            }
+            .answer-input {
+                width: 100%;
+                font-size: 16px;
+            }
+            .check-btn, .show-solution-btn, #toggleAllSolutionsBtn {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+            .jxgbox {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .jxgbox {
+                height: 120px;
+            }
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .answer-section, .feedback, .check-btn, .show-solution-btn, #toggleAllSolutionsBtn {
+                display: none !important;
+            }
+            .solutions-section {
+                display: block !important; /* Show solutions for printing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Growth Rate Analysis Worksheet</h1>
+            <p class="subtitle"><strong>Grade 10 Mathematics | Intermediate Level</strong></p>
+
+            <hr style="margin: 20px 0; border: 1px solid #bdc3c7;">
+        </header>
+
+        <main>
+            <section class="learning-objectives">
+                <h2>📚 Learning Objectives</h2>
+                <p>By the end of this lesson, you will be able to:</p>
+                <ul>
+                    <li>Calculate simple and compound annual growth rates (CAGR)</li>
+                    <li>Model exponential growth using real-world scenarios</li>
+                    <li>Interpret growth rate data in sports and business contexts</li>
+                    <li>Solve SAT-style problems involving exponential growth</li>
+                    <li>Apply growth rate formulas to analyze attendance, performance, and enrollment data</li>
+                </ul>
+            </section>
+
+            <section class="vocabulary">
+                <h2>🔑 Key Vocabulary & Concepts</h2>
+                
+                <p><strong>Growth Rate</strong>: The percentage increase or decrease in a value over a specific time period.</p>
+                
+                <p><strong>Compound Annual Growth Rate (CAGR)</strong>: The mean annual growth rate over a specified time period longer than one year.</p>
+                
+                <div class="formula-box">
+                    <p><strong>Formula</strong>: \[CAGR = \left(\frac{\text{Ending Value}}{\text{Beginning Value}}\right)^{\frac{1}{\text{Number of Years}}} - 1\]</p>
+                </div>
+                
+                <div class="formula-box">
+                    <p><strong>Exponential Growth Model</strong>: \[A(t) = A_0(1 + r)^t\]</p>
+                    <p>Where:</p>
+                    <ul>
+                        <li>\(A(t)\) = final amount</li>
+                        <li>\(A_0\) = initial amount</li>
+                        <li>\(r\) = growth rate (as decimal)</li>
+                        <li>\(t\) = time period</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="examples">
+                <h2>📖 Guided Examples</h2>
+
+                <h3>Example 1: Marcus's Soccer Program Analysis (Historical Context)</h3>
+                <p>Marcus discovered that his high school soccer program's home game attendance grew from 340 spectators to <strong>648</strong> spectators over 3 years under Coach Johnson's leadership, inspired by Bayern Munich's Julian Nagelsmann's data-driven approach.</p>
+
+                <div class="step">
+                    <p><strong>Step 1</strong>: Identify the values</p>
+                    <ul>
+                        <li>Beginning Value = 340 spectators</li>
+                        <li>Ending Value = <strong>648</strong> spectators</li>
+                        <li>Time Period = 3 years</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 2</strong>: Apply the CAGR formula</p>
+                    <p>\[CAGR = \left(\frac{648}{340}\right)^{\frac{1}{3}} - 1\]</p>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 3</strong>: Calculate step by step</p>
+                    <p>\[CAGR = \left(1.90588\right)^{0.333} - 1\]</p>
+                    <p>\[CAGR = 1.239 - 1 = 0.239\]</p>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 4</strong>: Convert to percentage</p>
+                    <p>\[CAGR = 23.9\%\]</p>
+                </div>
+
+                <h3>Example 2: Soccer Training Performance (Rules & Strategy Context)</h3>
+                <p>Sofia tracks her penalty kick success rate improvement. In her first month, she successfully scored 12 out of 20 penalty kicks (60% success rate). After implementing a new visualization technique learned from studying professional goalkeeping strategies, her success rate grew to 85% over 4 months.</p>
+
+                <p><strong>Calculate the monthly growth rate of her success percentage:</strong></p>
+
+                <div class="step">
+                    <p><strong>Step 1</strong>: Convert percentages to decimal values</p>
+                    <ul>
+                        <li>Initial success rate: 0.60</li>
+                        <li>Final success rate: 0.85</li>
+                        <li>Time period: 4 months</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 2</strong>: Apply growth rate formula</p>
+                    <p>\[Growth Rate = \left(\frac{0.85}{0.60}\right)^{\frac{1}{4}} - 1\]</p>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 3</strong>: Calculate</p>
+                    <p>\[Growth Rate = (1.41667)^{0.25} - 1 = 1.0909 - 1 = 0.0909\]</p>
+                </div>
+
+                <p><strong>Answer</strong>: Sofia's penalty kick success rate grew at approximately <strong>9.1% per month</strong>.</p>
+
+                <h3>Example 3: Youth Soccer League Expansion (Fictional Aspiring Player Context)</h3>
+                <p>Diego's local youth soccer league started with 8 teams in 2020. Due to increased interest sparked by the World Cup and local community programs, the league expanded following this pattern:</p>
+                <ul>
+                    <li>2020: 8 teams</li>
+                    <li>2021: 11 teams</li>
+                    <li>2022: 15 teams</li>
+                    <li>2023: 20 teams</li>
+                </ul>
+
+                <p><strong>Find the compound annual growth rate for the league expansion.</strong></p>
+
+                <div id="growthChart" class="jxgbox"></div>
+
+                <div class="step">
+                    <p><strong>Step 1</strong>: Identify values</p>
+                    <ul>
+                        <li>Beginning Value: 8 teams</li>
+                        <li>Ending Value: 20 teams</li>
+                        <li>Time Period: 3 years (2020 to 2023)</li>
+                    </ul>
+                </div>
+
+                <div class="step">
+                    <p><strong>Step 2</strong>: Calculate CAGR</p>
+                    <p>\[CAGR = \left(\frac{20}{8}\right)^{\frac{1}{3}} - 1\]</p>
+                    <p>\[CAGR = (2.5)^{0.333} - 1\]</p>
+                    <p>\[CAGR = 1.357 - 1 = 0.357\]</p>
+                </div>
+
+                <p><strong>Answer</strong>: The league grew at approximately <strong>35.7% annually</strong>.</p>
+            </section>
+
+            <section class="practice">
+                <h2>💪 Practice Problems</h2>
+
+                <h3>Problem Set A: Foundation Building</h3>
+
+                <article class="problem-container">
+                    <h4>Problem 1</h4>
+                    <p>A high school soccer team's fan club membership grew from 45 members to 73 members over 2 years. Calculate the compound annual growth rate.</p>
+                    <input type="number" step="0.01" class="answer-input" id="prob1" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('1', 27.4, 1)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution1" onclick="toggleSolution('1')">Show Solution</button>
+                    <div id="feedback1" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer1">
+                        <p><strong>Solution:</strong></p>
+                        <p>\[CAGR = \left(\frac{73}{45}\right)^{\frac{1}{2}} - 1 = (1.622)^{0.5} - 1 = 1.274 - 1 = 0.274 = 27.4\%\]</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Problem 2</h4>
+                    <p>The number of goals scored by the varsity soccer team increased from 28 goals in their first season to 52 goals in their fourth season. What was the annual growth rate?</p>
+                    <input type="number" step="0.01" class="answer-input" id="prob2" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('2', 22.8, 1)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution2" onclick="toggleSolution('2')">Show Solution</button>
+                    <div id="feedback2" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer2">
+                        <p><strong>Solution:</strong></p>
+                        <p>\[CAGR = \left(\frac{52}{28}\right)^{\frac{1}{3}} - 1 = (1.857)^{0.333} - 1 = 1.228 - 1 = 0.228 = 22.8\%\]</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Problem 3</h4>
+                    <p>A soccer academy's enrollment grew at a rate of 18% per year. If they started with 120 students, how many students will they have after 3 years?</p>
+                    <input type="number" class="answer-input" id="prob3" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('3', 197, 0)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution3" onclick="toggleSolution('3')">Show Solution</button>
+                    <div id="feedback3" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer3">
+                        <p><strong>Solution:</strong></p>
+                        <p>\[A(3) = 120(1.18)^3 = 120(1.644) = 197.3 \approx 197 \text{ students}\]</p>
+                    </div>
+                </article>
+
+                <h3>Problem Set B: Intermediate Applications</h3>
+
+                <article class="problem-container">
+                    <h4>Problem 4</h4>
+                    <p>The attendance at a soccer stadium follows this pattern:</p>
+                    <ul>
+                        <li>Year 1: 15,400 spectators average</li>
+                        <li>Year 2: 16,800 spectators average</li>
+                        <li>Year 3: 18,500 spectators average</li>
+                        <li>Year 4: 20,100 spectators average</li>
+                    </ul>
+                    <p>a) Calculate the compound annual growth rate.</p>
+                    <input type="number" step="0.01" class="answer-input" id="prob4a" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('4a', 9.3, 1)">Check Answer</button>
+                    <div id="feedback4a" class="feedback" style="display:none;"></div>
+                    
+                    <p>b) Predict the attendance for Year 5 using this growth rate.</p>
+                    <input type="number" class="answer-input" id="prob4b" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('4b', 21969, 0)">Check Answer</button>
+                    <div id="feedback4b" class="feedback" style="display:none;"></div>
+                    <button class="show-solution-btn" id="showSolution4" onclick="toggleSolution('4')">Show Solution</button>
+                    
+                    <div class="answer-section" id="answer4">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) \[CAGR = \left(\frac{20,100}{15,400}\right)^{\frac{1}{3}} - 1 = (1.305)^{0.333} - 1 = 1.093 - 1 = 0.093 = 9.3\%\]</p>
+                        <p>b) Year 5 prediction: \(20,100 \times 1.093 = 21,969\) spectators</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Problem 5</h4>
+                    <p>Maria's soccer skills improved measurably over time. Her coach rated her overall performance using a 100-point scale:</p>
+                    <ul>
+                        <li>Month 1: 72 points</li>
+                        <li>Month 4: 81 points</li>
+                        <li>Month 7: 91 points</li>
+                    </ul>
+                    <p>Assuming consistent growth rate, what would her projected score be in Month 10? (Note: Scores exceeding 100 represent a theoretical projection based on the model.)</p>
+                    <input type="number" step="0.1" class="answer-input" id="prob5" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('5', 102.4, 1)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution5" onclick="toggleSolution('5')">Show Solution</button>
+                    <div id="feedback5" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer5">
+                        <p><strong>Solution:</strong></p>
+                        <p>First, find monthly growth rate from Month 1 to Month 7:</p>
+                        <p>\[CAGR = \left(\frac{91}{72}\right)^{\frac{1}{6}} - 1 = (1.264)^{0.167} - 1 = 1.040 - 1 = 0.040 = 4.0\%\]</p>
+                        <p>Month 10 projection: \(91 \times (1.04)^3 = 91 \times 1.125 = 102.4\) points</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Problem 6</h4>
+                    <p>A professional soccer club's revenue grew from $2.4 million to $4.1 million over 5 years. If this growth rate continues, what will their revenue be in 2 additional years?</p>
+                    <input type="number" step="0.01" class="answer-input" id="prob6" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('6', 5.08, 2)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution6" onclick="toggleSolution('6')">Show Solution</button>
+                    <div id="feedback6" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer6">
+                        <p><strong>Solution:</strong></p>
+                        <p>\[CAGR = \left(\frac{4.1}{2.4}\right)^{\frac{1}{5}} - 1 = (1.708)^{0.2} - 1 = 1.113 - 1 = 0.113 = 11.3\%\]</p>
+                        <p>Revenue after 2 more years: \(4.1 \times (1.113)^2 = 4.1 \times 1.239 = \$5.08\) million</p>
+                    </div>
+                </article>
+
+                <h3>Problem Set C: SAT-Style Challenge Problems</h3>
+
+                <article class="problem-container">
+                    <h4>Problem 7</h4>
+                    <p>The number of youth soccer leagues in a state can be modeled by the function \(N(t) = 85(1.12)^t\), where \(t\) is the number of years since 2020.</p>
+                    
+                    <p>a) How many leagues were there in 2020?</p>
+                    <input type="number" class="answer-input" id="prob7a" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('7a', 85, 0)">Check Answer</button>
+                    <div id="feedback7a" class="feedback" style="display:none;"></div>
+                    
+                    <p>b) What is the annual growth rate?</p>
+                    <input type="number" class="answer-input" id="prob7b" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('7b', 12, 0)">Check Answer</button>
+                    <div id="feedback7b" class="feedback" style="display:none;"></div>
+                    
+                    <p>c) In what year will the number of leagues first exceed 200?</p>
+                    <input type="number" class="answer-input" id="prob7c" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('7c', 2028, 0)">Check Answer</button>
+                    <div id="feedback7c" class="feedback" style="display:none;"></div>
+                    <button class="show-solution-btn" id="showSolution7" onclick="toggleSolution('7')">Show Solution</button>
+                    
+                    <div class="answer-section" id="answer7">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) \(N(0) = 85(1.12)^0 = 85\) leagues</p>
+                        <p>b) Annual growth rate = 12%</p>
+                        <p>c) Solve \(85(1.12)^t > 200\): \(t > \frac{\ln(200/85)}{\ln(1.12)} = \frac{0.847}{0.113} = 7.5\) years<br>
+                        Answer: Year 2028</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Problem 8</h4>
+                    <p>Two rival high schools track their soccer program participation:</p>
+                    <p><strong>School A</strong>: Started with 60 players, growing at 15% annually</p>
+                    <p><strong>School B</strong>: Started with 45 players, growing at 22% annually</p>
+                    <p>After how many complete years will School B first have more players than School A?</p>
+                    <input type="number" class="answer-input" id="prob8" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('8', 5, 0)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolution8" onclick="toggleSolution('8')">Show Solution</button>
+                    <div id="feedback8" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answer8">
+                        <p><strong>Solution:</strong></p>
+                        <p>School A: \(A(t) = 60(1.15)^t\)</p>
+                        <p>School B: \(B(t) = 45(1.22)^t\)</p>
+                        <p>Solve \(45(1.22)^t > 60(1.15)^t\):</p>
+                        <p>\((1.22/1.15)^t > 60/45\)</p>
+                        <p>\((1.061)^t > 1.333\)</p>
+                        <p>\(t > \frac{\ln(1.333)}{\ln(1.061)} = \frac{0.287}{0.059} = 4.9\) years</p>
+                        <p>Answer: After 5 complete years</p>
+                    </div>
+                </article>
+
+                <div id="schoolComparison" class="jxgbox"></div>
+
+                <article class="problem-container">
+                    <h4>Problem 9</h4>
+                    <p>A soccer equipment company's sales follow exponential growth. If sales were $50,000 in Year 1 and $80,000 in Year 4, and the growth continues at the same compound rate:</p>
+                    
+                    <p>a) What will sales be in Year 7?</p>
+                    <input type="number" class="answer-input" id="prob9a" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('9a', 128250, 0)">Check Answer</button>
+                    <div id="feedback9a" class="feedback" style="display:none;"></div>
+                    
+                    <p>b) In which year will sales first exceed $150,000?</p>
+                    <input type="number" class="answer-input" id="prob9b" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('9b', 8, 0)">Check Answer</button>
+                    <div id="feedback9b" class="feedback" style="display:none;"></div>
+                    <button class="show-solution-btn" id="showSolution9" onclick="toggleSolution('9')">Show Solution</button>
+                    
+                    <div class="answer-section" id="answer9">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) \[CAGR = \left(\frac{80,000}{50,000}\right)^{\frac{1}{3}} - 1 = (1.6)^{0.333} - 1 = 1.170 - 1 = 0.170 = 17.0\%\]</p>
+                        <p>Year 7 sales: \(50,000 \times (1.17)^6 = 50,000 \times 2.565 = \$128,250\)</p>
+                        <p>b) Solve \(50,000(1.17)^{t-1} > 150,000\):</p>
+                        <p>\((1.17)^{t-1} > 3\)</p>
+                        <p>\(t-1 > \frac{\ln(3)}{\ln(1.17)} = \frac{1.099}{0.157} = 7.0\)</p>
+                        <p>Answer: Year 8</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="practice">
+                <h2>🌟 Advanced Challenge Problems</h2>
+
+                <article class="problem-container">
+                    <h4>Challenge 1</h4>
+                    <p>A soccer tournament's prize pool grows exponentially. The total prize money was $25,000 in 2019 and $45,000 in 2023. However, due to economic factors, the growth rate will decrease by 3 percentage points starting in 2024. What will the prize pool be in 2027?</p>
+                    <input type="number" class="answer-input" id="challenge1" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('challenge1', 73125, 0)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolutionchallenge1" onclick="toggleSolution('challenge1')">Show Solution</button>
+                    <div id="feedbackchallenge1" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answerchallenge1">
+                        <p><strong>Solution:</strong></p>
+                        <p>First, calculate the initial CAGR from 2019 to 2023 (4 years):</p>
+                        <p>\[CAGR = \left(\frac{45,000}{25,000}\right)^{\frac{1}{4}} - 1 = (1.8)^{0.25} - 1 = 1.158 - 1 = 0.158 = 15.8\%\]</p>
+                        <p>New growth rate starting in 2024: \(15.8\% - 3\% = 12.8\%\)</p>
+                        <p>Prize pool in 2023 was $45,000. We need to predict for 2027, which is 4 years after 2023.</p>
+                        <p>\[A(4) = 45,000(1 + 0.128)^4 = 45,000(1.128)^4 = 45,000(1.625) = \$73,125\]</p>
+                        <p>Answer: The prize pool in 2027 will be <strong>$73,125</strong>.</p>
+                    </div>
+                </article>
+
+                <article class="problem-container">
+                    <h4>Challenge 2</h4>
+                    <p>The performance rating of a soccer team follows the model \(P(t) = 650(1.08)^t\), where \(t\) is months of training. However, after reaching a rating of 800, the growth rate halves due to diminishing returns. How long will it take to reach a rating of 900?</p>
+                    <input type="number" step="0.01" class="answer-input" id="challenge2" placeholder="Enter your answer">
+                    <button class="check-btn" onclick="checkAnswer('challenge2', 5.70, 2)">Check Answer</button>
+                    <button class="show-solution-btn" id="showSolutionchallenge2" onclick="toggleSolution('challenge2')">Show Solution</button>
+                    <div id="feedbackchallenge2" class="feedback" style="display:none;"></div>
+                    <div class="answer-section" id="answerchallenge2">
+                        <p><strong>Solution:</strong></p>
+                        <p>First, find the time to reach a rating of 800 with the initial growth rate:</p>
+                        <p>\(P(t) = 650(1.08)^t\)</p>
+                        <p>\(800 = 650(1.08)^t\)</p>
+                        <p>\(\frac{800}{650} = (1.08)^t\)</p>
+                        <p>\(1.23077 = (1.08)^t\)</p>
+                        <p>\(t = \frac{\ln(1.23077)}{\ln(1.08)} = \frac{0.2076}{0.0769} \approx 2.70\) months</p>
+                        <p>After reaching 800, the growth rate halves: \(0.08 / 2 = 0.04\).</p>
+                        <p>Now, find the additional time (x) to reach 900 from 800 with the new growth rate:</p>
+                        <p>\(900 = 800(1.04)^x\)</p>
+                        <p>\(\frac{900}{800} = (1.04)^x\)</p>
+                        <p>\(1.125 = (1.04)^x\)</p>
+                        <p>\(x = \frac{\ln(1.125)}{\ln(1.04)} = \frac{0.1178}{0.0392} \approx 3.00\) months</p>
+                        <p>Total time to reach a rating of 900: \(2.70 + 3.00 = 5.70\) months.</p>
+                        <p>Answer: It will take approximately <strong>5.70 months</strong> to reach a rating of 900.</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="solutions-section" id="fullSolutions" style="display:none;">
+                <h2>📊 Solutions</h2>
+
+                <h3>Practice Problems Solutions</h3>
+
+                <p><strong>Problem 1</strong>:</p>
+                <p>\[CAGR = \left(\frac{73}{45}\right)^{\frac{1}{2}} - 1 = (1.622)^{0.5} - 1 = 1.274 - 1 = 0.274 = 27.4\%\]</p>
+
+                <p><strong>Problem 2</strong>:</p>
+                <p>\[CAGR = \left(\frac{52}{28}\right)^{\frac{1}{3}} - 1 = (1.857)^{0.333} - 1 = 1.228 - 1 = 0.228 = 22.8\%\]</p>
+
+                <p><strong>Problem 3</strong>:</p>
+                <p>\[A(3) = 120(1.18)^3 = 120(1.644) = 197.3 \approx 197 \text{ students}\]</p>
+
+                <p><strong>Problem 4</strong>:</p>
+                <p>a) \[CAGR = \left(\frac{20,100}{15,400}\right)^{\frac{1}{3}} - 1 = (1.305)^{0.333} - 1 = 1.093 - 1 = 0.093 = 9.3\%\]</p>
+                <p>b) Year 5 prediction: \(20,100 \times 1.093 = 21,969\) spectators</p>
+
+                <p><strong>Problem 5</strong>:</p>
+                <p>First, find monthly growth rate from Month 1 to Month 7:</p>
+                <p>\[CAGR = \left(\frac{91}{72}\right)^{\frac{1}{6}} - 1 = (1.264)^{0.167} - 1 = 1.040 - 1 = 0.040 = 4.0\%\]</p>
+                <p>Month 10 projection: \(91 \times (1.04)^3 = 91 \times 1.125 = 102.4\) points</p>
+
+                <p><strong>Problem 6</strong>:</p>
+                <p>\[CAGR = \left(\frac{4.1}{2.4}\right)^{\frac{1}{5}} - 1 = (1.708)^{0.2} - 1 = 1.113 - 1 = 0.113 = 11.3\%\]</p>
+                <p>Revenue after 2 more years: \(4.1 \times (1.113)^2 = 4.1 \times 1.239 = \$5.08\) million</p>
+
+                <p><strong>Problem 7</strong>:</p>
+                <p>a) \(N(0) = 85(1.12)^0 = 85\) leagues</p>
+                <p>b) Annual growth rate = 12%</p>
+                <p>c) Solve \(85(1.12)^t > 200\): \(t > \frac{\ln(200/85)}{\ln(1.12)} = \frac{0.847}{0.113} = 7.5\) years<br>
+                Answer: Year 2028</p>
+
+                <p><strong>Problem 8</strong>:</p>
+                <p>School A: \(A(t) = 60(1.15)^t\)</p>
+                <p>School B: \(B(t) = 45(1.22)^t\)</p>
+                <p>Solve \(45(1.22)^t > 60(1.15)^t\):</p>
+                <p>\((1.22/1.15)^t > 60/45\)</p>
+                <p>\((1.061)^t > 1.333\)</p>
+                <p>\(t > \frac{\ln(1.333)}{\ln(1.061)} = \frac{0.287}{0.059} = 4.9\) years</p>
+                <p>Answer: After 5 complete years</p>
+
+                <p><strong>Problem 9</strong>:</p>
+                <p>a) \[CAGR = \left(\frac{80,000}{50,000}\right)^{\frac{1}{3}} - 1 = (1.6)^{0.333} - 1 = 1.170 - 1 = 0.170 = 17.0\%\]</p>
+                <p>Year 7 sales: \(50,000 \times (1.17)^6 = 50,000 \times 2.565 = \$128,250\)</p>
+                <p>b) Solve \(50,000(1.17)^{t-1} > 150,000\):</p>
+                <p>\((1.17)^{t-1} > 3\)</p>
+                <p>\(t-1 > \frac{\ln(3)}{\ln(1.17)} = \frac{1.099}{0.157} = 7.0\)</p>
+                <p>Answer: Year 8</p>
+
+                <h3>Advanced Challenge Problems Solutions</h3>
+
+                <p><strong>Challenge 1</strong>:</p>
+                <p>First, calculate the initial CAGR from 2019 to 2023 (4 years):</p>
+                <p>\[CAGR = \left(\frac{45,000}{25,000}\right)^{\frac{1}{4}} - 1 = (1.8)^{0.25} - 1 = 1.158 - 1 = 0.158 = 15.8\%\]</p>
+                <p>New growth rate starting in 2024: \(15.8\% - 3\% = 12.8\%\)</p>
+                <p>Prize pool in 2023 was $45,000. We need to predict for 2027, which is 4 years after 2023.</p>
+                <p>\[A(4) = 45,000(1 + 0.128)^4 = 45,000(1.128)^4 = 45,000(1.625) = \$73,125\]</p>
+                <p>Answer: The prize pool in 2027 will be <strong>$73,125</strong>.</p>
+
+                <p><strong>Challenge 2</strong>:</p>
+                <p>First, find the time to reach a rating of 800 with the initial growth rate:</p>
+                <p>\(P(t) = 650(1.08)^t\)</p>
+                <p>\(800 = 650(1.08)^t\)</p>
+                <p>\(\frac{800}{650} = (1.08)^t\)</p>
+                <p>\(1.23077 = (1.08)^t\)</p>
+                <p>\(t = \frac{\ln(1.23077)}{\ln(1.08)} = \frac{0.2076}{0.0769} \approx 2.70\) months</p>
+                <p>After reaching 800, the growth rate halves: \(0.08 / 2 = 0.04\).</p>
+                <p>Now, find the additional time (x) to reach 900 from 800 with the new growth rate:</p>
+                <p>\(900 = 800(1.04)^x\)</p>
+                <p>\(\frac{900}{800} = (1.04)^x\)</p>
+                <p>\(1.125 = (1.04)^x\)</p>
+                <p>\(x = \frac{\ln(1.125)}{\ln(1.04)} = \frac{0.1178}{0.0392} \approx 3.00\) months</p>
+                <p>Total time to reach a rating of 900: \(2.70 + 3.00 = 5.70\) months.</p>
+                <p>Answer: It will take approximately <strong>5.70 months</strong> to reach a rating of 900.</p>
+            </section>
+
+            <button id="toggleAllSolutionsBtn" onclick="toggleAllSolutions()">Show All Solutions</button>
+
+            <section class="summary">
+                <h2>📋 Summary & Review</h2>
+
+                <p><strong>Key Takeaways:</strong></p>
+                <ol>
+                    <li><strong>CAGR Formula</strong>: \(\left(\frac{\text{End}}{\text{Start}}\right)^{\frac{1}{\text{years}}} - 1\)</li>
+                    <li><strong>Exponential Growth</strong>: \(A(t) = A_0(1 + r)^t\)</li>
+                    <li><strong>Growth rates help analyze trends</strong> in sports attendance, performance, and participation</li>
+                    <li><strong>Real-world applications</strong> connect mathematical concepts to soccer analytics and data-driven decision making</li>
+                </ol>
+
+                <p><strong>Success Checklist:</strong></p>
+                <ul class="checklist">
+                    <li>✅ Can calculate compound annual growth rates</li>
+                    <li>✅ Can model exponential growth scenarios</li>
+                    <li>✅ Can interpret growth data in sports contexts</li>
+                    <li>✅ Can solve multi-step growth problems</li>
+                    <li>✅ Can make predictions using growth models</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <hr style="margin: 20px 0; border: 1px solid #bdc3c7;">
+
+            <p style="text-align: center; font-style: italic; color: #555; margin-top: 20px;">
+                <em>"Just as coaches like Julian Nagelsmann use data to build championship teams, mastering growth rate analysis helps you understand how consistent improvement compounds into extraordinary results both on and off the field!"</em>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function checkAnswer(problemNum, correctAnswer, decimalPlaces) {
+            const inputId = 'prob' + problemNum;
+            const feedbackId = 'feedback' + problemNum;
+            const showSolutionBtnId = 'showSolution' + problemNum;
+            
+            const userAnswerRaw = document.getElementById(inputId).value;
+            const feedbackDiv = document.getElementById(feedbackId);
+            const showSolutionBtn = document.getElementById(showSolutionBtnId);
+            
+            // Show the 'Show Solution' button after any attempt
+            if (showSolutionBtn) {
+                showSolutionBtn.style.display = 'inline-block';
+            }
+
+            if (userAnswerRaw === '') {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.textContent = 'Please enter an answer.';
+                feedbackDiv.style.display = 'block';
+                return;
+            }
+
+            const userAnswer = parseFloat(userAnswerRaw);
+            
+            if (isNaN(userAnswer)) {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.textContent = 'Invalid input. Please enter a number.';
+                feedbackDiv.style.display = 'block';
+                return;
+            }
+
+            // Compare rounded values for more robust checking
+            const roundedUserAnswer = parseFloat(userAnswer.toFixed(decimalPlaces));
+            const roundedCorrectAnswer = parseFloat(correctAnswer.toFixed(decimalPlaces));
+            
+            feedbackDiv.style.display = 'block';
+            
+            if (roundedUserAnswer === roundedCorrectAnswer) {
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.textContent = 'Correct! Well done!';
+                // Optionally hide show solution button if correct, or leave it for review
+                // if (showSolutionBtn) showSolutionBtn.style.display = 'none';
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.textContent = `Incorrect. Try again!`;
+            }
+        }
+
+        function toggleSolution(problemNum) {
+            const answerId = 'answer' + problemNum;
+            const answerDiv = document.getElementById(answerId);
+            const showSolutionBtn = document.getElementById('showSolution' + problemNum);
+
+            if (answerDiv.style.display === 'none' || answerDiv.style.display === '') {
+                answerDiv.style.display = 'block';
+                if (showSolutionBtn) showSolutionBtn.textContent = 'Hide Solution';
+            } else {
+                answerDiv.style.display = 'none';
+                if (showSolutionBtn) showSolutionBtn.textContent = 'Show Solution';
+            }
+        }
+
+        function toggleAllSolutions() {
+            const fullSolutionsSection = document.getElementById('fullSolutions');
+            const toggleBtn = document.getElementById('toggleAllSolutionsBtn');
+
+            if (fullSolutionsSection.style.display === 'none' || fullSolutionsSection.style.display === '') {
+                fullSolutionsSection.style.display = 'block';
+                toggleBtn.textContent = 'Hide All Solutions';
+                toggleBtn.style.backgroundColor = '#dc3545'; // Red for hide
+            } else {
+                fullSolutionsSection.style.display = 'none';
+                toggleBtn.textContent = 'Show All Solutions';
+                toggleBtn.style.backgroundColor = '#28a745'; // Green for show
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Growth chart for Example 3
+                const growthBoard = JXG.JSXGraph.initBoard('growthChart', {
+                    boundingbox: [2019.5, 25, 2023.5, 5], // [x1, y2, x2, y1]
+                    axis: true,
+                    showNavigation: false,
+                    showCopyright: false,
+                    keepaspectratio: false,
+                    grid: true
+                });
+
+                // Data points
+                const years = [2020, 2021, 2022, 2023];
+                const teams = [8, 11, 15, 20];
+                
+                for (let i = 0; i < years.length; i++) {
+                    growthBoard.create('point', [years[i], teams[i]], {
+                        name: teams[i] + ' teams',
+                        size: 4,
+                        color: '#e74c3c',
+                        fixed: true
+                    });
+                }
+                
+                // Exponential curve fitting (using the calculated CAGR from the example)
+                // A(t) = A0 * (1 + r)^t
+                // A(t) = 8 * (1 + 0.357)^(t - 2020)
+                growthBoard.create('functiongraph', [function(x) {
+                    return 8 * Math.pow(1 + 0.357, x - 2020);
+                }, 2020, 2023], {
+                    strokeColor: '#3498db',
+                    strokeWidth: 2,
+                    name: 'Growth Curve'
+                });
+
+                // School comparison chart for Problem 8
+                const schoolBoard = JXG.JSXGraph.initBoard('schoolComparison', {
+                    boundingbox: [-0.5, 150, 6, 40], // Adjusted max Y to better fit content
+                    axis: true,
+                    showNavigation: false,
+                    showCopyright: false,
+                    keepaspectratio: false,
+                    grid: true
+                });
+
+                // School A: 60(1.15)^t
+                schoolBoard.create('functiongraph', [function(t) {
+                    return 60 * Math.pow(1.15, t);
+                }, 0, 6], {
+                    strokeColor: '#e74c3c',
+                    strokeWidth: 3,
+                    name: 'School A (15%)'
+                });
+
+                // School B: 45(1.22)^t
+                schoolBoard.create('functiongraph', [function(t) {
+                    return 45 * Math.pow(1.22, t);
+                }, 0, 6], {
+                    strokeColor: '#2ecc71',
+                    strokeWidth: 3,
+                    name: 'School B (22%)'
+                });
+
+                // Intersection point around t=4.9, so at year 5 School B first exceeds A
+                schoolBoard.create('point', [4.9, 45 * Math.pow(1.22, 4.9)], {
+                    name: 'Crossover Point',
+                    size: 4,
+                    color: '#9b59b6',
+                    fixed: true
+                });
+
+                schoolBoard.create('text', [5, 140, 'School B exceeds School A at Year 5'], { // Adjusted position
+                    fontSize: 14,
+                    color: '#9b59b6'
+                });
+
+            } catch (error) {
+                console.error('JSXGraph initialization error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
