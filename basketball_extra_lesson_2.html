@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Grade 1 Mathematics - Shapes and Patterns with Basketball">
+    <title>🏀 Zoe's Basketball Court Shapes Adventure - Grade 1</title>
+    <style>
+    /* =================================== */
+    /* 1. Mobile-First Base Styles */
+    /* =================================== */
+    * { 
+        box-sizing: border-box; 
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Comic Sans MS', 'Trebuchet MS', sans-serif;
+        background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%);
+        color: #2c3e50;
+        min-height: 100vh;
+        padding: 1rem;
+        line-height: 1.6;
+        font-size: 1.1em;
+        overflow-x: hidden;
+    }
+    
+    .lesson-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Floating basketball animation */
+    .floating-basketball {
+        position: absolute;
+        font-size: 2em;
+        animation: float 4s ease-in-out infinite;
+        z-index: 1;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-15px) rotate(90deg); }
+        50% { transform: translateY(-30px) rotate(180deg); }
+        75% { transform: translateY(-15px) rotate(270deg); }
+    }
+    
+    .basketball-1 { top: 20px; right: 20px; animation-delay: 0s; }
+    .basketball-2 { top: 60px; left: 30px; animation-delay: 1s; }
+    .basketball-3 { top: 120px; right: 60px; animation-delay: 2s; }
+    
+    /* Header with bouncing basketball */
+    .lesson-header {
+        background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        color: white;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .lesson-header h1 {
+        font-size: 1.8em;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        margin-bottom: 0.5rem;
+        animation: titleBounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes titleBounce {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .bouncing-ball {
+        position: absolute;
+        font-size: 3em;
+        animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    .ball-left { left: 10px; top: 20px; animation-delay: 0s; }
+    .ball-right { right: 10px; top: 20px; animation-delay: 1s; }
+    
+    /* Content sections with different themes */
+    .content-section {
+        padding: 1.5rem;
+        margin: 1rem;
+        border-radius: 15px;
+        border-left: 6px solid;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Story section - Adventure theme */
+    .story-section {
+        background: linear-gradient(135deg, #E8F4FD 0%, #F1F8FF 100%);
+        border-left-color: #3498DB;
+        color: #1565C0;
+    }
+    
+    .story-section::before {
+        content: "📚 THE STORY";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #1976D2;
+    }
+    
+    /* Learning goals - Target theme */
+    .goals-section {
+        background: linear-gradient(135deg, #E8F5E8 0%, #F1F8F1 100%);
+        border-left-color: #4CAF50;
+        color: #2E7D32;
+    }
+    
+    .goals-section::before {
+        content: "🎯 LEARNING GOALS";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #388E3C;
+    }
+    
+    /* Vocabulary - Book theme */
+    .vocab-section {
+        background: linear-gradient(135deg, #FFF3E0 0%, #FFF8F0 100%);
+        border-left-color: #FF9800;
+        color: #E65100;
+    }
+    
+    .vocab-section::before {
+        content: "📖 KEY VOCABULARY";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #F57C00;
+    }
+    
+    /* Activity section - Sport theme */
+    .activity-section {
+        background: linear-gradient(135deg, #F3E5F5 0%, #FAF5FF 100%);
+        border-left-color: #9C27B0;
+        color: #6A1B9A;
+    }
+    
+    .activity-section::before {
+        content: "🏃‍♀️ ACTIVITY";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #7B1FA2;
+    }
+    
+    /* Practice section - Exercise theme */
+    .practice-section {
+        background: linear-gradient(135deg, #E0F2F1 0%, #F0F8F7 100%);
+        border-left-color: #009688;
+        color: #00695C;
+    }
+    
+    .practice-section::before {
+        content: "✏️ PRACTICE PROBLEMS";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #00796B;
+    }
+    
+    /* Pattern section - Creative theme */
+    .pattern-section {
+        background: linear-gradient(135deg, #FCE4EC 0%, #FFF0F5 100%);
+        border-left-color: #E91E63;
+        color: #AD1457;
+    }
+    
+    .pattern-section::before {
+        content: "🌟 PATTERN PRACTICE";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #C2185B;
+    }
+    
+    /* Bonus section - Trophy theme */
+    .bonus-section {
+        background: linear-gradient(135deg, #FFF8E1 0%, #FFFDF7 100%);
+        border-left-color: #FFC107;
+        color: #FF8F00;
+    }
+    
+    .bonus-section::before {
+        content: "🏆 BONUS CHALLENGES";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #FFA000;
+    }
+    
+    /* Art section - Palette theme */
+    .art-section {
+        background: linear-gradient(135deg, #F1F8E9 0%, #F8FBF4 100%);
+        border-left-color: #8BC34A;
+        color: #33691E;
+    }
+    
+    .art-section::before {
+        content: "🎨 SHAPE ART PROJECT";
+        font-weight: bold;
+        font-size: 1.1em;
+        display: block;
+        margin-bottom: 1rem;
+        color: #689F38;
+    }
+    
+    /* Shape styling */
+    .shape {
+        font-size: 2em;
+        margin: 0.2em;
+        display: inline-block;
+        animation: shapeWiggle 3s ease-in-out infinite;
+    }
+    
+    @keyframes shapeWiggle {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(5deg); }
+        75% { transform: rotate(-5deg); }
+    }
+    
+    .circle { color: #2196F3; }
+    .square { color: #4CAF50; }
+    .triangle { color: #FF9800; }
+    .rectangle { color: #9C27B0; }
+    
+    /* Basketball court visualization */
+    .basketball-court {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        border: 4px solid #654321;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        text-align: center;
+        position: relative;
+        min-height: 120px;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .court-line {
+        position: absolute;
+        background: white;
+        animation: lineGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes lineGlow {
+        0% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 15px rgba(255,255,255,0.8); }
+    }
+    
+    .center-line {
+        width: 2px;
+        height: 80%;
+        left: 50%;
+        top: 10%;
+        transform: translateX(-50%);
+    }
+    
+    .hoop {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 3px solid #FFA500;
+        border-radius: 50%;
+        background: rgba(255,165,0,0.3);
+        animation: hoopSpin 4s linear infinite;
+    }
+    
+    @keyframes hoopSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .hoop-left { left: 20px; top: 50%; transform: translateY(-50%); }
+    .hoop-right { right: 20px; top: 50%; transform: translateY(-50%); }
+    
+    /* Problem styling */
+    .problem {
+        background: rgba(255,255,255,0.8);
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .problem-number {
+        color: #FF6B35;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Answer lines */
+    .answer-line {
+        display: inline-block;
+        border-bottom: 2px solid #333;
+        min-width: 100px;
+        height: 1.5em;
+        margin: 0 0.5em;
+        vertical-align: bottom;
+    }
+    
+    /* Moving pattern elements */
+    .pattern-demo {
+        text-align: center;
+        font-size: 2.5em;
+        margin: 1rem 0;
+        letter-spacing: 0.3em;
+    }
+    
+    .pattern-demo .shape {
+        animation: patternSlide 4s ease-in-out infinite;
+    }
+    
+    @keyframes patternSlide {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(10px); }
+    }
+    
+    /* Vocabulary definitions */
+    .vocab-item {
+        background: rgba(255,255,255,0.6);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 0.8rem 0;
+        border-left: 4px solid #FF9800;
+    }
+    
+    .vocab-word {
+        font-weight: bold;
+        color: #E65100;
+        font-size: 1.2em;
+    }
+    
+    .vocab-definition {
+        margin: 0.5rem 0;
+        color: #5D4037;
+    }
+    
+    .vocab-example {
+        font-style: italic;
+        color: #795548;
+        margin-top: 0.5rem;
+    }
+    
+    /* Size comparison */
+    .size-demo {
+        text-align: center;
+        margin: 1rem 0;
+    }
+    
+    .small-ball { font-size: 1.5em; }
+    .medium-ball { font-size: 2.5em; }
+    .large-ball { font-size: 3.5em; }
+    
+    .size-demo .shape {
+        animation: sizeFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes sizeFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+    
+    /* Goal list styling */
+    .goal-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .goal-list li {
+        background: rgba(255,255,255,0.6);
+        margin: 0.5rem 0;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border-left: 4px solid #4CAF50;
+    }
+    
+    /* Checklist styling */
+    .checklist {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .checklist li {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .checklist li::before {
+        content: "☐";
+        position: absolute;
+        left: 0.5rem;
+        font-size: 1.2em;
+        color: #4CAF50;
+    }
+    
+    /* Learning summary */
+    .learning-summary {
+        background: linear-gradient(135deg, #E8F5E8 0%, #F1F8F1 100%);
+        border: 2px solid #4CAF50;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .learning-summary h3 {
+        color: #2E7D32;
+        margin-bottom: 1rem;
+        font-size: 1.4em;
+    }
+    
+    .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: left;
+    }
+    
+    .summary-item {
+        background: rgba(255,255,255,0.8);
+        padding: 0.8rem;
+        border-radius: 8px;
+        border-left: 4px solid #4CAF50;
+    }
+
+    /* =================================== */
+    /* INTERACTIVE ELEMENT STYLES          */
+    /* =================================== */
+    .interactive-area {
+        margin-top: 1rem;
+    }
+    .interactive-area p {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+    }
+    .answer-input {
+        font-family: 'Comic Sans MS', 'Trebuchet MS', sans-serif;
+        font-size: 1em;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        padding: 0.5rem;
+        margin: 0 0.5rem;
+        min-width: 80px;
+        max-width: 100px;
+        text-align: center;
+    }
+    .check-btn {
+        background-color: #FF6B35;
+        color: white;
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 0.5rem;
+    }
+    .check-btn:hover {
+        background-color: #F7931E;
+        transform: scale(1.05);
+    }
+    .feedback {
+        font-weight: bold;
+        margin-left: 1rem;
+    }
+    .feedback.correct {
+        color: #2E7D32;
+    }
+    .feedback.incorrect {
+        color: #c0392b;
+    }
+     /* New class for full-answer feedback */
+    .feedback.full-answer {
+        display: block;
+        margin-top: 0.8rem;
+        line-height: 1.5;
+        margin-left: 0; /* Reset margin for block display */
+    }
+    .feedback.full-answer strong {
+        word-break: break-all; /* Ensures long emoji patterns wrap on small screens */
+    }
+    .clickable-shape {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .clickable-shape:hover {
+        transform: scale(1.2);
+    }
+    .clickable-shape.selected {
+        outline: 4px solid #FFC107;
+        border-radius: 50%;
+        transform: scale(1.1);
+    }
+    
+    /* =================================== */
+    /* 2. Tablet & Desktop Styles */
+    /* =================================== */
+    @media screen and (min-width: 768px) {
+        body {
+            font-size: 1.2em;
+            padding: 2rem;
+        }
+        
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            padding: 2rem;
+            margin: 2rem;
+            border-radius: 20px;
+        }
+        
+        .lesson-header {
+            padding: 3rem 2rem;
+        }
+        
+        .lesson-header h1 {
+            font-size: 2.5em;
+        }
+        
+        .pattern-demo {
+            font-size: 3em;
+        }
+        
+        .summary-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .basketball-court {
+            min-height: 200px;
+            padding: 2rem;
+        }
+        
+        .hoop {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    
+    @media screen and (min-width: 1200px) {
+        .lesson-container {
+            max-width: 1200px;
+        }
+        
+        .summary-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    /* =================================== */
+    /* 3. Accessibility & Print Styles */
+    /* =================================== */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+    
+    @media print {
+        body {
+            background: white !important;
+            color: black !important;
+        }
+        
+        .content-section {
+            background: white !important;
+            color: black !important;
+            border: 2px solid black !important;
+            box-shadow: none !important;
+            page-break-inside: avoid;
+        }
+        
+        .floating-basketball,
+        .bouncing-ball,
+        .interactive-area {
+            display: none;
+        }
+        
+        .answer-line {
+            border-bottom: 2px solid black !important;
+        }
+    }
+    
+    /* Screen reader only class */
+    .sr-only {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    </style>
+</head>
+<body>
+    <div class="lesson-container">
+        <div class="floating-basketball basketball-1">🏀</div>
+        <div class="floating-basketball basketball-2">🏀</div>
+        <div class="floating-basketball basketball-3">🏀</div>
+        
+        <header class="lesson-header">
+            <div class="bouncing-ball ball-left">🏀</div>
+            <div class="bouncing-ball ball-right">🏀</div>
+            <h1>🏀 Zoe's Shape Detective Mission</h1>
+            <p><strong>Shapes and Patterns on the Basketball Court - Grade 1</strong></p>
+        </header>
+        
+        <section class="content-section story-section">
+            <p>Zoe steps onto the basketball court, her new sneakers squeaking against the polished floor. The afternoon sun streams through tall windows, casting geometric shadows across the court lines. Coach Martinez points to the court markings with her clipboard.</p>
+            
+            <p><em>"Zoe, before we start practice, can you help me identify all the shapes on our court? I think someone mixed up our shape poster!"</em></p>
+            
+            <div class="basketball-court">
+                <div class="court-line center-line"></div>
+                <div class="hoop hoop-left"></div>
+                <div class="hoop hoop-right"></div>
+                <p>🏀 THE BASKETBALL COURT 🏀</p>
+            </div>
+            
+            <p>Zoe looks around. The basketball hoop forms a perfect circle, the court itself is a large rectangle, and the free-throw line creates interesting triangular spaces. Even the basketball is round like a sphere!</p>
+        </section>
+        
+        <section class="content-section goals-section">
+            <p><strong>Today you will:</strong></p>
+            <ul class="goal-list">
+                <li>🔵 Identify circles, squares, rectangles, and triangles</li>
+                <li>🎨 Find patterns in basketball court designs</li>
+                <li>📐 Compare sizes of the same shapes</li>
+                <li>🏀 Create your own basketball court pattern</li>
+            </ul>
+        </section>
+        
+        <section class="content-section vocab-section">
+            <div class="vocab-item">
+                <div class="vocab-word">Circle <span class="shape circle">⭕</span></div>
+                <div class="vocab-definition">A round shape with no corners or straight lines</div>
+                <div class="vocab-example">Example: Basketball hoop, basketball</div>
+            </div>
+            
+            <div class="vocab-item">
+                <div class="vocab-word">Rectangle <span class="shape rectangle">⬛</span></div>
+                <div class="vocab-definition">A shape with 4 sides and 4 corners, opposite sides are the same length</div>
+                <div class="vocab-example">Example: Basketball court, backboard</div>
+            </div>
+            
+            <div class="vocab-item">
+                <div class="vocab-word">Triangle <span class="shape triangle">🔺</span></div>
+                <div class="vocab-definition">A shape with 3 sides and 3 corners</div>
+                <div class="vocab-example">Example: The spaces created by court lines</div>
+            </div>
+            
+            <div class="vocab-item">
+                <div class="vocab-word">Square <span class="shape square">⬜</span></div>
+                <div class="vocab-definition">A special rectangle where all 4 sides are the same length</div>
+                <div class="vocab-example">Example: Some court markings</div>
+            </div>
+            
+            <div class="vocab-item">
+                <div class="vocab-word">Pattern <span class="shape">🔄</span></div>
+                <div class="vocab-definition">Things that repeat in the same order</div>
+                <div class="vocab-example">Example: Circle, triangle, circle, triangle</div>
+            </div>
+        </section>
+        
+        <section class="content-section activity-section">
+            <h3>🏃‍♀️ COURT SHAPE HUNT</h3>
+            <p><strong>What You'll Do:</strong></p>
+            <ol>
+                <li>Look around your space (classroom, home, playground)</li>
+                <li>Find examples of each shape</li>
+                <li>Draw or name them</li>
+                <li>Count how many of each shape you find</li>
+            </ol>
+            
+            <div class="problem">
+                <div class="problem-number">Shape Hunt Checklist:</div>
+                <ul class="checklist">
+                    <li>🔵 Circles: <input type="text" class="answer-input" placeholder="Name one"></li>
+                    <li>🔲 Squares: <input type="text" class="answer-input" placeholder="Name one"></li>
+                    <li>📐 Rectangles: <input type="text" class="answer-input" placeholder="Name one"></li>
+                    <li>🔺 Triangles: <input type="text" class="answer-input" placeholder="Name one"></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="content-section practice-section">
+            <div class="problem">
+                <div class="problem-number">Problem 1: Shape Sorting</div>
+                <p>Zoe found these shapes on the basketball court. Sort them into groups:</p>
+                <div class="pattern-demo">
+                    <span class="shape circle">🔵</span>
+                    <span class="shape square">⬜</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape rectangle">📐</span>
+                    <span class="shape square">⬜</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape rectangle">📐</span>
+                    <span class="shape circle">🔵</span>
+                </div>
+                <div class="interactive-area">
+                    <p><strong>Circles:</strong> <input type="number" id="p1_circles" class="answer-input" min="0"></p>
+                    <p><strong>Squares:</strong> <input type="number" id="p1_squares" class="answer-input" min="0"></p>
+                    <p><strong>Triangles:</strong> <input type="number" id="p1_triangles" class="answer-input" min="0"></p>
+                    <p><strong>Rectangles:</strong> <input type="number" id="p1_rectangles" class="answer-input" min="0"></p>
+                    <button class="check-btn" onclick="checkProblem1()">Check Answers</button>
+                    <span id="feedback1" class="feedback"></span>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Problem 2: Court Design</div>
+                <p>The basketball court has this pattern painted on the sideline:</p>
+                <div class="pattern-demo">
+                    <span class="shape circle">🔵</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape triangle">🔺</span>
+                </div>
+                <div class="interactive-area">
+                    <p>What shape comes next? <input type="text" id="p2_shape" class="answer-input" placeholder="Type here"></p>
+                    <button class="check-btn" onclick="checkProblem2()">Check Answer</button>
+                    <span id="feedback2" class="feedback"></span>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Problem 3: Shape Counting</div>
+                <p>Coach drew this design for the new court:</p>
+                <div class="pattern-demo">
+                    <span class="shape square">🔲</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape circle">🔵</span>
+                </div>
+                <div class="interactive-area">
+                     <p>Squares: <input type="number" id="p3_squares" class="answer-input" min="0"></p>
+                     <p>Circles: <input type="number" id="p3_circles" class="answer-input" min="0"></p>
+                    <button class="check-btn" onclick="checkProblem3()">Check Answers</button>
+                    <span id="feedback3" class="feedback"></span>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Problem 4: Basketball Equipment Shapes</div>
+                <p>Match each piece of equipment to its shape:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                    <div>
+                        <strong>Equipment:</strong>
+                        <ul>
+                            <li>🏀 Basketball</li>
+                            <li>🏟️ Court</li>
+                            <li>📋 Backboard</li>
+                            <li>🔺 Free-throw area corners</li>
+                        </ul>
+                    </div>
+                    <div class="interactive-area">
+                        <strong>Shapes:</strong>
+                        <ul>
+                            <li>Circle <input type="text" id="p4_bball" class="answer-input" placeholder="Equipment"></li>
+                            <li>Rectangle <input type="text" id="p4_court" class="answer-input" placeholder="Equipment"></li>
+                            <li>Rectangle <input type="text" id="p4_backboard" class="answer-input" placeholder="Equipment"></li>
+                            <li>Triangle <input type="text" id="p4_corners" class="answer-input" placeholder="Equipment"></li>
+                        </ul>
+                    </div>
+                </div>
+                 <button class="check-btn" onclick="checkProblem4()">Check Matches</button>
+                 <span id="feedback4" class="feedback"></span>
+            </div>
+        </section>
+        
+        <section class="content-section pattern-section">
+            <div class="problem">
+                <div class="problem-number">Problem 5: Complete the Patterns</div>
+                
+                <p><strong>A) Basketball Pattern:</strong></p>
+                <div class="pattern-demo">
+                    <span class="shape">🏀</span>
+                    <span class="shape square">⬜</span>
+                    <span class="shape">🏀</span>
+                    <span class="shape square">⬜</span>
+                    <span class="shape">🏀</span>
+                    <span class="shape square">⬜</span>
+                    <input type="text" id="p5a_pattern" class="answer-input" style="font-size: 1.5em; width: 80px;" placeholder="?">
+                </div>
+                
+                <p><strong>B) Court Line Pattern:</strong></p>
+                <div class="pattern-demo">
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <input type="text" id="p5b_pattern" class="answer-input" style="font-size: 1.5em; width: 80px;" placeholder="?">
+                </div>
+                
+                <p><strong>C) Team Color Pattern:</strong></p>
+                <div class="pattern-demo">
+                    <span class="shape" style="color: red;">🔴</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape" style="color: red;">🔴</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape" style="color: red;">🔴</span>
+                    <span class="shape circle">🔵</span>
+                    <input type="text" id="p5c_pattern" class="answer-input" style="font-size: 1.5em; width: 80px;" placeholder="?">
+                </div>
+                <div class="interactive-area">
+                    <button class="check-btn" onclick="checkProblem5()">Check All Patterns</button>
+                    <span id="feedback5a" class="feedback"></span>
+                    <span id="feedback5b" class="feedback"></span>
+                    <span id="feedback5c" class="feedback"></span>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Problem 6: Create Your Own Pattern</div>
+                <p>Use these shapes to make a pattern that repeats 3 times:</p>
+                <div class="pattern-demo">
+                    <span class="shape circle">🔵</span>
+                    <span class="shape square">🔲</span>
+                    <span class="shape triangle">🔺</span>
+                </div>
+                <p>Your pattern:</p>
+                <div style="margin: 1rem 0;">
+                     <input type="text" class="answer-input" style="width: 100%; text-align: left; font-size: 1.5em;" placeholder="Example: 🔵🔲🔺🔵🔲🔺🔵🔲🔺">
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section practice-section">
+            <div class="problem">
+                <div class="problem-number">Problem 7: Big, Medium, Small</div>
+                <p>Zoe found basketballs of different sizes. Put them in order from smallest to largest:</p>
+                <div class="size-demo">
+                    <span class="shape medium-ball">🏀</span> Medium
+                    <span class="shape large-ball">🏀</span> Large
+                    <span class="shape small-ball">🏀</span> Small
+                </div>
+                 <div class="interactive-area">
+                    <p><strong>Order:</strong> 
+                        <input type="text" id="p7_1" class="answer-input" placeholder="1st"> 
+                        <input type="text" id="p7_2" class="answer-input" placeholder="2nd"> 
+                        <input type="text" id="p7_3" class="answer-input" placeholder="3rd">
+                    </p>
+                    <button class="check-btn" onclick="checkProblem7()">Check Order</button>
+                    <span id="feedback7" class="feedback"></span>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Problem 8: Shape Families</div>
+                <p>Click the shapes that belong in the same family:</p>
+                <p><strong>Round Family:</strong></p>
+                <div class="pattern-demo" id="p8_round">
+                    <span class="shape circle clickable-shape" data-family="round">🔵</span>
+                    <span class="shape square clickable-shape" data-family="4side">⬜</span>
+                    <span class="shape clickable-shape" style="color: red;" data-family="round">🔴</span>
+                    <span class="shape triangle clickable-shape" data-family="3side">🔺</span>
+                    <span class="shape clickable-shape" style="color: black;" data-family="round">⚫</span>
+                    <span class="shape rectangle clickable-shape" data-family="4side">📐</span>
+                </div>
+                <p><strong>Four-Sided Family:</strong></p>
+                <div class="pattern-demo" id="p8_4side">
+                    <span class="shape square clickable-shape" data-family="4side">🔲</span>
+                    <span class="shape circle clickable-shape" data-family="round">🔵</span>
+                    <span class="shape rectangle clickable-shape" data-family="4side">📐</span>
+                    <span class="shape triangle clickable-shape" data-family="3side">🔺</span>
+                    <span class="shape square clickable-shape" data-family="4side">⬜</span>
+                    <span class="shape clickable-shape" style="color: orange;" data-family="4side">♦️</span>
+                </div>
+                 <div class="interactive-area">
+                    <button class="check-btn" onclick="checkProblem8()">Check Families</button>
+                    <span id="feedback8" class="feedback"></span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section bonus-section">
+            <div class="problem">
+                <div class="problem-number">1st Grade Challenge:</div>
+                <p>Design a new basketball court pattern using only 2 shapes. Draw your pattern here:</p>
+                <div style="min-height: 60px; border: 2px dashed #FFC107; border-radius: 10px; padding: 1rem; margin: 1rem 0; background: rgba(255,255,255,0.5);">
+                    <p style="text-align: center; color: #FF8F00; font-style: italic;">Draw your design here!</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <div class="problem-number">Advanced Thinking:</div>
+                <p>Zoe wants to paint a border around the court. She decides to use this pattern:</p>
+                <div class="pattern-demo">
+                    <span class="shape triangle">🔺</span>
+                    <span class="shape circle">🔵</span>
+                    <span class="shape square">🔲</span>
+                </div>
+                <p>If she starts at one corner and the border needs 12 shapes total, what will the complete pattern be?</p>
+                 <div class="interactive-area">
+                    <input type="text" id="bonus_pattern" class="answer-input" style="width: 100%; text-align: left; font-size: 1.5em;" placeholder="Enter all 12 shapes...">
+                    <button class="check-btn" onclick="checkBonus()">Check Pattern</button>
+                    <span id="feedback_bonus" class="feedback"></span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section art-section">
+            <h3>Design Your Dream Basketball Court:</h3>
+            <ol>
+                <li>Your court must be a rectangle</li>
+                <li>Include at least one circle (for the hoop)</li>
+                <li>Add a pattern using triangles</li>
+                <li>Use squares somewhere in your design</li>
+            </ol>
+            
+            <div style="min-height: 120px; border: 3px dashed #8BC34A; border-radius: 15px; padding: 2rem; margin: 1rem 0; background: rgba(255,255,255,0.6); text-align: center;">
+                <p style="color: #33691E; font-weight: bold; font-size: 1.2em;">🎨 Design Your Court Here! 🎨</p>
+                <div class="basketball-court" style="margin-top: 1rem;">
+                    <div class="court-line center-line"></div>
+                    <div class="hoop hoop-left"></div>
+                    <div class="hoop hoop-right"></div>
+                    <p>Your Dream Court</p>
+                </div>
+            </div>
+            
+            <p><strong>Describe your court:</strong></p>
+            <p>My court has <input type="number" class="answer-input" placeholder="count"> circles, <input type="number" class="answer-input" placeholder="count"> rectangles, <input type="number" class="answer-input" placeholder="count"> triangles, and <input type="number" class="answer-input" placeholder="count"> squares.</p>
+        </section>
+        
+        <section class="content-section story-section">
+            <h3>🏆 STORY ENDING</h3>
+            <p>Zoe successfully identified every shape on the basketball court! She discovered that the court was actually a giant rectangle filled with circles, triangles, and smaller rectangles. The wooden floor gleams under the gym lights, and each painted line creates perfect geometric patterns.</p>
+            
+            <p><em>"Great detective work, Zoe!"</em> says Coach Martinez. <em>"Now you know that math shapes are everywhere in basketball!"</em></p>
+            
+            <div class="basketball-court">
+                <div class="court-line center-line"></div>
+                <div class="hoop hoop-left"></div>
+                <div class="hoop hoop-right"></div>
+                <p>🏀 MISSION COMPLETE! 🏀</p>
+            </div>
+        </section>
+        
+        <section class="learning-summary">
+            <h3>📝 WHAT WE LEARNED TODAY</h3>
+            <div class="summary-grid">
+                <div class="summary-item">✅ Circles are round with no corners</div>
+                <div class="summary-item">✅ Rectangles have 4 sides and 4 corners</div>
+                <div class="summary-item">✅ Triangles have 3 sides and 3 corners</div>
+                <div class="summary-item">✅ Squares are special rectangles with equal sides</div>
+                <div class="summary-item">✅ Patterns repeat in order</div>
+                <div class="summary-item">✅ Shapes come in different sizes</div>
+                <div class="summary-item">✅ Basketball courts are full of geometric shapes!</div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem; font-size: 2em;">
+                🏀🔍 Excellent shape detective work! 🔍🏀
+            </div>
+        </section>
+        
+        <footer style="text-align: center; padding: 2rem; color: #7f8c8d; font-style: italic;">
+            <p>Created with ❤️ for young mathematicians</p>
+            <div class="pattern-demo">
+                <span class="shape circle">🔵</span>
+                <span class="shape square">🔲</span>
+                <span class="shape triangle">🔺</span>
+                <span class="shape rectangle">📐</span>
+                <span class="shape">🏀</span>
+            </div>
+        </footer>
+    </div>
+
+<script>
+// Helper function to show feedback
+function showFeedback(elementId, isCorrect, correctMessage = "Correct! 👍", incorrectMessage = "Try Again! 🤔") {
+    const feedbackEl = document.getElementById(elementId);
+    feedbackEl.textContent = isCorrect ? correctMessage : incorrectMessage;
+    feedbackEl.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+}
+
+// Problem 1: Shape Sorting
+function checkProblem1() {
+    const circles = document.getElementById('p1_circles').value;
+    const squares = document.getElementById('p1_squares').value;
+    const triangles = document.getElementById('p1_triangles').value;
+    const rectangles = document.getElementById('p1_rectangles').value;
+    const isCorrect = circles === '3' && squares === '2' && triangles === '2' && rectangles === '2';
+    showFeedback('feedback1', isCorrect);
+}
+
+// Problem 2: Court Design - MODIFIED
+function checkProblem2() {
+    const feedbackEl = document.getElementById('feedback2');
+    // Display the correct answer directly, styled positively.
+    feedbackEl.innerHTML = 'The next shape is a <strong>circle 🔵</strong>!';
+    feedbackEl.className = 'feedback correct';
+}
+
+// Problem 3: Shape Counting
+function checkProblem3() {
+    const squares = document.getElementById('p3_squares').value;
+    const circles = document.getElementById('p3_circles').value;
+    const isCorrect = squares === '6' && circles === '3';
+    showFeedback('feedback3', isCorrect);
+}
+
+// Problem 4: Equipment Matching
+function checkProblem4() {
+    const bball = document.getElementById('p4_bball').value.trim().toLowerCase();
+    const court = document.getElementById('p4_court').value.trim().toLowerCase();
+    const backboard = document.getElementById('p4_backboard').value.trim().toLowerCase();
+    const corners = document.getElementById('p4_corners').value.trim().toLowerCase();
+    
+    // Allow for multiple correct answers for the two rectangles
+    const rectAnswers = [court, backboard];
+    const rectSolutions = ['court', 'backboard'];
+    
+    const isBballCorrect = bball.includes('basketball');
+    const isCornersCorrect = corners.includes('corners');
+    const areRectsCorrect = (rectAnswers.includes('court') && rectAnswers.includes('backboard'));
+
+    const isCorrect = isBballCorrect && isCornersCorrect && areRectsCorrect;
+    showFeedback('feedback4', isCorrect);
+}
+
+// Problem 5: Complete the Patterns - MODIFIED
+function checkProblem5() {
+    const feedbackA = document.getElementById('feedback5a');
+    const feedbackB = document.getElementById('feedback5b');
+    const feedbackC = document.getElementById('feedback5c');
+
+    // Display the correct answer for each pattern directly.
+    feedbackA.innerHTML = 'A) The next shape is a <strong>basketball 🏀</strong>.';
+    feedbackA.className = 'feedback correct full-answer';
+
+    feedbackB.innerHTML = 'B) The next shape is a <strong>triangle 🔺</strong>.';
+    feedbackB.className = 'feedback correct full-answer';
+
+    feedbackC.innerHTML = 'C) The next shape is a <strong>red circle 🔴</strong>.';
+    feedbackC.className = 'feedback correct full-answer';
+}
+
+// Problem 7: Size Order
+function checkProblem7() {
+    const order1 = document.getElementById('p7_1').value.trim().toLowerCase();
+    const order2 = document.getElementById('p7_2').value.trim().toLowerCase();
+    const order3 = document.getElementById('p7_3').value.trim().toLowerCase();
+    const isCorrect = order1 === 'small' && order2 === 'medium' && order3 === 'large';
+    showFeedback('feedback7', isCorrect);
+}
+
+// Problem 8: Shape Families
+document.querySelectorAll('.clickable-shape').forEach(shape => {
+    shape.addEventListener('click', () => {
+        shape.classList.toggle('selected');
+    });
+});
+
+function checkProblem8() {
+    let correctSelections = 0;
+    let totalSelections = 0;
+    
+    // Check round family
+    document.querySelectorAll('#p8_round .clickable-shape').forEach(shape => {
+        if (shape.classList.contains('selected')) {
+            totalSelections++;
+            if (shape.dataset.family === 'round') {
+                correctSelections++;
+            }
+        }
+    });
+
+    // Check 4-sided family
+     document.querySelectorAll('#p8_4side .clickable-shape').forEach(shape => {
+        if (shape.classList.contains('selected')) {
+            totalSelections++;
+            if (shape.dataset.family === '4side') {
+                correctSelections++;
+            }
+        }
+    });
+
+    // There are 3 round and 4 four-sided shapes, total 7 correct shapes
+    const isCorrect = correctSelections === 7 && totalSelections === 7;
+     showFeedback('feedback8', isCorrect);
+}
+
+// Bonus Challenge - MODIFIED
+function checkBonus() {
+    const feedbackEl = document.getElementById('feedback_bonus');
+    const correctAnswer = '🔺🔵🔲🔺🔵🔲🔺🔵🔲🔺🔵🔲';
+    // Display the full, correct pattern to the student.
+    feedbackEl.innerHTML = `Great thinking! The full pattern is: <br><strong>${correctAnswer}</strong>`;
+    feedbackEl.className = 'feedback correct full-answer';
+}
+
+</script>
+</body>
+</html>

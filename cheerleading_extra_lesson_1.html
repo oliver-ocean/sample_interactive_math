@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Coach Maya's Time Challenge - Grade 3 Mathematics Lesson">
+    <title>🕒 Coach Maya's Time Challenge - IterLight Math</title>
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 50%, #f0f8ff 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+            padding: 1rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            animation: backgroundShift 10s ease-in-out infinite alternate;
+        }
+        
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 50%, #f0f8ff 100%); }
+            100% { background: linear-gradient(135deg, #f0f8ff 0%, #fff5f5 50%, #fef5e7 100%); }
+        }
+        
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa500 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "⭐🏆⭐🏆⭐🏆⭐🏆⭐🏆⭐🏆⭐🏆⭐";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            animation: sparkleMove 8s linear infinite;
+            font-size: 1.5em;
+            opacity: 0.3;
+        }
+        
+        @keyframes sparkleMove {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .content-section {
+            padding: 2rem;
+            margin: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .reading-section {
+            background: linear-gradient(135deg, #e8f4fd 0%, #f1f9ff 100%);
+            border-left: 6px solid #3498db;
+        }
+        
+        .problems-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+            border-left: 6px solid #27ae60;
+        }
+        
+        .schedule-section {
+            background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+            border-left: 6px solid #8e44ad;
+        }
+        
+        .creative-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%);
+            border-left: 6px solid #f39c12;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .clock-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .clock-item {
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .clock-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .clock {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #2c3e50;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .clock-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        
+        .hour-hand, .minute-hand {
+            position: absolute;
+            background: #2c3e50;
+            border-radius: 2px;
+            transform-origin: bottom center;
+            left: 50%;
+        }
+        
+        .hour-hand {
+            width: 3px;
+            height: 30px;
+            margin-left: -1.5px;
+            bottom: 50%;
+        }
+        
+        .minute-hand {
+            width: 2px;
+            height: 40px;
+            margin-left: -1px;
+            bottom: 50%;
+            background: #e74c3c;
+        }
+        
+        .center-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #2c3e50;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        /* Clock 1: 3:30 */
+        .clock1 .hour-hand { transform: rotate(105deg); }
+        .clock1 .minute-hand { transform: rotate(180deg); }
+        
+        /* Clock 2: 4:15 */
+        .clock2 .hour-hand { transform: rotate(127.5deg); }
+        .clock2 .minute-hand { transform: rotate(90deg); }
+        
+        /* Clock 3: 5:00 */
+        .clock3 .hour-hand { transform: rotate(150deg); }
+        .clock3 .minute-hand { transform: rotate(0deg); }
+        
+        .problem-item {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .problem-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .problem-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .answer-input {
+            border: none;
+            border-bottom: 2px solid #3498db;
+            width: 50px;
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            color: #3498db;
+            background: transparent;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .answer-input:focus {
+            outline: none;
+            border-color: #f39c12;
+        }
+        .answer-input.correct { border-color: #2ecc71; }
+        .answer-input.incorrect { border-color: #e74c3c; }
+        .long-answer { width: 150px; }
+
+        .work-space {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px dashed #dee2e6;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .schedule-table th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .schedule-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .pattern-exercise {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+        
+        .pattern-number {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .floating-emoji {
+            position: absolute;
+            font-size: 2em;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .emoji1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .emoji2 { top: 20%; right: 8%; animation-delay: 1s; }
+        .emoji3 { top: 40%; left: 3%; animation-delay: 2s; }
+        .emoji4 { top: 60%; right: 5%; animation-delay: 3s; }
+        .emoji5 { top: 80%; left: 7%; animation-delay: 0.5s; }
+
+        .action-buttons {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 0 0.5rem;
+        }
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        #reset-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        #results-container {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .self-check {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .emoji-rating {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .emoji-rating span {
+            font-size: 3em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .emoji-rating span:hover {
+            transform: scale(1.2);
+        }
+        
+        @media screen and (max-width: 767px) {
+            body { padding: 0.5rem; }
+            .header h1 { font-size: 2em; }
+            .content-section { 
+                padding: 1.5rem 1rem; 
+                margin: 1rem 0; 
+            }
+            .clock-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .clock {
+                width: 100px;
+                height: 100px;
+            }
+            .section-title { font-size: 1.5em; }
+            .schedule-table th, .schedule-table td {
+                padding: 0.5rem;
+                font-size: 0.9em;
+            }
+            .pattern-exercise {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            .emoji-rating {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .floating-emoji { display: none; }
+            .action-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media print {
+            body { background: white; }
+            .floating-emoji, .action-buttons, .self-check { display: none; }
+            .content-section { 
+                box-shadow: none; 
+                border: 1px solid #ccc; 
+            }
+            .answer-input { 
+                border-bottom: 1px solid black; 
+                color: black; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-emoji emoji1">⏰</div>
+    <div class="floating-emoji emoji2">📚</div>
+    <div class="floating-emoji emoji3">⭐</div>
+    <div class="floating-emoji emoji4">🏆</div>
+    <div class="floating-emoji emoji5">✨</div>
+    
+    <div class="lesson-container">
+        <div class="header">
+            <h1>🕒 Coach Maya's Time Challenge</h1>
+            <p style="font-size: 1.3em; margin-top: 1rem;">Help Coach Maya organize the perfect cheerleading schedule! ⏰</p>
+            <div style="margin-top: 1rem;">
+                <strong>Name:</strong> <input type="text" class="answer-input" style="border-color: white; width: 200px;"> 
+                <strong style="margin-left: 2rem;">Date:</strong> <input type="text" class="answer-input" style="border-color: white; width: 150px;">
+            </div>
+        </div>
+
+        <div class="content-section reading-section">
+            <h2 class="section-title">📚 Part A: Reading the Clock 🕐</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 2rem; color: #34495e;">
+                Look at each clock and write the time:
+            </p>
+            
+            <div class="clock-container">
+                <div class="clock-item">
+                    <h3 style="color: #e74c3c; margin-bottom: 1rem;">🏃‍♀️ Practice Start Time</h3>
+                    <div class="clock clock1"><div class="hour-hand"></div><div class="minute-hand"></div><div class="center-dot"></div></div>
+                    <p><strong>Time:</strong> <input type="text" class="answer-input" id="q1_hr" maxlength="2" size="2"> : <input type="text" class="answer-input" id="q1_min" maxlength="2" size="2"></p>
+                </div>
+
+                <div class="clock-item">
+                    <h3 style="color: #3498db; margin-bottom: 1rem;">💧 Water Break Time</h3>
+                    <div class="clock clock2"><div class="hour-hand"></div><div class="minute-hand"></div><div class="center-dot"></div></div>
+                    <p><strong>Time:</strong> <input type="text" class="answer-input" id="q2_hr" maxlength="2" size="2"> : <input type="text" class="answer-input" id="q2_min" maxlength="2" size="2"></p>
+                </div>
+
+                <div class="clock-item">
+                    <h3 style="color: #27ae60; margin-bottom: 1rem;">🏁 Practice End Time</h3>
+                    <div class="clock clock3"><div class="hour-hand"></div><div class="minute-hand"></div><div class="center-dot"></div></div>
+                    <p><strong>Time:</strong> <input type="text" class="answer-input" id="q3_hr" maxlength="2" size="2"> : <input type="text" class="answer-input" id="q3_min" maxlength="2" size="2"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section problems-section">
+            <h2 class="section-title">🤔 Part B: Time Problems</h2>
+            
+            <div class="problem-item">
+                <div class="problem-number">4. 🚗 Arrival Problem</div>
+                <p>Practice starts at 3:30 PM. Sarah arrives 25 minutes late. What time did Sarah arrive?</p>
+                <div class="work-space">
+                    <strong>Work space:</strong> 3:30 + 25 minutes = <input type="text" class="answer-input" id="q4_hr" size="2">:<input type="text" class="answer-input" id="q4_min" size="2">
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-number">5. 🎽 Equipment Setup</div>
+                <p>The cheerleaders need 40 minutes to set up decorations. The pep rally starts at 2:00 PM. What time should they start setting up?</p>
+                <div class="work-space">
+                    <strong>Work space:</strong> 2:00 - 40 minutes = <input type="text" class="answer-input" id="q5_hr" size="2">:<input type="text" class="answer-input" id="q5_min" size="2">
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-number">6. 🎵 Performance Length</div>
+                <p>The squad performs 3 different cheers:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>First cheer: 8 minutes</li>
+                    <li>Second cheer: 12 minutes</li>
+                    <li>Third cheer: 6 minutes</li>
+                </ul>
+                <p>How many total minutes do they perform?</p>
+                <div class="work-space">
+                    <strong>Work space:</strong> 8 + 12 + 6 = <input type="number" class="answer-input" id="q6_total"> minutes
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section schedule-section">
+            <h2 class="section-title">📋 Part C: Schedule Planning</h2>
+            
+            <div class="problem-item">
+                <div class="problem-number">7. 📅 Create Emma's Practice Schedule</div>
+                <p>Emma has cheerleading practice today. Help her plan her time:</p>
+                <p style="margin: 1rem 0;"><strong>Fill in the schedule:</strong></p>
+                <table class="schedule-table">
+                    <thead><tr><th>⏰ Time</th><th>🎯 Activity</th></tr></thead>
+                    <tbody>
+                        <tr><td>2:45 PM</td><td>Gets home</td></tr>
+                        <tr><td><input type="text" class="answer-input" id="q7_t1_hr" size="2">:<input type="text" class="answer-input" id="q7_t1_min" size="2"></td><td>Finishes homework & snack (after 30 mins)</td></tr>
+                        <tr><td><input type="text" class="answer-input" id="q7_t2_hr" size="2">:<input type="text" class="answer-input" id="q7_t2_min" size="2"></td><td>Finishes changing clothes (after 15 more mins)</td></tr>
+                        <tr><td><input type="text" class="answer-input" id="q7_t3_hr" size="2">:<input type="text" class="answer-input" id="q7_t3_min" size="2"></td><td>Ready for practice</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section problems-section">
+            <h2 class="section-title">⭐ Part D: Game Day Timeline</h2>
+            
+            <div class="problem-item">
+                <div class="problem-number">8. 🏈 Friday Night Football Schedule</div>
+                <p>Use this information to answer the questions:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem; background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                    <li>Cheerleaders arrive: 6:00 PM</li><li>Warm-up starts: 6:20 PM</li><li>Game begins: 7:00 PM</li>
+                    <li>Halftime show: 8:30 PM (lasts 15 minutes)</li><li>Game ends: 10:00 PM</li>
+                </ul>
+                <div style="margin: 1rem 0;">
+                    <p><strong>Questions:</strong></p>
+                    <div style="margin: 0.5rem 0;">
+                        <strong>a)</strong> How long do cheerleaders warm up before the game starts?<br>
+                        From 6:20 PM to 7:00 PM = <input type="number" class="answer-input" id="q8a_mins"> minutes
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <strong>b)</strong> What time does the halftime show end?<br>
+                        8:30 PM + 15 minutes = <input type="text" class="answer-input" id="q8b_hr" size="2">:<input type="text" class="answer-input" id="q8b_min" size="2">
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <strong>c)</strong> How many hours are cheerleaders at the game?<br>
+                        From 6:00 PM to 10:00 PM = <input type="number" class="answer-input" id="q8c_hrs"> hours
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section schedule-section">
+            <h2 class="section-title">🎵 Part E: Pattern Practice</h2>
+            <div class="problem-item">
+                <div class="problem-number">9. 🎤 Cheer Rhythm Patterns</div>
+                <p>Each cheerleading chant follows a time pattern. Complete the patterns:</p>
+                <div class="pattern-exercise">
+                    <strong>Pattern 1: 👏 Clap every 2 seconds</strong>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <span class="pattern-number">2</span><span class="pattern-number">4</span><span class="pattern-number">6</span>
+                        <input type="number" class="answer-input" id="q9p1_1"><input type="number" class="answer-input" id="q9p1_2">
+                        <span class="pattern-number">12</span>
+                    </div>
+                </div>
+                <div class="pattern-exercise">
+                    <strong>Pattern 2: 🦘 Jump every 5 seconds</strong>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <span class="pattern-number">5</span><span class="pattern-number">10</span><span class="pattern-number">15</span>
+                        <input type="number" class="answer-input" id="q9p2_1"><input type="number" class="answer-input" id="q9p2_2">
+                        <span class="pattern-number">30</span>
+                    </div>
+                </div>
+                <div class="pattern-exercise">
+                    <strong>Pattern 3: 📣 Cheer every 8 seconds</strong>
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <span class="pattern-number">8</span><span class="pattern-number">16</span><span class="pattern-number">24</span>
+                        <input type="number" class="answer-input" id="q9p3_1"><input type="number" class="answer-input" id="q9p3_2">
+                        <span class="pattern-number">48</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section problems-section">
+            <h2 class="section-title">🏆 Part F: Word Problems</h2>
+            <div class="problem-item">
+                <div class="problem-number">10. 🎉 Competition Challenge</div>
+                <p>Three squads are competing at the regional championship:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>🦅 Eagles squad:</strong> 4 minutes and 30 seconds</li>
+                    <li><strong>🐅 Tigers squad:</strong> 3 minutes and 45 seconds</li>
+                    <li><strong>🐻 Bears squad:</strong> 5 minutes and 15 seconds</li>
+                </ul>
+                <div style="margin: 1rem 0;">
+                    <div style="margin: 0.5rem 0;">
+                        <strong>a)</strong> Which squad has the longest routine? <input type="text" class="answer-input long-answer" id="q10a">
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <strong>b)</strong> Which squad has the shortest routine? <input type="text" class="answer-input long-answer" id="q10b">
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <strong>c)</strong> How much longer is the Eagles routine than the Tigers routine?<br>
+                        <input type="number" class="answer-input" id="q10c_min"> minutes <input type="number" class="answer-input" id="q10c_sec"> seconds
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section creative-section">
+            <h2 class="section-title">🌟 Part G: Creative Challenge</h2>
+            <div class="problem-item">
+                <div class="problem-number">11. 🎨 Design Your Perfect Practice</div>
+                <p>You are the coach! Plan a 60-minute practice session. <strong>(This section is for creativity and is not graded.)</strong></p>
+                <table class="schedule-table">
+                    <thead><tr><th>🕐 Start Time</th><th>🕑 End Time</th><th>🏃‍♀️ Activity</th><th>⏱️ Minutes</th></tr></thead>
+                    <tbody>
+                        <tr><td>4:00 PM</td><td>4:10 PM</td><td>Warm-up</td><td>10</td></tr>
+                        <tr><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input long-answer"></td><td><input type="number" class="answer-input"></td></tr>
+                        <tr><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input long-answer"></td><td><input type="number" class="answer-input"></td></tr>
+                        <tr><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input long-answer"></td><td><input type="number" class="answer-input"></td></tr>
+                        <tr><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input" size="5"></td><td><input type="text" class="answer-input long-answer"></td><td><input type="number" class="answer-input"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section schedule-section">
+            <h2 class="section-title">⭐ Bonus Challenge</h2>
+            <div class="problem-item">
+                <div class="problem-number">12. 🔍 The Mystery Schedule</div>
+                <p>Coach Maya's watch is broken! She knows practice lasted 90 minutes, had a 10-minute water break, and ended at 5:15 PM. The water break started 40 minutes after practice began.</p>
+                <div style="margin: 1rem 0;">
+                    <div style="margin: 0.5rem 0;"><strong>a)</strong> What time did practice start? <input type="text" class="answer-input" id="q12a_hr" size="2">:<input type="text" class="answer-input" id="q12a_min" size="2"></div>
+                    <div style="margin: 0.5rem 0;"><strong>b)</strong> What time did the water break start? <input type="text" class="answer-input" id="q12b_hr" size="2">:<input type="text" class="answer-input" id="q12b_min" size="2"></div>
+                    <div style="margin: 0.5rem 0;"><strong>c)</strong> What time did the water break end? <input type="text" class="answer-input" id="q12c_hr" size="2">:<input type="text" class="answer-input" id="q12c_min" size="2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="check-btn" class="action-btn">✅ Check My Answers</button>
+            <button id="reset-btn" class="action-btn">🔄 Try Again</button>
+            <div id="results-container"></div>
+        </div>
+
+        <div class="self-check">
+            <h2 style="margin-bottom: 1rem;">✅ Self-Check</h2>
+            <p style="font-size: 1.2em; margin-bottom: 1rem;">Circle how you feel about telling time:</p>
+            <div class="emoji-rating">
+                <div style="text-align: center;"><span>😊</span><p><strong>I can read clocks easily!</strong></p></div>
+                <div style="text-align: center;"><span>😐</span><p><strong>I can read clocks with some help.</strong></p></div>
+                <div style="text-align: center;"><span>😟</span><p><strong>I need more practice reading clocks.</strong></p></div>
+            </div>
+            <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                <p style="font-size: 1.3em; font-weight: bold;">
+                    🏆 Coach Maya says: "Remember, champions don't just perform on time - they make every second count!" ⭐
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const resultsContainer = document.getElementById('results-container');
+
+    const answerKey = {
+        'q1_hr': '3', 'q1_min': '30',
+        'q2_hr': '4', 'q2_min': '15',
+        'q3_hr': '5', 'q3_min': '00',
+        'q4_hr': '3', 'q4_min': '55',
+        'q5_hr': '1', 'q5_min': '20',
+        'q6_total': '26',
+        'q7_t1_hr': '3', 'q7_t1_min': '15',
+        'q7_t2_hr': '3', 'q7_t2_min': '30',
+        'q7_t3_hr': '3', 'q7_t3_min': '30',
+        'q8a_mins': '40',
+        'q8b_hr': '8', 'q8b_min': '45',
+        'q8c_hrs': '4',
+        'q9p1_1': '8', 'q9p1_2': '10',
+        'q9p2_1': '20', 'q9p2_2': '25',
+        'q9p3_1': '32', 'q9p3_2': '40',
+        'q10a': 'bears',
+        'q10b': 'tigers',
+        'q10c_min': '0', 'q10c_sec': '45',
+        'q12a_hr': '3', 'q12a_min': '45',
+        'q12b_hr': '4', 'q12b_min': '25',
+        'q12c_hr': '4', 'q12c_min': '35',
+    };
+
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = Object.keys(answerKey).length;
+
+        for (const id in answerKey) {
+            const inputElement = document.getElementById(id);
+            if (inputElement) {
+                const userAnswer = inputElement.value.trim().toLowerCase().replace('squad','').trim();
+                const correctAnswer = answerKey[id];
+
+                inputElement.classList.remove('correct', 'incorrect');
+
+                if (userAnswer === correctAnswer) {
+                    inputElement.classList.add('correct');
+                    score++;
+                } else {
+                    inputElement.classList.add('incorrect');
+                }
+            }
+        }
+        
+        resultsContainer.innerHTML = `You got ${score} out of ${totalQuestions} correct! Keep practicing! 🌟`;
+        resultsContainer.style.display = 'block';
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetQuiz() {
+        const inputs = document.querySelectorAll('.answer-input');
+        inputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'incorrect');
+        });
+        resultsContainer.style.display = 'none';
+        document.querySelector('.header').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+});
+</script>
+
+</body>
+</html>

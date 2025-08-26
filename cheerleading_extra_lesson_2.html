@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Grade 3 Mathematics - Cheerleading Equipment Budget Lesson">
+    <title>💰 Coach Kim's Budget Challenge - Grade 3 Math</title>
+    <style>
+    /* Mobile-First Base Styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #fff5f5 0%, #fef5e7 50%, #e8f5e8 100%);
+        color: #2c3e50;
+        line-height: 1.6;
+        padding: 1rem;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .lesson-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .lesson-header {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .lesson-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        animation: bounceIn 1s ease-out;
+    }
+    
+    .lesson-header .subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    /* Floating decorations */
+    .floating-emoji {
+        position: absolute;
+        font-size: 2rem;
+        animation: float 6s ease-in-out infinite;
+        opacity: 0.7;
+    }
+    
+    .floating-emoji:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .floating-emoji:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+    .floating-emoji:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 4s; }
+    .floating-emoji:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1s; }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    @keyframes bounceIn {
+        0% { transform: scale(0.3); opacity: 0; }
+        50% { transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+        0% { transform: translateY(30px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    .lesson-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    /* Section Styling */
+    .content-section {
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 5px solid;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .content-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .content-section h3 {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.3rem;
+    }
+    
+    .story-section {
+        background: linear-gradient(135deg, #e3f2fd 0%, #f1f8ff 100%);
+        border-left-color: #1976d2;
+        color: #0d47a1;
+    }
+    
+    .learning-section {
+        background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+        border-left-color: #7b1fa2;
+        color: #4a148c;
+    }
+
+    .practice-section {
+        background: linear-gradient(135deg, #e8f5e8 0%, #f1f8f1 100%);
+        border-left-color: #388e3c;
+        color: #1b5e20;
+    }
+    
+    .shopping-section {
+        background: linear-gradient(135deg, #fff3e0 0%, #fff8f0 100%);
+        border-left-color: #f57c00;
+        color: #e65100;
+    }
+    
+    .budget-section {
+        background: linear-gradient(135deg, #f1f8e9 0%, #f9fbe7 100%);
+        border-left-color: #689f38;
+        color: #33691e;
+    }
+    
+    /* Math Elements */
+    .math-input {
+        padding: 0.5rem;
+        border: 2px solid #3498db;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-family: 'Times New Roman', serif;
+        font-weight: 600;
+        width: 80px;
+        text-align: center;
+        margin: 0.25rem;
+        transition: all 0.2s ease;
+        background: rgba(248, 249, 250, 0.9);
+    }
+    
+    .math-input:focus {
+        border-color: #e74c3c;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+    }
+    .math-input.correct { border-color: #2ecc71; background-color: #e8f5e8; }
+    .math-input.incorrect { border-color: #e74c3c; background-color: #fff5f5; }
+
+    .math-block {
+        display: block;
+        text-align: center;
+        margin: 1rem 0;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #fafbfc 0%, #f8f9fa 100%);
+        border: 3px solid #3498db;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        color: #2c3e50;
+        font-family: 'Times New Roman', serif;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+        font-weight: bold;
+    }
+    
+    /* Exercise Elements */
+    .exercise-item {
+        background: white;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        border-radius: 10px;
+        border: 2px solid #dee2e6;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .problem-number {
+        font-weight: 700;
+        color: #e74c3c;
+        font-size: 1.1rem;
+        margin-right: 0.5rem;
+    }
+    
+    .answer-space {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 2px dashed #dee2e6;
+    }
+    
+    /* Equipment Catalog */
+    .equipment-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .equipment-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .equipment-item .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .equipment-item .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #27ae60;
+        margin: 0.5rem 0;
+    }
+    
+    .money-display {
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    }
+    
+    .concession-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .concession-item {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 2px solid #ffeb3b;
+        text-align: center;
+    }
+    
+    .celebration {
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        border-radius: 15px;
+        margin: 2rem 0;
+        color: #2c3e50;
+    }
+    
+    .celebration .trophy {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Action Buttons */
+    .action-buttons {
+        text-align: center;
+        padding: 2rem;
+        margin: 1.5rem 0;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.2em;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin: 0.5rem;
+    }
+    .action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    #reset-btn {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    #results-container {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 10px;
+        display: none;
+    }
+    
+    @media screen and (min-width: 768px) {
+        body { padding: 2rem; }
+        .lesson-container { max-width: 1000px; }
+        .lesson-content { padding: 2rem; }
+        .lesson-header h1 { font-size: 2.5rem; }
+        .equipment-grid { grid-template-columns: repeat(2, 1fr); }
+        .concession-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    </style>
+</head>
+<body>
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <div class="floating-emoji">📣</div>
+            <div class="floating-emoji">🎀</div>
+            <div class="floating-emoji">💰</div>
+            <div class="floating-emoji">⭐</div>
+            <h1>💰 Coach Kim's Budget Challenge 💰</h1>
+            <div class="subtitle">Grade 3 Mathematics - Money & Budgeting</div>
+        </header>
+        
+        <main class="lesson-content">
+            <section class="story-section content-section">
+                <h3>📖 The Fundraising Challenge</h3>
+                <p>The gym falls silent as Principal Johnson holds up the envelope. Inside: the results of this month's fundraising car wash. The cheerleading squad needs new equipment, but nobody knows if they raised enough money.</p>
+                <p><strong>"We counted $347,"</strong> announces team captain Riley, her voice echoing off the basketball hoops. Eight pairs of eyes turn to the equipment catalog spread across the floor. Pom-poms cost $12 each. Megaphones cost $25. Hair ribbons come in packs of 10 for $8.</p>
+                <p>Coach Kim taps her calculator. <strong>"We need a budget expert,"</strong> she says, looking at you. <strong>"Can you help us figure out what we can afford?"</strong></p>
+            </section>
+
+            <section class="learning-section content-section">
+                <h3>🎯 Learning Our Money Skills</h3>
+                <h4><strong>Learning Goals:</strong></h4>
+                <ul>
+                    <li>✅ Count coins and bills accurately</li>
+                    <li>✅ Add and subtract money amounts</li>
+                    <li>✅ Solve multiplication problems with money</li>
+                    <li>✅ Create budgets and make smart spending choices</li>
+                </ul>
+            </section>
+
+            <section class="practice-section content-section">
+                <h3>🪙 Part A: Counting Money Practice</h3>
+                <div class="exercise-item">
+                    <p><span class="problem-number">1.</span> <strong>Count the car wash earnings:</strong></p>
+                    <h4>💵 Bills:</h4>
+                    <p>4 ten-dollar bills = 4 × $10.00 = $<input type="text" class="math-input" id="q1_1"></p>
+                    <p>7 five-dollar bills = 7 × $5.00 = $<input type="text" class="math-input" id="q1_2"></p>
+                    <p>12 one-dollar bills = 12 × $1.00 = $<input type="text" class="math-input" id="q1_3"></p>
+                    <h4>🪙 Coins:</h4>
+                    <p>20 quarters = 20 × $0.25 = $<input type="text" class="math-input" id="q1_4"></p>
+                    <p>15 dimes = 15 × $0.10 = $<input type="text" class="math-input" id="q1_5"></p>
+                    <p>8 nickels = 8 × $0.05 = $<input type="text" class="math-input" id="q1_6"></p>
+                    <p>45 pennies = 45 × $0.01 = $<input type="text" class="math-input" id="q1_7"></p>
+                    <div class="money-display">Total Money Counted: $<input type="text" class="math-input" id="q1_total"></div>
+                </div>
+            </section>
+
+            <section class="shopping-section content-section">
+                <h3>🛍️ Equipment Catalog & Shopping</h3>
+                <div class="equipment-grid"><div class="equipment-item"><span class="icon">🎀</span><h4>Pom-Poms</h4><div class="price">$12.00 each</div></div>
+                    <div class="equipment-item"><span class="icon">📣</span><h4>Megaphones</h4><div class="price">$25.00 each</div></div>
+                    <div class="equipment-item"><span class="icon">🎀</span><h4>Hair Ribbons</h4><div class="price">$8.00 per pack</div></div>
+                    <div class="equipment-item"><span class="icon">💧</span><h4>Water Bottles</h4><div class="price">$6.00 each</div></div>
+                </div>
+                <div class="exercise-item">
+                    <p><span class="problem-number">2.</span> <strong>Calculate the total cost for each item:</strong></p>
+                    <p><strong>Pom-poms:</strong> Need 6: 6 × $12.00 = $<input type="text" class="math-input" id="q2_1"></p>
+                    <p><strong>Megaphones:</strong> Need 2: 2 × $25.00 = $<input type="text" class="math-input" id="q2_2"></p>
+                    <p><strong>Hair Ribbons:</strong> Need 3 packs: 3 × $8.00 = $<input type="text" class="math-input" id="q2_3"></p>
+                    <p><strong>Water Bottles:</strong> Need 6: 6 × $6.00 = $<input type="text" class="math-input" id="q2_4"></p>
+                </div>
+                <div class="exercise-item">
+                    <p><span class="problem-number">3.</span> <strong>What is the total cost for all equipment?</strong></p>
+                    <div class="math-block">
+                        $<input type="text" class="math-input" id="q3_1" placeholder="cost 1"> + $<input type="text" class="math-input" id="q3_2" placeholder="cost 2"> + $<input type="text" class="math-input" id="q3_3" placeholder="cost 3"> + $<input type="text" class="math-input" id="q3_4" placeholder="cost 4"> = $<input type="text" class="math-input" id="q3_total">
+                    </div>
+                </div>
+            </section>
+
+            <section class="budget-section content-section">
+                <h3>📋 Budget Planning Challenge</h3>
+                <div class="exercise-item">
+                    <p><span class="problem-number">4.</span> <strong>The squad has $200.00 to spend. Complete the budget:</strong></p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; text-align: center;">
+                         <thead><tr><th style="border: 1px solid #dee2e6; padding: 0.5rem;">Item</th><th style="border: 1px solid #dee2e6; padding: 0.5rem;">Price</th><th style="border: 1px solid #dee2e6; padding: 0.5rem;">Needed</th><th style="border: 1px solid #dee2e6; padding: 0.5rem;">Total Cost</th></tr></thead>
+                        <tbody>
+                            <tr><td style="border: 1px solid #dee2e6; padding: 0.5rem;">Pom-poms</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$12.00</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">5</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$<input type="text" class="math-input" id="q4_1"></td></tr>
+                            <tr><td style="border: 1px solid #dee2e6; padding: 0.5rem;">Megaphones</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$25.00</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">1</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$<input type="text" class="math-input" id="q4_2"></td></tr>
+                            <tr><td style="border: 1px solid #dee2e6; padding: 0.5rem;">Hair Ribbons</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$8.00</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">2 packs</td><td style="border: 1px solid #dee2e6; padding: 0.5rem;">$<input type="text" class="math-input" id="q4_3"></td></tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Total Spent:</strong> $<input type="text" class="math-input" id="q4_total"></p>
+                    <p><strong>Money Left Over:</strong> $200.00 - $<input type="text" class="math-input" id="q4_spent"> = $<input type="text" class="math-input" id="q4_leftover"></p>
+                </div>
+                <div class="exercise-item">
+                    <p><span class="problem-number">5.</span> <strong>Can they afford to buy 6 water bottles at $6.00 each with their leftover money?</strong></p>
+                    <p>Cost of 6 water bottles: 6 × $6.00 = $<input type="text" class="math-input" id="q5_cost"></p>
+                    <div class="answer-space">
+                        <p><input type="radio" name="q5_choice" id="q5_yes" value="yes"> <label for="q5_yes">Yes</label>
+                           <input type="radio" name="q5_choice" id="q5_no" value="no"> <label for="q5_no">No</label></p>
+                        <p>Explain your answer: <input type="text" style="width: 100%;" placeholder="Because..." ></p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="shopping-section content-section">
+                <h3>🏪 Shopping Scenarios</h3>
+                <div class="exercise-item">
+                    <p><span class="problem-number">6.</span> <strong>Discount Sale Problem:</strong> How much money does the squad save by buying 8 pom-poms on sale for $9.00 instead of $12.00?</p>
+                    <p>Regular price: 8 × $12.00 = $<input type="text" class="math-input" id="q6_reg"></p>
+                    <p>Sale price: 8 × $9.00 = $<input type="text" class="math-input" id="q6_sale"></p>
+                    <p>Money saved: $<input type="text" class="math-input" id="q6_saved_1"> - $<input type="text" class="math-input" id="q6_saved_2"> = $<input type="text" class="math-input" id="q6_saved_total"></p>
+                </div>
+                <div class="exercise-item">
+                    <p><span class="problem-number">7.</span> <strong>Bulk Purchase Deal:</strong> Hair ribbons cost $8.00/pack. Deal: Buy 3, get 1 free. How much do they save if they need 4 packs?</p>
+                    <p>Normal cost: 4 × $8.00 = $<input type="text" class="math-input" id="q7_normal"></p>
+                    <p>Special deal cost: 3 × $8.00 = $<input type="text" class="math-input" id="q7_deal"></p>
+                    <p>Money saved: $<input type="text" class="math-input" id="q7_saved_1"> - $<input type="text" class="math-input" id="q7_saved_2"> = $<input type="text" class="math-input" id="q7_saved_total"></p>
+                </div>
+            </section>
+
+             <section class="practice-section content-section">
+                <h3>🍿 Concession Stand Math</h3>
+                <div class="exercise-item">
+                    <p><span class="problem-number">8.</span> <strong>Saturday Sales:</strong></p>
+                    <p>25 popcorn ($3.00) = $<input type="text" class="math-input" id="q8_1"></p>
+                    <p>18 candy ($2.00) = $<input type="text" class="math-input" id="q8_2"></p>
+                    <p>22 sodas ($2.50) = $<input type="text" class="math-input" id="q8_3"></p>
+                    <p>15 hot dogs ($4.00) = $<input type="text" class="math-input" id="q8_4"></p>
+                    <div class="money-display">Total Saturday earnings: $<input type="text" class="math-input" id="q8_total"></div>
+                </div>
+                 <div class="exercise-item">
+                    <p><span class="problem-number">9.</span> <strong>Sunday Sales:</strong></p>
+                    <p>30 popcorn ($3.00) = $<input type="text" class="math-input" id="q9_1"></p>
+                    <p>24 candy ($2.00) = $<input type="text" class="math-input" id="q9_2"></p>
+                    <p>28 sodas ($2.50) = $<input type="text" class="math-input" id="q9_3"></p>
+                    <p>20 hot dogs ($4.00) = $<input type="text" class="math-input" id="q9_4"></p>
+                    <div class="money-display">Total Sunday earnings: $<input type="text" class="math-input" id="q9_total"></div>
+                </div>
+                 <div class="exercise-item">
+                    <p><span class="problem-number">10.</span> <strong>Weekend Total:</strong></p>
+                    <div class="math-block">
+                        $<input type="text" class="math-input" id="q10_1"> + $<input type="text" class="math-input" id="q10_2"> = $<input type="text" class="math-input" id="q10_total">
+                    </div>
+                </div>
+            </section>
+            
+            <section class="budget-section content-section">
+                <h3>🤔 Word Problems Challenge</h3>
+                <div class="exercise-item">
+                    <p><span class="problem-number">13.</span> <strong>Multi-step Problems:</strong> (Note: Question 12 is skipped in the original.)</p>
+                    <p><strong>a)</strong> 8 jackets at $35.00 each. Saved $150.00. How much more money is needed?</p>
+                    <p>Cost of jackets: 8 × $35.00 = $<input type="text" class="math-input" id="q13a_cost"></p>
+                    <p>Money needed: $<input type="text" class="math-input" id="q13a_needed_1"> - $150.00 = $<input type="text" class="math-input" id="q13a_needed_2"></p>
+                    <p><strong>b)</strong> Sold 45 tickets at $8.00 each. Supplies cost $75.00. How much profit was made?</p>
+                    <p>Money from tickets: 45 × $8.00 = $<input type="text" class="math-input" id="q13b_tickets"></p>
+                    <p>Profit: $<input type="text" class="math-input" id="q13b_profit_1"> - $75.00 = $<input type="text" class="math-input" id="q13b_profit_2"></p>
+                </div>
+            </section>
+            
+            <section class="celebration">
+                <div class="trophy">🏆</div><h3>⭐ Bonus Challenge: The Championship Fund</h3>
+                 <div class="exercise-item">
+                    <p><span class="problem-number">15.</span> <strong>The squad needs $500.00.</strong></p>
+                    <p>After 3 weeks they have $125 + $89 + $156. How much is that?</p>
+                    <p>$125.00 + $89.00 + $156.00 = $<input type="text" class="math-input" id="q15_1"></p>
+                    <p>How much more do they need to earn in Week 4?</p>
+                    <p>$500.00 - $<input type="text" class="math-input" id="q15_2"> = $<input type="text" class="math-input" id="q15_3"></p>
+                    <p>If they sell raffle tickets for $5.00 each, how many must they sell?</p>
+                    <p>$<input type="text" class="math-input" id="q15_4"> ÷ $5.00 = <input type="text" class="math-input" id="q15_5"> tickets</p>
+                </div>
+            </section>
+            
+            <div class="action-buttons">
+                <button id="check-btn" class="action-btn">✅ Check My Answers</button>
+                <button id="reset-btn" class="action-btn">🔄 Try Again</button>
+                <div id="results-container"></div>
+            </div>
+            
+            <section class="learning-section content-section">
+                <h3>✅ Self-Check</h3>
+                <p><strong>Circle how you feel about money math:</strong></p>
+                <div style="font-size: 1.2rem; line-height: 2;">
+                    <p>😊 I can solve money problems easily!</p>
+                    <p>😐 I can solve money problems with some help.</p>
+                    <p>😟 I need more practice with money problems.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const resultsContainer = document.getElementById('results-container');
+    
+    // Helper function to normalize answers (removes $, commas, and spaces)
+    const normalize = (val) => val.toString().trim().replace(/[$,\s]/g, '');
+
+    const answerKey = {
+        'q1_1': '40.00', 'q1_2': '35.00', 'q1_3': '12.00', 'q1_4': '5.00', 'q1_5': '1.50', 'q1_6': '0.40', 'q1_7': '0.45', 'q1_total': '94.35',
+        'q2_1': '72.00', 'q2_2': '50.00', 'q2_3': '24.00', 'q2_4': '36.00',
+        'q3_1': '72.00', 'q3_2': '50.00', 'q3_3': '24.00', 'q3_4': '36.00', 'q3_total': '182.00',
+        'q4_1': '60.00', 'q4_2': '25.00', 'q4_3': '16.00', 'q4_total': '101.00', 'q4_spent': '101.00', 'q4_leftover': '99.00',
+        'q5_cost': '36.00', 'q5_choice': 'yes',
+        'q6_reg': '96.00', 'q6_sale': '72.00', 'q6_saved_1': '96.00', 'q6_saved_2': '72.00', 'q6_saved_total': '24.00',
+        'q7_normal': '32.00', 'q7_deal': '24.00', 'q7_saved_1': '32.00', 'q7_saved_2': '24.00', 'q7_saved_total': '8.00',
+        'q8_1': '75.00', 'q8_2': '36.00', 'q8_3': '55.00', 'q8_4': '60.00', 'q8_total': '226.00',
+        'q9_1': '90.00', 'q9_2': '48.00', 'q9_3': '70.00', 'q9_4': '80.00', 'q9_total': '288.00',
+        'q10_1': '226.00', 'q10_2': '288.00', 'q10_total': '514.00',
+        'q13a_cost': '280.00', 'q13a_needed_1': '280.00', 'q13a_needed_2': '130.00',
+        'q13b_tickets': '360.00', 'q13b_profit_1': '360.00', 'q13b_profit_2': '285.00',
+        'q15_1': '370.00', 'q15_2': '370.00', 'q15_3': '130.00', 'q15_4': '130.00', 'q15_5': '26',
+    };
+
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = Object.keys(answerKey).length;
+        
+        for (const id in answerKey) {
+            const inputElement = document.getElementById(id);
+            if (inputElement) {
+                let userAnswer;
+                if (inputElement.type === 'radio') {
+                    // Handle radio buttons separately
+                    const radioGroup = document.getElementsByName(inputElement.name);
+                    let selectedValue = '';
+                    for (const radio of radioGroup) {
+                        if (radio.checked) {
+                            selectedValue = radio.value;
+                            break;
+                        }
+                    }
+                    userAnswer = selectedValue;
+                    // Visually mark the correct label
+                    const labels = document.querySelectorAll(`label[for^="${inputElement.name.replace('_choice','_')}"]`);
+                    labels.forEach(l => l.style.color = 'inherit');
+                    if (answerKey[id] === 'yes') {
+                        document.querySelector('label[for="q5_yes"]').style.color = '#2ecc71';
+                    } else {
+                        document.querySelector('label[for="q5_no"]').style.color = '#2ecc71';
+                    }
+
+                } else {
+                     userAnswer = normalize(inputElement.value);
+                }
+               
+                const correctAnswer = normalize(answerKey[id]);
+                
+                inputElement.classList.remove('correct', 'incorrect');
+
+                if (userAnswer === correctAnswer) {
+                    if(inputElement.type !== 'radio') inputElement.classList.add('correct');
+                    score++;
+                } else {
+                    if(inputElement.type !== 'radio') inputElement.classList.add('incorrect');
+                }
+            }
+        }
+        
+        resultsContainer.innerHTML = `You got ${score} out of ${totalQuestions} correct! Great job! 💰`;
+        resultsContainer.style.display = 'block';
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetQuiz() {
+        const inputs = document.querySelectorAll('.math-input, input[type="radio"]');
+        inputs.forEach(input => {
+            if(input.type === 'radio') {
+                input.checked = false;
+            } else {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            }
+        });
+        document.querySelectorAll('label').forEach(l => l.style.color = 'inherit');
+        resultsContainer.style.display = 'none';
+        document.querySelector('.lesson-header').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+});
+</script>
+</body>
+</html>
