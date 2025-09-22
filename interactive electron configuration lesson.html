@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Electron Configuration & Periodic Table Lesson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: visible;
+        }
+        .tab-active {
+            border-color: #3b82f6;
+            background-color: #bfdbfe;
+            color: #1e3a8a;
+        }
+        .orbital-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .arrow-up, .arrow-down {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+            color: #1e40af;
+        }
+        .arrow-up.visible, .arrow-down.visible {
+            opacity: 1;
+        }
+        .sublevel-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        .sublevel-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            padding-bottom: 4px;
+        }
+        .pt-grid {
+            display: grid;
+            grid-template-columns: repeat(18, minmax(60px, 1fr));
+            grid-template-rows: repeat(6, minmax(60px, 80px));
+            gap: 4px;
+            width: 100%;
+            min-height: 480px;
+        }
+        .element-tile {
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .element-tile:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .atom-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .atom-nucleus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .valence-electron {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            transition: all 1s ease-in-out;
+        }
+        .molecule-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .molecule-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #666;
+        }
+        .grid-cols-15 {
+            grid-template-columns: repeat(15, minmax(0, 1fr));
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-stone-50 text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Interactive Chemistry Learning Suite</h1>
+            <p class="text-slate-600 mt-2">Explore electron configurations, the periodic table, and chemical bonding.</p>
+        </header>
+
+        <nav class="flex justify-center border-b-2 border-slate-200 mb-8">
+            <button data-tab="electron-config" class="tab-button tab-active text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">1. Electron Configuration</button>
+            <button data-tab="periodic-table" class="tab-button text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">2. Periodic Table</button>
+            <button data-tab="bonding" class="tab-button text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">3. Chemical Bonding</button>
+        </nav>
+
+        <!-- Progress Tracking -->
+        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-slate-700">Lesson Progress</span>
+                <span id="progress-text" class="text-sm font-medium text-slate-600">0 of 3 sections explored</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-3">
+                <div id="progress-fill" class="bg-blue-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div class="mt-3 flex justify-center">
+                <button id="reset-progress-btn" class="bg-slate-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-slate-600 transition-all">
+                    🔄 Reset Progress
+                </button>
+            </div>
+        </div>
+
+        <main>
+            <!-- Section 1: Electron Configuration -->
+            <section id="electron-config" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">The Atom as an Apartment Building</h2>
+                    <p class="mb-4">To understand where electrons live, let's imagine an atom is a special apartment building. The nucleus is the manager's office on the ground floor, and the electrons are the residents. They always try to live in the easiest spots, which means the ones with the lowest energy.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-3">Concept 1: Energy Levels (Floors)</h3>
+                        <p>The building has floors called <strong>Principal Energy Levels (n)</strong>. The 1st floor (n=1) is closest to the manager (nucleus) and takes the least energy to live on. Electrons always fill the lowest floors first.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                         <h3 class="text-xl font-bold mb-3">Concept 2: Sublevels (Apartment Types)</h3>
+                        <p>Higher floors are bigger and have fancier types of apartments called <strong>Sublevels (s, p, d, f)</strong>. An 's' sublevel is a simple studio, while 'p', 'd', and 'f' are more complex suites.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold mb-4">Interactive Electron Builder</h3>
+                    <p class="mb-4">Select an element from the dropdown list. The application will automatically build its electron configuration and orbital diagram based on the rules we've learned.</p>
+                    <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
+                        <label for="element-select" class="font-semibold">Choose an Element:</label>
+                        <select id="element-select" class="p-2 border border-slate-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </select>
+                         <button id="build-button" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">Build</button>
+                    </div>
+
+                    <div id="results" class="space-y-6">
+                        <div id="element-info" class="text-center"></div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Electron Configuration:</h3>
+                            <p id="electron-config-text" class="font-mono text-xl bg-slate-100 p-4 rounded-md text-center break-words"></p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Orbital Diagram:</h3>
+                            <div id="orbital-diagram" class="flex flex-wrap gap-x-4 gap-y-6 items-end p-4 bg-slate-50 rounded-md justify-center"></div>
+                        </div>
+                         <div>
+                            <h3 class="font-bold text-lg mb-2">Valence Electrons:</h3>
+                            <p id="valence-electrons" class="text-xl font-bold text-blue-700 text-center bg-blue-100 p-4 rounded-md"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Periodic Table -->
+            <section id="periodic-table" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">The Periodic Table of Elements</h2>
+                    <p class="mb-4">The periodic table is organized into horizontal periods and vertical groups. Elements in the same group have similar properties and the same number of valence electrons.</p>
+                </div>
+                <div id="periodic-table-container" class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 overflow-auto max-h-[800px] min-h-[600px]"></div>
+            </section>
+
+            <!-- Section 3: Chemical Bonding -->
+            <section id="bonding" class="tab-content hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">Chemical Bonding Simulator</h2>
+                    <p class="mb-4">Atoms interact to become stable, usually by getting a full outer shell of 8 electrons (The Octet Rule). Pick elements from the lists below to see how they bond. Watch how they either transfer (ionic) or share (covalent) electrons to achieve their goal!</p>
+                    <div class="flex flex-wrap justify-center items-center gap-4 mb-6">
+                        <div class="flex flex-col items-center gap-2">
+                            <label class="font-semibold">Element 1:</label>
+                            <select id="el1-select" class="p-2 border rounded-md"></select>
+                            <input type="number" id="el1-count" class="w-16 p-1 border rounded text-center" value="1" min="1" max="5">
+                            <span class="text-xs text-gray-600">Count</span>
+                        </div>
+                        <span class="font-bold text-2xl">+</span>
+                        <div class="flex flex-col items-center gap-2">
+                            <label class="font-semibold">Element 2:</label>
+                            <select id="el2-select" class="p-2 border rounded-md"></select>
+                            <input type="number" id="el2-count" class="w-16 p-1 border rounded text-center" value="1" min="1" max="5">
+                            <span class="text-xs text-gray-600">Count</span>
+                        </div>
+                        <button id="bond-button" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700">Let's Bond!</button>
+                    </div>
+                    <div id="bond-arena" class="flex flex-col md:flex-row justify-around items-center min-h-[300px] bg-slate-50 rounded-lg p-4">
+                        <div id="molecule1-display" class="flex flex-wrap justify-center gap-4"></div>
+                        <div id="molecule2-display" class="flex flex-wrap justify-center gap-4"></div>
+                    </div>
+                    <div id="bond-explanation" class="mt-4 text-center text-lg font-medium p-4 bg-blue-50 rounded-md"></div>
+                    <div id="bond-feedback" class="mt-4 text-center p-4 bg-green-50 border border-green-200 rounded-md hidden">
+                        <span class="text-green-700 font-medium">✅ Bonding simulation completed successfully!</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Progress tracking
+            let completedSections = new Set();
+            let currentTab = 'electron-config';
+            
+            function updateProgress() {
+                const progressFill = document.getElementById('progress-fill');
+                const progressText = document.getElementById('progress-text');
+                const percentage = (completedSections.size / 3) * 100;
+                
+                progressFill.style.width = `${percentage}%`;
+                progressText.textContent = `${completedSections.size} of 3 sections explored`;
+                
+                localStorage.setItem('chemistryProgress', JSON.stringify(Array.from(completedSections)));
+            }
+            
+            function loadProgress() {
+                const saved = localStorage.getItem('chemistryProgress');
+                if (saved) {
+                    completedSections = new Set(JSON.parse(saved));
+                    updateProgress();
+                }
+            }
+            
+            function markSectionComplete(section) {
+                completedSections.add(section);
+                updateProgress();
+            }
+            
+            function resetProgress() {
+                if (confirm('Are you sure you want to reset all progress?')) {
+                    completedSections.clear();
+                    updateProgress();
+                    document.getElementById('bond-explanation').innerHTML = '';
+                    document.getElementById('bond-feedback').classList.add('hidden');
+                    document.getElementById('molecule1-display').innerHTML = '';
+                    document.getElementById('molecule2-display').innerHTML = '';
+                    document.getElementById('orbital-diagram').innerHTML = '';
+                    document.getElementById('electron-config-text').textContent = '';
+                    document.getElementById('valence-electrons').textContent = '';
+                    document.getElementById('element-info').innerHTML = '';
+                }
+            }
+            
+            document.getElementById('reset-progress-btn').addEventListener('click', resetProgress);
+            loadProgress();
+
+            // Element data with comprehensive periodic table (up to element 86)
+            const elementData = [
+                // Period 1
+                {"name": "Hydrogen", "symbol": "H", "number": 1, "group": 1, "period": 1, "block": "s", "category": "nonmetal", "electrons": 1},
+                {"name": "Helium", "symbol": "He", "number": 2, "group": 18, "period": 1, "block": "s", "category": "noble-gas", "electrons": 2},
+                
+                // Period 2
+                {"name": "Lithium", "symbol": "Li", "number": 3, "group": 1, "period": 2, "block": "s", "category": "alkali-metal", "electrons": 3},
+                {"name": "Beryllium", "symbol": "Be", "number": 4, "group": 2, "period": 2, "block": "s", "category": "alkaline-earth-metal", "electrons": 4},
+                {"name": "Boron", "symbol": "B", "number": 5, "group": 13, "period": 2, "block": "p", "category": "metalloid", "electrons": 5},
+                {"name": "Carbon", "symbol": "C", "number": 6, "group": 14, "period": 2, "block": "p", "category": "nonmetal", "electrons": 6},
+                {"name": "Nitrogen", "symbol": "N", "number": 7, "group": 15, "period": 2, "block": "p", "category": "nonmetal", "electrons": 7},
+                {"name": "Oxygen", "symbol": "O", "number": 8, "group": 16, "period": 2, "block": "p", "category": "nonmetal", "electrons": 8},
+                {"name": "Fluorine", "symbol": "F", "number": 9, "group": 17, "period": 2, "block": "p", "category": "halogen", "electrons": 9},
+                {"name": "Neon", "symbol": "Ne", "number": 10, "group": 18, "period": 2, "block": "p", "category": "noble-gas", "electrons": 10},
+                
+                // Period 3
+                {"name": "Sodium", "symbol": "Na", "number": 11, "group": 1, "period": 3, "block": "s", "category": "alkali-metal", "electrons": 11},
+                {"name": "Magnesium", "symbol": "Mg", "number": 12, "group": 2, "period": 3, "block": "s", "category": "alkaline-earth-metal", "electrons": 12},
+                {"name": "Aluminum", "symbol": "Al", "number": 13, "group": 13, "period": 3, "block": "p", "category": "post-transition-metal", "electrons": 13},
+                {"name": "Silicon", "symbol": "Si", "number": 14, "group": 14, "period": 3, "block": "p", "category": "metalloid", "electrons": 14},
+                {"name": "Phosphorus", "symbol": "P", "number": 15, "group": 15, "period": 3, "block": "p", "category": "nonmetal", "electrons": 15},
+                {"name": "Sulfur", "symbol": "S", "number": 16, "group": 16, "period": 3, "block": "p", "category": "nonmetal", "electrons": 16},
+                {"name": "Chlorine", "symbol": "Cl", "number": 17, "group": 17, "period": 3, "block": "p", "category": "halogen", "electrons": 17},
+                {"name": "Argon", "symbol": "Ar", "number": 18, "group": 18, "period": 3, "block": "p", "category": "noble-gas", "electrons": 18},
+                
+                // Period 4
+                {"name": "Potassium", "symbol": "K", "number": 19, "group": 1, "period": 4, "block": "s", "category": "alkali-metal", "electrons": 19},
+                {"name": "Calcium", "symbol": "Ca", "number": 20, "group": 2, "period": 4, "block": "s", "category": "alkaline-earth-metal", "electrons": 20},
+                {"name": "Scandium", "symbol": "Sc", "number": 21, "group": 3, "period": 4, "block": "d", "category": "transition-metal", "electrons": 21},
+                {"name": "Titanium", "symbol": "Ti", "number": 22, "group": 4, "period": 4, "block": "d", "category": "transition-metal", "electrons": 22},
+                {"name": "Vanadium", "symbol": "V", "number": 23, "group": 5, "period": 4, "block": "d", "category": "transition-metal", "electrons": 23},
+                {"name": "Chromium", "symbol": "Cr", "number": 24, "group": 6, "period": 4, "block": "d", "category": "transition-metal", "electrons": 24},
+                {"name": "Manganese", "symbol": "Mn", "number": 25, "group": 7, "period": 4, "block": "d", "category": "transition-metal", "electrons": 25},
+                {"name": "Iron", "symbol": "Fe", "number": 26, "group": 8, "period": 4, "block": "d", "category": "transition-metal", "electrons": 26},
+                {"name": "Cobalt", "symbol": "Co", "number": 27, "group": 9, "period": 4, "block": "d", "category": "transition-metal", "electrons": 27},
+                {"name": "Nickel", "symbol": "Ni", "number": 28, "group": 10, "period": 4, "block": "d", "category": "transition-metal", "electrons": 28},
+                {"name": "Copper", "symbol": "Cu", "number": 29, "group": 11, "period": 4, "block": "d", "category": "transition-metal", "electrons": 29},
+                {"name": "Zinc", "symbol": "Zn", "number": 30, "group": 12, "period": 4, "block": "d", "category": "transition-metal", "electrons": 30},
+                {"name": "Gallium", "symbol": "Ga", "number": 31, "group": 13, "period": 4, "block": "p", "category": "post-transition-metal", "electrons": 31},
+                {"name": "Germanium", "symbol": "Ge", "number": 32, "group": 14, "period": 4, "block": "p", "category": "metalloid", "electrons": 32},
+                {"name": "Arsenic", "symbol": "As", "number": 33, "group": 15, "period": 4, "block": "p", "category": "metalloid", "electrons": 33},
+                {"name": "Selenium", "symbol": "Se", "number": 34, "group": 16, "period": 4, "block": "p", "category": "nonmetal", "electrons": 34},
+                {"name": "Bromine", "symbol": "Br", "number": 35, "group": 17, "period": 4, "block": "p", "category": "halogen", "electrons": 35},
+                {"name": "Krypton", "symbol": "Kr", "number": 36, "group": 18, "period": 4, "block": "p", "category": "noble-gas", "electrons": 36},
+                
+                // Period 5
+                {"name": "Rubidium", "symbol": "Rb", "number": 37, "group": 1, "period": 5, "block": "s", "category": "alkali-metal", "electrons": 37},
+                {"name": "Strontium", "symbol": "Sr", "number": 38, "group": 2, "period": 5, "block": "s", "category": "alkaline-earth-metal", "electrons": 38},
+                {"name": "Yttrium", "symbol": "Y", "number": 39, "group": 3, "period": 5, "block": "d", "category": "transition-metal", "electrons": 39},
+                {"name": "Zirconium", "symbol": "Zr", "number": 40, "group": 4, "period": 5, "block": "d", "category": "transition-metal", "electrons": 40},
+                {"name": "Niobium", "symbol": "Nb", "number": 41, "group": 5, "period": 5, "block": "d", "category": "transition-metal", "electrons": 41},
+                {"name": "Molybdenum", "symbol": "Mo", "number": 42, "group": 6, "period": 5, "block": "d", "category": "transition-metal", "electrons": 42},
+                {"name": "Technetium", "symbol": "Tc", "number": 43, "group": 7, "period": 5, "block": "d", "category": "transition-metal", "electrons": 43},
+                {"name": "Ruthenium", "symbol": "Ru", "number": 44, "group": 8, "period": 5, "block": "d", "category": "transition-metal", "electrons": 44},
+                {"name": "Rhodium", "symbol": "Rh", "number": 45, "group": 9, "period": 5, "block": "d", "category": "transition-metal", "electrons": 45},
+                {"name": "Palladium", "symbol": "Pd", "number": 46, "group": 10, "period": 5, "block": "d", "category": "transition-metal", "electrons": 46},
+                {"name": "Silver", "symbol": "Ag", "number": 47, "group": 11, "period": 5, "block": "d", "category": "transition-metal", "electrons": 47},
+                {"name": "Cadmium", "symbol": "Cd", "number": 48, "group": 12, "period": 5, "block": "d", "category": "transition-metal", "electrons": 48},
+                {"name": "Indium", "symbol": "In", "number": 49, "group": 13, "period": 5, "block": "p", "category": "post-transition-metal", "electrons": 49},
+                {"name": "Tin", "symbol": "Sn", "number": 50, "group": 14, "period": 5, "block": "p", "category": "post-transition-metal", "electrons": 50},
+                {"name": "Antimony", "symbol": "Sb", "number": 51, "group": 15, "period": 5, "block": "p", "category": "metalloid", "electrons": 51},
+                {"name": "Tellurium", "symbol": "Te", "number": 52, "group": 16, "period": 5, "block": "p", "category": "metalloid", "electrons": 52},
+                {"name": "Iodine", "symbol": "I", "number": 53, "group": 17, "period": 5, "block": "p", "category": "halogen", "electrons": 53},
+                {"name": "Xenon", "symbol": "Xe", "number": 54, "group": 18, "period": 5, "block": "p", "category": "noble-gas", "electrons": 54},
+                
+                // Period 6
+                {"name": "Cesium", "symbol": "Cs", "number": 55, "group": 1, "period": 6, "block": "s", "category": "alkali-metal", "electrons": 55},
+                {"name": "Barium", "symbol": "Ba", "number": 56, "group": 2, "period": 6, "block": "s", "category": "alkaline-earth-metal", "electrons": 56},
+                {"name": "Lanthanum", "symbol": "La", "number": 57, "group": 3, "period": 6, "block": "f", "category": "lanthanide", "electrons": 57},
+                {"name": "Hafnium", "symbol": "Hf", "number": 72, "group": 4, "period": 6, "block": "d", "category": "transition-metal", "electrons": 72},
+                {"name": "Tantalum", "symbol": "Ta", "number": 73, "group": 5, "period": 6, "block": "d", "category": "transition-metal", "electrons": 73},
+                {"name": "Tungsten", "symbol": "W", "number": 74, "group": 6, "period": 6, "block": "d", "category": "transition-metal", "electrons": 74},
+                {"name": "Rhenium", "symbol": "Re", "number": 75, "group": 7, "period": 6, "block": "d", "category": "transition-metal", "electrons": 75},
+                {"name": "Osmium", "symbol": "Os", "number": 76, "group": 8, "period": 6, "block": "d", "category": "transition-metal", "electrons": 76},
+                {"name": "Iridium", "symbol": "Ir", "number": 77, "group": 9, "period": 6, "block": "d", "category": "transition-metal", "electrons": 77},
+                {"name": "Platinum", "symbol": "Pt", "number": 78, "group": 10, "period": 6, "block": "d", "category": "transition-metal", "electrons": 78},
+                {"name": "Gold", "symbol": "Au", "number": 79, "group": 11, "period": 6, "block": "d", "category": "transition-metal", "electrons": 79},
+                {"name": "Mercury", "symbol": "Hg", "number": 80, "group": 12, "period": 6, "block": "d", "category": "transition-metal", "electrons": 80},
+                {"name": "Thallium", "symbol": "Tl", "number": 81, "group": 13, "period": 6, "block": "p", "category": "post-transition-metal", "electrons": 81},
+                {"name": "Lead", "symbol": "Pb", "number": 82, "group": 14, "period": 6, "block": "p", "category": "post-transition-metal", "electrons": 82},
+                {"name": "Bismuth", "symbol": "Bi", "number": 83, "group": 15, "period": 6, "block": "p", "category": "post-transition-metal", "electrons": 83},
+                {"name": "Polonium", "symbol": "Po", "number": 84, "group": 16, "period": 6, "block": "p", "category": "metalloid", "electrons": 84},
+                {"name": "Astatine", "symbol": "At", "number": 85, "group": 17, "period": 6, "block": "p", "category": "halogen", "electrons": 85},
+                {"name": "Radon", "symbol": "Rn", "number": 86, "group": 18, "period": 6, "block": "p", "category": "noble-gas", "electrons": 86}
+            ];
+
+            const blockColors = {
+                s: 'bg-amber-200 text-amber-900',
+                p: 'bg-sky-200 text-sky-900',
+                d: 'bg-emerald-200 text-emerald-900',
+                f: 'bg-rose-200 text-rose-900'
+            };
+
+            // Tab switching
+            function setupTabs() {
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetTab = button.dataset.tab;
+                        
+                        tabButtons.forEach(btn => btn.classList.remove('tab-active'));
+                        button.classList.add('tab-active');
+                        
+                        tabContents.forEach(content => content.classList.add('hidden'));
+                        document.getElementById(targetTab).classList.remove('hidden');
+                        
+                        currentTab = targetTab;
+                        markSectionComplete(targetTab);
+                    });
+                });
+            }
+
+            // Periodic Table
+            function createPeriodicTable() {
+                const container = document.getElementById('periodic-table-container');
+                if (!container) {
+                    console.error('Periodic table container not found!');
+                    return;
+                }
+                container.innerHTML = '';
+                
+                // Add element counter and period info
+                const counterDiv = document.createElement('div');
+                counterDiv.className = 'mb-4 text-center text-sm text-gray-600';
+                counterDiv.innerHTML = `Loading periodic table with ${elementData.length} elements...`;
+                container.appendChild(counterDiv);
+                
+                console.log('Creating periodic table with', elementData.length, 'elements');
+                
+                // Main periodic table
+                const mainTable = document.createElement('div');
+                mainTable.className = 'pt-grid mb-8';
+                mainTable.style.backgroundColor = '#f0f0f0'; // Temporary background to see the grid
+                mainTable.style.border = '2px solid #ccc'; // Temporary border to see the grid
+
+                // Create main table (periods 1-6, but skip lanthanides for now)
+                let elementsPlaced = 0;
+                for (let period = 1; period <= 6; period++) {
+                    for (let group = 1; group <= 18; group++) {
+                        const el = elementData.find(e => e.period === period && e.group === group && e.category !== 'lanthanide');
+                        if (el) {
+                            elementsPlaced++;
+                            const tile = document.createElement('div');
+                            tile.className = `element-tile flex flex-col items-center justify-center p-1 rounded-md cursor-pointer text-xs ${blockColors[el.block]}`;
+                            tile.style.gridColumnStart = group;
+                            tile.style.gridRowStart = period;
+                            tile.innerHTML = `<div class="font-bold text-sm">${el.symbol}</div><div class="text-[8px] text-center">${el.number}</div>`;
+                            tile.title = `${el.name} - ${el.electrons} electrons`;
+                            tile.addEventListener('click', () => {
+                                document.getElementById('element-select').value = el.symbol;
+                                buildConfiguration();
+                                markSectionComplete('periodic-table');
+                            });
+                            mainTable.appendChild(tile);
+                        }
+                    }
+                }
+                
+                // Update counter with actual elements placed
+                counterDiv.innerHTML = `Displaying ${elementsPlaced} elements from the periodic table (Periods 1-6) + ${elementData.filter(e => e.category === 'lanthanide').length} lanthanide(s)`;
+                container.appendChild(mainTable);
+                
+                console.log('Elements placed:', elementsPlaced);
+                console.log('Main table created and appended');
+
+                // Add lanthanide series below
+                const lanthanideContainer = document.createElement('div');
+                lanthanideContainer.className = 'mt-4 p-4 bg-slate-100 rounded-lg';
+                lanthanideContainer.innerHTML = '<h3 class="text-lg font-bold mb-3 text-center">Lanthanide Series (f-block)</h3>';
+                
+                const lanthanideGrid = document.createElement('div');
+                lanthanideGrid.className = 'grid gap-2 justify-center';
+                lanthanideGrid.style.gridTemplateColumns = 'repeat(15, minmax(60px, 80px))';
+                
+                const lanthanides = elementData.filter(e => e.category === 'lanthanide');
+                lanthanides.forEach(el => {
+                    const tile = document.createElement('div');
+                    tile.className = `element-tile flex flex-col items-center justify-center p-2 rounded-md cursor-pointer text-xs ${blockColors[el.block]}`;
+                    tile.innerHTML = `<div class="font-bold text-sm">${el.symbol}</div><div class="text-[8px] text-center">${el.number}</div>`;
+                    tile.title = `${el.name} - ${el.electrons} electrons`;
+                    tile.addEventListener('click', () => {
+                        document.getElementById('element-select').value = el.symbol;
+                        buildConfiguration();
+                        markSectionComplete('periodic-table');
+                    });
+                    lanthanideGrid.appendChild(tile);
+                });
+                
+                lanthanideContainer.appendChild(lanthanideGrid);
+                container.appendChild(lanthanideContainer);
+            }
+
+            // Electron Configuration Builder
+            const sublevels = [
+                { name: '1s', orbitals: 1, level: 1, type: 's' }, 
+                { name: '2s', orbitals: 1, level: 2, type: 's' },
+                { name: '2p', orbitals: 3, level: 2, type: 'p' }, 
+                { name: '3s', orbitals: 1, level: 3, type: 's' },
+                { name: '3p', orbitals: 3, level: 3, type: 'p' }, 
+                { name: '4s', orbitals: 1, level: 4, type: 's' },
+                { name: '3d', orbitals: 5, level: 3, type: 'd' }, 
+                { name: '4p', orbitals: 3, level: 4, type: 'p' },
+                { name: '5s', orbitals: 1, level: 5, type: 's' },
+                { name: '4d', orbitals: 5, level: 4, type: 'd' },
+                { name: '5p', orbitals: 3, level: 5, type: 'p' },
+                { name: '6s', orbitals: 1, level: 6, type: 's' },
+                { name: '4f', orbitals: 7, level: 4, type: 'f' },
+                { name: '5d', orbitals: 5, level: 5, type: 'd' },
+                { name: '6p', orbitals: 3, level: 6, type: 'p' }
+            ];
+
+            function populateSelect() {
+                const elementSelect = document.getElementById('element-select');
+                const el1Select = document.getElementById('el1-select');
+                const el2Select = document.getElementById('el2-select');
+                
+                elementData.forEach(el => {
+                    const option1 = new Option(`${el.name} (${el.symbol})`, el.symbol);
+                    const option2 = new Option(`${el.name} (${el.symbol})`, el.symbol);
+                    const option3 = new Option(`${el.name} (${el.symbol})`, el.symbol);
+                    elementSelect.add(option1);
+                    el1Select.add(option2);
+                    el2Select.add(option3);
+                });
+            }
+
+            let animationTimeout;
+
+            function buildConfiguration() {
+                clearTimeout(animationTimeout);
+                const symbol = document.getElementById('element-select').value;
+                const element = elementData.find(el => el.symbol === symbol);
+                if (!element) return;
+
+                document.getElementById('element-info').innerHTML = `<h2 class="text-2xl font-bold">${element.name} (${element.symbol})</h2><p class="text-slate-600">${element.electrons} electrons to place</p>`;
+                document.getElementById('electron-config-text').textContent = '';
+                document.getElementById('orbital-diagram').innerHTML = '';
+                document.getElementById('valence-electrons').textContent = '';
+                
+                let electronsToPlace = element.electrons;
+                let finalConfig = {};
+                let highestLevel = 0;
+                
+                const diagramGroups = {};
+
+                // Prepare diagram structure
+                for (const sublevel of sublevels) {
+                    if (electronsToPlace === 0 && Object.keys(finalConfig).length > 0) break;
+
+                    const group = document.createElement('div');
+                    group.className = 'sublevel-group';
+
+                    const label = document.createElement('span');
+                    label.className = 'font-mono text-sm text-slate-500 sublevel-label';
+                    label.textContent = sublevel.name;
+                    group.appendChild(label);
+
+                    diagramGroups[sublevel.name] = [];
+
+                    for (let i = 0; i < sublevel.orbitals; i++) {
+                        const box = document.createElement('div');
+                        box.className = 'orbital-box border-2 border-slate-400 bg-white';
+                        const arrowUp = document.createElement('span');
+                        arrowUp.className = 'arrow-up';
+                        arrowUp.textContent = '↑';
+                        const arrowDown = document.createElement('span');
+                        arrowDown.className = 'arrow-down';
+                        arrowDown.textContent = '↓';
+                        box.appendChild(arrowUp);
+                        box.appendChild(arrowDown);
+                        group.appendChild(box);
+                        diagramGroups[sublevel.name].push({ arrowUp, arrowDown });
+                    }
+                    document.getElementById('orbital-diagram').appendChild(group);
+                }
+
+                let electronsPlaced = 0;
+                let animationDelay = 0;
+                const delayIncrement = 150;
+
+                for (const sublevel of sublevels) {
+                    if (electronsPlaced >= element.electrons) break;
+                    
+                    finalConfig[sublevel.name] = 0;
+
+                    // Hund's Rule Part 1: Fill singly
+                    for (let i = 0; i < sublevel.orbitals; i++) {
+                        if (electronsPlaced >= element.electrons) break;
+                        electronsPlaced++;
+                        finalConfig[sublevel.name]++;
+                        
+                        const currentElectron = electronsPlaced;
+                        animationTimeout = setTimeout(() => {
+                            diagramGroups[sublevel.name][i].arrowUp.classList.add('visible');
+                            updateRunningConfig(element, currentElectron);
+                        }, animationDelay);
+                        animationDelay += delayIncrement;
+                    }
+
+                    // Hund's Rule Part 2: Pair up
+                    for (let i = 0; i < sublevel.orbitals; i++) {
+                        if (electronsPlaced >= element.electrons) break;
+                         electronsPlaced++;
+                        finalConfig[sublevel.name]++;
+
+                        const currentElectron = electronsPlaced;
+                        animationTimeout = setTimeout(() => {
+                             diagramGroups[sublevel.name][i].arrowDown.classList.add('visible');
+                             updateRunningConfig(element, currentElectron);
+                        }, animationDelay);
+                        animationDelay += delayIncrement;
+                    }
+                }
+                markSectionComplete('electron-config');
+            }
+
+            function updateRunningConfig(element, count) {
+                let electronsToPlace = count;
+                let configString = '';
+                let valence = 0;
+                let highestLevel = 0;
+                let currentConfig = {};
+                
+                for (const sublevel of sublevels) {
+                    if (electronsToPlace <= 0) break;
+                    const capacity = sublevel.orbitals * 2;
+                    const electronsInSublevel = Math.min(electronsToPlace, capacity);
+                    currentConfig[sublevel.name] = electronsInSublevel;
+                    electronsToPlace -= electronsInSublevel;
+                }
+                
+                for(const sublevelName in currentConfig) {
+                    configString += `${sublevelName}<sup>${currentConfig[sublevelName]}</sup> `;
+                    const level = parseInt(sublevelName[0]);
+                     if (level > highestLevel) {
+                        highestLevel = level;
+                    }
+                }
+                document.getElementById('electron-config-text').innerHTML = configString.trim();
+
+                for (const sublevelName in currentConfig) {
+                    const level = parseInt(sublevelName[0]);
+                    if (level === highestLevel) {
+                        valence += currentConfig[sublevelName];
+                    }
+                }
+                
+                if (count === element.electrons) {
+                    document.getElementById('valence-electrons').textContent = `${valence} valence electron${valence === 1 ? '' : 's'} on the n=${highestLevel} level.`;
+                } else {
+                     document.getElementById('valence-electrons').textContent = 'Calculating...';
+                }
+            }
+
+            // Bonding Simulator
+            function getValenceElectrons(el) {
+                if (el.group === 18) return el.symbol === 'He' ? 2 : 8;
+                if (el.group >= 13) return el.group - 10;
+                return el.group;
+            }
+
+            function createAtomDisplay(symbol) {
+                const el = elementData.find(e => e.symbol === symbol);
+                const valence = getValenceElectrons(el);
+                
+                const container = document.createElement('div');
+                container.className = 'flex flex-col items-center';
+
+                const atomVisual = document.createElement('div');
+                atomVisual.className = 'atom-container';
+
+                const nucleus = document.createElement('div');
+                nucleus.className = `atom-nucleus ${blockColors[el.block]}`;
+                nucleus.textContent = el.symbol;
+                atomVisual.appendChild(nucleus);
+
+                for (let i = 0; i < valence; i++) {
+                    const electron = document.createElement('div');
+                    electron.className = 'valence-electron';
+                    const angle = (i / valence) * 2 * Math.PI;
+                    const radius = 65;
+                    electron.style.left = `calc(50% - 7.5px)`;
+                    electron.style.top = `calc(50% - 7.5px)`;
+                    electron.style.transform = `rotate(${angle}rad) translateX(${radius}px) rotate(${-angle}rad)`;
+                    atomVisual.appendChild(electron);
+                }
+                
+                const label = document.createElement('p');
+                label.className = "font-bold mt-2";
+                label.textContent = el.name;
+                
+                container.appendChild(atomVisual);
+                container.appendChild(label);
+                return container;
+            }
+
+            function runBondingAnimation() {
+                const symbol1 = document.getElementById('el1-select').value;
+                const symbol2 = document.getElementById('el2-select').value;
+                const count1 = parseInt(document.getElementById('el1-count').value);
+                const count2 = parseInt(document.getElementById('el2-count').value);
+                
+                const el1 = elementData.find(e => e.symbol === symbol1);
+                const el2 = elementData.find(e => e.symbol === symbol2);
+
+                const molecule1Display = document.getElementById('molecule1-display');
+                const molecule2Display = document.getElementById('molecule2-display');
+                const bondExplanation = document.getElementById('bond-explanation');
+                
+                molecule1Display.innerHTML = '';
+                molecule2Display.innerHTML = '';
+                
+                // Create multiple atoms if needed
+                for (let i = 0; i < count1; i++) {
+                    const container = document.createElement('div');
+                    container.className = 'molecule-container';
+                    container.appendChild(createAtomDisplay(symbol1));
+                    if (count1 > 1) {
+                        const label = document.createElement('div');
+                        label.className = 'molecule-label';
+                        label.textContent = `${count1}x`;
+                        container.appendChild(label);
+                    }
+                    molecule1Display.appendChild(container);
+                }
+                
+                for (let i = 0; i < count2; i++) {
+                    const container = document.createElement('div');
+                    container.className = 'molecule-container';
+                    container.appendChild(createAtomDisplay(symbol2));
+                    if (count2 > 1) {
+                        const label = document.createElement('div');
+                        label.className = 'molecule-label';
+                        label.textContent = `${count2}x`;
+                        container.appendChild(label);
+                    }
+                    molecule2Display.appendChild(container);
+                }
+
+                const isMetal1 = ['alkali-metal', 'alkaline-earth-metal', 'post-transition-metal'].includes(el1.category);
+                const isMetal2 = ['alkali-metal', 'alkaline-earth-metal', 'post-transition-metal'].includes(el2.category);
+                const isNonmetal1 = ['nonmetal', 'halogen'].includes(el1.category);
+                const isNonmetal2 = ['nonmetal', 'halogen'].includes(el2.category);
+
+                bondExplanation.innerHTML = `Analyzing the bond between ${count1} ${el1.name} and ${count2} ${el2.name}...`;
+
+                setTimeout(() => {
+                    if ((isMetal1 && isNonmetal2) || (isMetal2 && isNonmetal1)) {
+                        const metal = isMetal1 ? el1 : el2;
+                        const nonmetal = isMetal1 ? el2 : el1;
+                        const metalCount = isMetal1 ? count1 : count2;
+                        const nonmetalCount = isMetal1 ? count2 : count1;
+                        
+                        const electronsToMove = getValenceElectrons(metal) * metalCount;
+                        const electronsNeeded = (8 - getValenceElectrons(nonmetal)) * nonmetalCount;
+                        
+                        if (electronsToMove === electronsNeeded) {
+                            bondExplanation.innerHTML = `<strong class="text-red-700">Perfect Ionic Bond!</strong> ${metalCount} ${metal.name} atom(s) transfer ${getValenceElectrons(metal)} electron(s) each to ${nonmetalCount} ${nonmetal.name} atom(s). This creates stable ions with full outer shells.`;
+                        } else {
+                            bondExplanation.innerHTML = `<strong class="text-red-700">Ionic Bond!</strong> The ratio ${metalCount}:${nonmetalCount} creates an ionic compound, though the electron transfer may not be perfectly balanced.`;
+                        }
+                        
+                        setTimeout(() => {
+                            document.getElementById('bond-feedback').classList.remove('hidden');
+                            markSectionComplete('bonding');
+                        }, 2000);
+                    } 
+                    else if (isNonmetal1 && isNonmetal2 && el1.symbol !== el2.symbol) {
+                        const electronsToShare1 = (8 - getValenceElectrons(el1)) * count1;
+                        const electronsToShare2 = (8 - getValenceElectrons(el2)) * count2;
+                        const totalShared = Math.min(electronsToShare1, electronsToShare2);
+
+                        bondExplanation.innerHTML = `<strong class="text-green-700">Covalent Bond!</strong> Since both are nonmetals, they share ${totalShared} electron(s) to form a stable covalent compound with the formula ${el1.symbol}<sub>${count1}</sub>${el2.symbol}<sub>${count2}</sub>.`;
+                        
+                        setTimeout(() => {
+                            document.getElementById('bond-feedback').classList.remove('hidden');
+                            markSectionComplete('bonding');
+                        }, 2000);
+                    }
+                    else {
+                         bondExplanation.innerHTML = `This combination is complex! It might involve metallic bonding (two metals) or be a molecule of the same element. Try a metal with a nonmetal (like Na + Cl) or two different nonmetals (like H + O).`;
+                    }
+                }, 500);
+            }
+
+            // Initialize everything
+            setupTabs();
+            createPeriodicTable();
+            populateSelect();
+            document.getElementById('build-button').addEventListener('click', buildConfiguration);
+            document.getElementById('bond-button').addEventListener('click', runBondingAnimation);
+            
+            // Set default values
+            document.getElementById('element-select').value = 'H';
+            document.getElementById('el1-select').value = 'Na';
+            document.getElementById('el2-select').value = 'Cl';
+            
+            buildConfiguration();
+        });
+    </script>
+</body>
+</html>

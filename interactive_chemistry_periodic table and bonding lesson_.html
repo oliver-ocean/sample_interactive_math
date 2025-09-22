@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Periodic Table Lesson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            border-color: #3b82f6;
+            background-color: #bfdbfe;
+            color: #1e3a8a;
+        }
+        .pt-grid {
+            display: grid;
+            grid-template-columns: repeat(18, minmax(0, 1fr));
+            gap: 4px;
+        }
+        .element-tile {
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s, box-shadow 0s;
+        }
+        .element-tile:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #475569;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .label:hover {
+            background-color: #e0e7ff;
+        }
+        .pt-layout {
+            display: grid;
+            grid-template-columns: 30px repeat(18, minmax(0, 1fr));
+            grid-template-rows: 30px repeat(7, minmax(0, 1fr));
+            gap: 4px;
+        }
+        .pt-grid-container {
+            grid-column: 2 / span 18;
+            grid-row: 2 / span 7;
+        }
+        .atom-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .atom-nucleus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .valence-electron {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            transition: all 1s ease-in-out;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-stone-50 text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">The Periodic Table Neighborhood</h1>
+            <p class="text-slate-600 mt-2">Explore the city map of elements and see how they become friends.</p>
+        </header>
+
+        <nav class="flex justify-center border-b-2 border-slate-200 mb-8">
+            <button data-tab="map" class="tab-button tab-active text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">1. Neighborhood Map</button>
+            <button data-tab="blocks" class="tab-button text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">2. Neighborhood Blocks</button>
+            <button data-tab="bonding" class="tab-button text-sm md:text-base font-semibold py-3 px-4 md:px-6 border-b-4 border-transparent hover:border-blue-500 hover:bg-blue-50 transition-all">3. How Neighbors Interact</button>
+        </nav>
+
+        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-slate-700">Lesson Progress</span>
+                <span id="progress-text" class="text-sm font-medium text-slate-600">0 of 3 sections explored</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-3">
+                <div id="progress-fill" class="bg-blue-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div class="mt-3 flex justify-center">
+                <button id="reset-progress-btn" class="bg-slate-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-slate-600 transition-all">
+                    🔄 Reset Progress
+                </button>
+            </div>
+        </div>
+
+        <main>
+            <section id="map" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">Layout of the Neighborhood</h2>
+                    <p class="mb-4">The periodic table is like a city map, organized into horizontal "streets" (Periods) and vertical "family estates" (Groups). An element's address tells you its personality. Think of **Periods** as the different floors of a building, and **Groups** as the different apartments on each floor. Hover over any element to learn more about it. Click on the group (top) or period (left) labels to highlight them.</p>
+                </div>
+                <div id="periodic-table-container-map" class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 overflow-x-auto"></div>
+            </section>
+
+            <section id="blocks" class="tab-content hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">The Neighborhood Blocks (s, p, d, f)</h2>
+                    <p id="block-info" class="mb-4">Just like a city has different districts, the periodic table has blocks. These tell you which type of "apartment" (sublevel) is being filled with electrons. Click the buttons below to highlight each block and see where they are located.</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-4">
+                        <button data-block="s" class="block-button font-semibold py-2 px-4 rounded-md bg-amber-100 text-amber-800 hover:bg-amber-200">s-block</button>
+                        <button data-block="p" class="block-button font-semibold py-2 px-4 rounded-md bg-sky-100 text-sky-800 hover:bg-sky-200">p-block</button>
+                        <button data-block="d" class="block-button font-semibold py-2 px-4 rounded-md bg-emerald-100 text-emerald-800 hover:bg-emerald-200">d-block</button>
+                        <button data-block="f" class="block-button font-semibold py-2 px-4 rounded-md bg-rose-100 text-rose-800 hover:bg-rose-200">f-block</button>
+                    </div>
+                </div>
+                 <div id="periodic-table-container-blocks" class="bg-white p-4 rounded-lg shadow-sm border border-slate-200 overflow-x-auto"></div>
+            </section>
+            
+            <section id="bonding" class="tab-content hidden space-y-6">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-3">Chemical Bonding Simulator</h2>
+                    <p class="mb-4">Atoms interact to become stable, just like people form friendships. Atoms are "happy" and stable when they have a full outer shell of 8 electrons (The Octet Rule). Think of this as having a full circle of 8 friends. Pick two elements from the lists below to see how they bond. Watch how they either transfer (ionic) or share (covalent) electrons to achieve their goal!</p>
+                    <div class="flex flex-wrap justify-center items-center gap-4 mb-6">
+                        <select id="el1-select" class="p-2 border rounded-md"></select>
+                        <span class="font-bold text-2xl">+</span>
+                        <select id="el2-select" class="p-2 border rounded-md"></select>
+                        <button id="bond-button" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700">Let's Bond!</button>
+                    </div>
+                    <div id="bond-arena" class="flex flex-col md:flex-row justify-around items-center min-h-[300px] bg-slate-50 rounded-lg p-4">
+                        <div id="atom1-display" class="flex flex-col items-center text-center"></div>
+                        <div id="atom2-display" class="flex flex-col items-center text-center"></div>
+                    </div>
+                    <div id="bond-explanation" class="mt-4 text-center text-lg font-medium p-4 bg-blue-50 rounded-md"></div>
+                    <div id="bond-feedback" class="mt-4 text-center p-4 bg-green-50 border border-green-200 rounded-md hidden">
+                        <span class="text-green-700 font-medium">✅ Bonding simulation completed successfully!</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Progress tracking
+            let completedSections = new Set();
+            let currentTab = 'map';
+            
+            function updateProgress() {
+                const progressFill = document.getElementById('progress-fill');
+                const progressText = document.getElementById('progress-text');
+                const percentage = (completedSections.size / 3) * 100;
+                
+                progressFill.style.width = `${percentage}%`;
+                progressText.textContent = `${completedSections.size} of 3 sections explored`;
+                
+                localStorage.setItem('chemistryProgress', JSON.stringify(Array.from(completedSections)));
+            }
+            
+            function loadProgress() {
+                const saved = localStorage.getItem('chemistryProgress');
+                if (saved) {
+                    completedSections = new Set(JSON.parse(saved));
+                    updateProgress();
+                }
+            }
+            
+            function markSectionComplete(section) {
+                completedSections.add(section);
+                updateProgress();
+            }
+            
+            function resetProgress() {
+                if (confirm('Are you sure you want to reset all progress? This will clear your exploration history.')) {
+                    completedSections.clear();
+                    updateProgress();
+                    
+                    document.getElementById('bond-explanation').innerHTML = '';
+                    document.getElementById('bond-feedback').classList.add('hidden');
+                    document.getElementById('atom1-display').innerHTML = '';
+                    document.getElementById('atom2-display').innerHTML = '';
+                    
+                    const tiles = document.querySelectorAll('.element-tile');
+                    tiles.forEach(tile => tile.classList.remove('highlight'));
+                    
+                    document.getElementById('block-info').textContent = 'Just like a city has different districts, the periodic table has blocks. These tell you which type of "apartment" (sublevel) is being filled with electrons. Click the buttons below to highlight each block and see where they are located.';
+                }
+            }
+            
+            document.getElementById('reset-progress-btn').addEventListener('click', resetProgress);
+            
+            loadProgress();
+            
+            const elementData = [
+                {"name": "Hydrogen", "symbol": "H", "number": 1, "group": 1, "period": 1, "block": "s", "category": "nonmetal"},
+                {"name": "Helium", "symbol": "He", "number": 2, "group": 18, "period": 1, "block": "s", "category": "noble-gas"},
+                {"name": "Lithium", "symbol": "Li", "number": 3, "group": 1, "period": 2, "block": "s", "category": "alkali-metal"},
+                {"name": "Beryllium", "symbol": "Be", "number": 4, "group": 2, "period": 2, "block": "s", "category": "alkaline-earth-metal"},
+                {"name": "Boron", "symbol": "B", "number": 5, "group": 13, "period": 2, "block": "p", "category": "metalloid"},
+                {"name": "Carbon", "symbol": "C", "number": 6, "group": 14, "period": 2, "block": "p", "category": "nonmetal"},
+                {"name": "Nitrogen", "symbol": "N", "number": 7, "group": 15, "period": 2, "block": "p", "category": "nonmetal"},
+                {"name": "Oxygen", "symbol": "O", "number": 8, "group": 16, "period": 2, "block": "p", "category": "nonmetal"},
+                {"name": "Fluorine", "symbol": "F", "number": 9, "group": 17, "period": 2, "block": "p", "category": "halogen"},
+                {"name": "Neon", "symbol": "Ne", "number": 10, "group": 18, "period": 2, "block": "p", "category": "noble-gas"},
+                {"name": "Sodium", "symbol": "Na", "number": 11, "group": 1, "period": 3, "block": "s", "category": "alkali-metal"},
+                {"name": "Magnesium", "symbol": "Mg", "number": 12, "group": 2, "period": 3, "block": "s", "category": "alkaline-earth-metal"},
+                {"name": "Aluminum", "symbol": "Al", "number": 13, "group": 13, "period": 3, "block": "p", "category": "post-transition-metal"},
+                {"name": "Silicon", "symbol": "Si", "number": 14, "group": 14, "period": 3, "block": "p", "category": "metalloid"},
+                {"name": "Phosphorus", "symbol": "P", "number": 15, "group": 15, "period": 3, "block": "p", "category": "nonmetal"},
+                {"name": "Sulfur", "symbol": "S", "number": 16, "group": 16, "period": 3, "block": "p", "category": "nonmetal"},
+                {"name": "Chlorine", "symbol": "Cl", "number": 17, "group": 17, "period": 3, "block": "p", "category": "halogen"},
+                {"name": "Argon", "symbol": "Ar", "number": 18, "group": 18, "period": 3, "block": "p", "category": "noble-gas"},
+                {"name": "Potassium", "symbol": "K", "number": 19, "group": 1, "period": 4, "block": "s", "category": "alkali-metal"},
+                {"name": "Calcium", "symbol": "Ca", "number": 20, "group": 2, "period": 4, "block": "s", "category": "alkaline-earth-metal"},
+                {"name": "Scandium", "symbol": "Sc", "number": 21, "group": 3, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Titanium", "symbol": "Ti", "number": 22, "group": 4, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Vanadium", "symbol": "V", "number": 23, "group": 5, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Chromium", "symbol": "Cr", "number": 24, "group": 6, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Manganese", "symbol": "Mn", "number": 25, "group": 7, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Iron", "symbol": "Fe", "number": 26, "group": 8, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Cobalt", "symbol": "Co", "number": 27, "group": 9, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Nickel", "symbol": "Ni", "number": 28, "group": 10, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Copper", "symbol": "Cu", "number": 29, "group": 11, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Zinc", "symbol": "Zn", "number": 30, "group": 12, "period": 4, "block": "d", "category": "transition-metal"},
+                {"name": "Gallium", "symbol": "Ga", "number": 31, "group": 13, "period": 4, "block": "p", "category": "post-transition-metal"},
+                {"name": "Germanium", "symbol": "Ge", "number": 32, "group": 14, "period": 4, "block": "p", "category": "metalloid"},
+                {"name": "Arsenic", "symbol": "As", "number": 33, "group": 15, "period": 4, "block": "p", "category": "metalloid"},
+                {"name": "Selenium", "symbol": "Se", "number": 34, "group": 16, "period": 4, "block": "p", "category": "nonmetal"},
+                {"name": "Bromine", "symbol": "Br", "number": 35, "group": 17, "period": 4, "block": "p", "category": "halogen"},
+                {"name": "Krypton", "symbol": "Kr", "number": 36, "group": 18, "period": 4, "block": "p", "category": "noble-gas"},
+                {"name": "Rubidium", "symbol": "Rb", "number": 37, "group": 1, "period": 5, "block": "s", "category": "alkali-metal"},
+                {"name": "Strontium", "symbol": "Sr", "number": 38, "group": 2, "period": 5, "block": "s", "category": "alkaline-earth-metal"},
+                {"name": "Yttrium", "symbol": "Y", "number": 39, "group": 3, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Zirconium", "symbol": "Zr", "number": 40, "group": 4, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Niobium", "symbol": "Nb", "number": 41, "group": 5, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Molybdenum", "symbol": "Mo", "number": 42, "group": 6, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Technetium", "symbol": "Tc", "number": 43, "group": 7, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Ruthenium", "symbol": "Ru", "number": 44, "group": 8, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Rhodium", "symbol": "Rh", "number": 45, "group": 9, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Palladium", "symbol": "Pd", "number": 46, "group": 10, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Silver", "symbol": "Ag", "number": 47, "group": 11, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Cadmium", "symbol": "Cd", "number": 48, "group": 12, "period": 5, "block": "d", "category": "transition-metal"},
+                {"name": "Indium", "symbol": "In", "number": 49, "group": 13, "period": 5, "block": "p", "category": "post-transition-metal"},
+                {"name": "Tin", "symbol": "Sn", "number": 50, "group": 14, "period": 5, "block": "p", "category": "post-transition-metal"},
+                {"name": "Antimony", "symbol": "Sb", "number": 51, "group": 15, "period": 5, "block": "p", "category": "metalloid"},
+                {"name": "Tellurium", "symbol": "Te", "number": 52, "group": 16, "period": 5, "block": "p", "category": "metalloid"},
+                {"name": "Iodine", "symbol": "I", "number": 53, "group": 17, "period": 5, "block": "p", "category": "halogen"},
+                {"name": "Xenon", "symbol": "Xe", "number": 54, "group": 18, "period": 5, "block": "p", "category": "noble-gas"},
+            ];
+            const bondingElements = ['H', 'Li', 'Be', 'C', 'N', 'O', 'F', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'K', 'Ca', 'Br', 'I'];
+
+            const blockColors = {
+                s: 'bg-amber-200 text-amber-900',
+                p: 'bg-sky-200 text-sky-900',
+                d: 'bg-emerald-200 text-emerald-900',
+                f: 'bg-rose-200 text-rose-900'
+            };
+
+            const blockInfoText = {
+                 s: "The s-block (Groups 1-2) are filling their simple 's' sublevel. Think of them as the extroverts of the neighborhood—they are very reactive and eager to interact!",
+                 p: "The p-block (Groups 13-18) fills the 'p' sublevel. This block is like the bustling downtown area, containing a wide variety of personalities: metals, metalloids, and nonmetals, including the stable noble gases.",
+                 d: "The d-block (Groups 3-12) are the Transition Metals. They are filling their 'd' sublevels, which gives them interesting properties like forming colorful compounds. They're like the artists of the neighborhood—creative and versatile!",
+                 f: "The f-block elements are usually shown below the main table. They have electrons in 'f' sublevels and include the Lanthanides and Actinides. Think of them as the secretive, exclusive clubs of the city, tucked away from the main streets."
+            };
+
+            function getValenceElectrons(el) {
+                if (el.group === 18) return el.symbol === 'He' ? 2 : 8;
+                if (el.group >= 13) return el.group - 10;
+                return el.group;
+            }
+
+            function createPeriodicTable(containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                const layout = document.createElement('div');
+                layout.className = 'pt-layout';
+
+                for (let i = 1; i <= 18; i++) {
+                    const label = document.createElement('div');
+                    label.className = 'label group-label';
+                    label.textContent = i;
+                    label.dataset.group = i;
+                    label.style.gridColumn = i + 1;
+                    label.style.gridRow = 1;
+                    layout.appendChild(label);
+                }
+
+                for (let i = 1; i <= 7; i++) {
+                    const label = document.createElement('div');
+                    label.className = 'label period-label';
+                    label.textContent = i;
+                    label.dataset.period = i;
+                    label.style.gridColumn = 1;
+                    label.style.gridRow = i + 1;
+                    layout.appendChild(label);
+                }
+
+                const tableContainer = document.createElement('div');
+                tableContainer.className = 'pt-grid-container';
+                
+                const table = document.createElement('div');
+                table.className = 'pt-grid';
+                tableContainer.appendChild(table);
+                layout.appendChild(tableContainer);
+                
+                elementData.forEach(el => {
+                    const tile = document.createElement('div');
+                    tile.className = `element-tile flex flex-col items-center justify-center p-1 rounded-md cursor-pointer text-xs ${blockColors[el.block]}`;
+                    tile.style.gridColumnStart = el.group;
+                    tile.style.gridRowStart = el.period;
+                    tile.dataset.symbol = el.symbol;
+                    tile.dataset.group = el.group;
+                    tile.dataset.period = el.period;
+                    tile.innerHTML = `<div class="font-bold text-sm">${el.symbol}</div><div class="text-[8px] text-center">${el.name}</div>`;
+                    tile.addEventListener('mouseenter', () => tile.title = `${el.name} (Group ${el.group}, Period ${el.period}) - Valence: ${getValenceElectrons(el)}`);
+                    table.appendChild(tile);
+                });
+                
+                container.appendChild(layout);
+            }
+            
+            function setupTabs() {
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetTab = button.dataset.tab;
+                        
+                        tabButtons.forEach(btn => btn.classList.remove('tab-active'));
+                        button.classList.add('tab-active');
+                        
+                        tabContents.forEach(content => content.classList.add('hidden'));
+                        document.getElementById(targetTab).classList.remove('hidden');
+                        
+                        currentTab = targetTab;
+                        
+                        if (targetTab === 'map') markSectionComplete('map');
+                        else if (targetTab === 'blocks') markSectionComplete('blocks');
+                        else if (targetTab === 'bonding') markSectionComplete('bonding');
+                    });
+                });
+            }
+            
+            function setupBlockButtons() {
+                const buttons = document.querySelectorAll('.block-button');
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const block = button.dataset.block;
+                        const tiles = document.querySelectorAll('#periodic-table-container-blocks .element-tile');
+                        document.getElementById('block-info').textContent = blockInfoText[block];
+                        tiles.forEach(tile => {
+                            const el = elementData.find(e => e.symbol === tile.dataset.symbol);
+                            if (el.block === block) {
+                                tile.classList.add('highlight');
+                            } else {
+                                tile.classList.remove('highlight');
+                            }
+                        });
+                        markSectionComplete('blocks');
+                    });
+                });
+            }
+
+            function setupHighlighting(containerId) {
+                const container = document.getElementById(containerId);
+                const groupLabels = container.querySelectorAll('.group-label');
+                const periodLabels = container.querySelectorAll('.period-label');
+                const tiles = container.querySelectorAll('.element-tile');
+
+                const clearHighlights = () => tiles.forEach(t => t.classList.remove('highlight'));
+
+                groupLabels.forEach(label => {
+                    label.addEventListener('click', () => {
+                        clearHighlights();
+                        const group = label.dataset.group;
+                        tiles.forEach(tile => {
+                            if (tile.dataset.group === group) tile.classList.add('highlight');
+                        });
+                        markSectionComplete('map');
+                    });
+                });
+
+                periodLabels.forEach(label => {
+                    label.addEventListener('click', () => {
+                        clearHighlights();
+                        const period = label.dataset.period;
+                        tiles.forEach(tile => {
+                            if (tile.dataset.period === period) tile.classList.add('highlight');
+                        });
+                        markSectionComplete('map');
+                    });
+                });
+            }
+
+            function setupBondingSimulator() {
+                const el1Select = document.getElementById('el1-select');
+                const el2Select = document.getElementById('el2-select');
+                const bondButton = document.getElementById('bond-button');
+
+                bondingElements.forEach(symbol => {
+                    const el = elementData.find(e => e.symbol === symbol);
+                    if (el) {
+                        const option1 = new Option(`${el.name} (${el.symbol})`, el.symbol);
+                        const option2 = new Option(`${el.name} (${el.symbol})`, el.symbol);
+                        el1Select.add(option1);
+                        el2Select.add(option2);
+                    }
+                });
+                el1Select.value = 'Na';
+                el2Select.value = 'Cl';
+
+                bondButton.addEventListener('click', runBondingAnimation);
+            }
+
+            function createAtomDisplay(symbol) {
+                const el = elementData.find(e => e.symbol === symbol);
+                const valence = getValenceElectrons(el);
+                
+                const container = document.createElement('div');
+                container.className = 'flex flex-col items-center';
+                container.id = `atom-container-${symbol}`;
+
+                const atomVisual = document.createElement('div');
+                atomVisual.className = 'atom-container';
+                atomVisual.id = `atom-visual-${symbol}`;
+
+                const nucleus = document.createElement('div');
+                nucleus.className = `atom-nucleus ${blockColors[el.block]}`;
+                nucleus.textContent = el.symbol;
+                atomVisual.appendChild(nucleus);
+
+                for (let i = 0; i < valence; i++) {
+                    const electron = document.createElement('div');
+                    electron.className = 'valence-electron';
+                    const angle = (i / valence) * 2 * Math.PI;
+                    const radius = 65;
+                    electron.style.left = `calc(50% - 7.5px)`;
+                    electron.style.top = `calc(50% - 7.5px)`;
+                    electron.style.transform = `rotate(${angle}rad) translateX(${radius}px) rotate(${-angle}rad)`;
+                    atomVisual.appendChild(electron);
+                }
+                
+                const label = document.createElement('p');
+                label.className = "font-bold mt-2";
+                label.textContent = el.name;
+                
+                container.appendChild(atomVisual);
+                container.appendChild(label);
+                return container;
+            }
+
+            function runBondingAnimation() {
+                const symbol1 = document.getElementById('el1-select').value;
+                const symbol2 = document.getElementById('el2-select').value;
+                const el1 = elementData.find(e => e.symbol === symbol1);
+                const el2 = elementData.find(e => e.symbol === symbol2);
+
+                const atom1Display = document.getElementById('atom1-display');
+                const atom2Display = document.getElementById('atom2-display');
+                const bondExplanation = document.getElementById('bond-explanation');
+                
+                atom1Display.innerHTML = '';
+                atom2Display.innerHTML = '';
+                atom1Display.appendChild(createAtomDisplay(symbol1));
+                atom2Display.appendChild(createAtomDisplay(symbol2));
+
+                const isMetal1 = ['alkali-metal', 'alkaline-earth-metal', 'post-transition-metal'].includes(el1.category);
+                const isMetal2 = ['alkali-metal', 'alkaline-earth-metal', 'post-transition-metal'].includes(el2.category);
+                const isNonmetal1 = ['nonmetal', 'halogen'].includes(el1.category);
+                const isNonmetal2 = ['nonmetal', 'halogen'].includes(el2.category);
+
+                bondExplanation.innerHTML = `Analyzing the bond between ${el1.name} and ${el2.name}...`;
+
+                setTimeout(() => {
+                    // Ionic Bond
+                    if ((isMetal1 && isNonmetal2) || (isMetal2 && isNonmetal1)) {
+                        const metal = isMetal1 ? el1 : el2;
+                        const nonmetal = isMetal1 ? el2 : el1;
+                        const metalVisual = document.getElementById(`atom-visual-${metal.symbol}`);
+                        const metalContainer = document.getElementById(`atom-container-${metal.symbol}`);
+                        const nonmetalVisual = document.getElementById(`atom-visual-${nonmetal.symbol}`);
+                        const nonmetalContainer = document.getElementById(`atom-container-${nonmetal.symbol}`);
+                        
+                        const metalElectrons = metalVisual.querySelectorAll('.valence-electron');
+                        const electronsToMoveCount = getValenceElectrons(metal);
+                        
+                        const charge = electronsToMoveCount > 1 ? `${electronsToMoveCount}+` : '+';
+                        const nonmetalCharge = electronsToMoveCount > 1 ? `${electronsToMoveCount}-` : '-';
+
+                        if (metalElectrons.length > 0) {
+                            for(let i=0; i<electronsToMoveCount; i++) {
+                                if(metalElectrons[i]) {
+                                    const rect1 = metalContainer.getBoundingClientRect();
+                                    const rect2 = nonmetalContainer.getBoundingClientRect();
+                                    const deltaX = (rect2.left + rect2.width / 2) - (rect1.left + rect1.width / 2);
+                                    const deltaY = (rect2.top + rect2.height / 2) - (rect1.top + rect1.height / 2);
+                                    
+                                    metalElectrons[i].style.transform += ` translate(${deltaX}px, ${deltaY}px)`;
+                                    metalElectrons[i].style.backgroundColor = '#ef4444';
+                                }
+                            }
+                        }
+                        setTimeout(() => {
+                           const metalNucleus = metalVisual.querySelector('.atom-nucleus');
+                           const nonmetalNucleus = nonmetalVisual.querySelector('.atom-nucleus');
+                           metalNucleus.innerHTML = `${metal.symbol}<sup>${charge}</sup>`;
+                           nonmetalNucleus.innerHTML = `${nonmetal.symbol}<sup>${nonmetalCharge}</sup>`;
+                           
+                           const oldMetalElectrons = metalVisual.querySelectorAll('.valence-electron');
+                           oldMetalElectrons.forEach(e => e.remove());
+                           const oldNonmetalElectrons = nonmetalVisual.querySelectorAll('.valence-electron');
+                           oldNonmetalElectrons.forEach(e => e.remove());
+
+                           const originalNonmetalValence = getValenceElectrons(nonmetal);
+                           for (let i = 0; i < originalNonmetalValence + electronsToMoveCount; i++) {
+                                const electron = document.createElement('div');
+                                electron.className = 'valence-electron';
+                                
+                                if (i >= originalNonmetalValence) {
+                                    electron.style.backgroundColor = '#ef4444';
+                                }
+
+                                const angle = (i / (originalNonmetalValence + electronsToMoveCount)) * 2 * Math.PI;
+                                const radius = 65;
+                                electron.style.left = `calc(50% - 7.5px)`;
+                                electron.style.top = `calc(50% - 7.5px)`;
+                                electron.style.transform = `rotate(${angle}rad) translateX(${radius}px) rotate(${-angle}rad)`;
+                                nonmetalVisual.appendChild(electron);
+                           }
+                        }, 1000);
+
+                        bondExplanation.innerHTML = `<strong class="text-red-700">Ionic Bond!</strong> This is like a **trade**. ${metal.name} (a metal) has extra electrons to get rid of and is happy to give them away, while ${nonmetal.name} (a nonmetal) is in great need of them. ${metal.name} transfers ${electronsToMoveCount} electron(s) to ${nonmetal.name}. This creates a positive ion (**cation**) and a negative ion (**anion**) that attract each other like opposite sides of a magnet!`;
+                        
+                        setTimeout(() => {
+                            document.getElementById('bond-feedback').classList.remove('hidden');
+                            markSectionComplete('bonding');
+                        }, 2000);
+                    } 
+                    // Covalent Bond
+                    else if (isNonmetal1 && isNonmetal2 && el1.symbol !== el2.symbol) {
+                        const electronsToShare1 = 8 - getValenceElectrons(el1);
+                        const electronsToShare2 = 8 - getValenceElectrons(el2);
+
+                        const atom1Visual = document.getElementById(`atom-visual-${el1.symbol}`);
+                        const atom2Visual = document.getElementById(`atom-visual-${el2.symbol}`);
+                        const electrons1 = atom1Visual.querySelectorAll('.valence-electron');
+                        const electrons2 = atom2Visual.querySelectorAll('.valence-electron');
+
+                        const totalShared = Math.min(electronsToShare1, electronsToShare2, electrons1.length, electrons2.length);
+
+                        for(let i=0; i < totalShared; i++) {
+                            if(electrons1[i]) electrons1[i].style.transform += ' translateX(50px)';
+                            if(electrons2[i]) electrons2[i].style.transform += ' translateX(-50px)';
+                        }
+                        
+                        const bondType = totalShared === 1 ? 'single' : totalShared === 2 ? 'double' : 'triple';
+                        bondExplanation.innerHTML = `<strong class="text-green-700">Covalent Bond!</strong> This is like a **sharing economy**. Since both are nonmetals, neither wants to give up their electrons. They form a partnership and share ${totalShared} pair(s) of electrons to form a stable ${bondType} bond. Both atoms now feel like they have a full outer shell.`;
+                        
+                        setTimeout(() => {
+                            document.getElementById('bond-feedback').classList.remove('hidden');
+                            markSectionComplete('bonding');
+                        }, 2000);
+                    }
+                    else {
+                         bondExplanation.innerHTML = `This combination is a bit more complex! It might involve metallic bonding (two metals) or be a molecule of the same element. Try a metal with a nonmetal (like Na + Cl) or two different nonmetals (like H + O).`;
+                    }
+                }, 500);
+            }
+
+            // Initial setup
+            createPeriodicTable('periodic-table-container-map');
+            setupHighlighting('periodic-table-container-map');
+            createPeriodicTable('periodic-table-container-blocks');
+            setupTabs();
+            setupBlockButtons();
+            setupBondingSimulator();
+            runBondingAnimation();
+        });
+    </script>
+</body>
+</html>
